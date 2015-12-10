@@ -2,28 +2,71 @@ defmodule Footprints.PTHHeader do
   alias Footprints.Components, as: Comps
 
 
-  def make_outline(pinpitch, i, layer, {xc,yc}) do
-    numpoints  = 8
-    angle      = 22.5 * :math.pi / 180.0
 
-    bodyrad    = pinpitch / :math.cos(22.5 * :math.pi / 180.0) / 2.0;
+  def make_pin_outline(pinpitch, i, layer, {xc,yc}) do
+    numpoints  = 8
+    angle      = 180/numpoints * :math.pi/180.0
+
+    bodyrad    = pinpitch / :math.cos(angle)/2.0;
     thetaStart = i*2.0*:math.pi/numpoints + angle
     thetaEnd   = (i+1)*2.0*:math.pi/numpoints + angle
     dxStart    = bodyrad * :math.cos(thetaStart)
     dyStart    = bodyrad * :math.sin(thetaStart)
     dxEnd      = bodyrad * :math.cos(thetaEnd)
     dyEnd      = bodyrad * :math.sin(thetaEnd)
-    %Comps.Line{start: {xc+dxStart,yc+dyStart}, end: {xc+dxEnd,yc+dyEnd}, layer: layer, width: 0.1}
+    Comps.line(start: {xc+dxStart,yc+dyStart},
+               end: {xc+dxEnd,yc+dyEnd},
+               layer: layer, width: 0.1)
   end
 
 
-  def make_box(len, wid, layer, thick) do
-    [%Comps.Line{start: {-len, wid}, end: { len, wid}, layer: layer, width: thick},
-     %Comps.Line{start: {-len,-wid}, end: { len,-wid}, layer: layer, width: thick},
-     %Comps.Line{start: { len,-wid}, end: { len, wid}, layer: layer, width: thick},
-     %Comps.Line{start: {-len,-wid}, end: {-len, wid}, layer: layer, width: thick}]
-  end
+  def make_outline(params, pincount, rowcount) do
+    pinpitch        = params[:pinpitch]
+    rowpitch        = params[:rowpitch]
 
+    row = 1
+    hmmm = for pin <- 1..pincount do
+      xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
+      yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
+      edges = case pin do
+                   1 -> [0,1,2,3,4]
+           ^pincount -> [0,1,2,6,7]
+                   _ -> [0,1,2]
+              end
+       for n <- edges, do: make_pin_outline(pinpitch, n,"F.SilkS",{xc,yc})
+    end
+
+    row = rowcount
+    hmmm2 = for pin <- 1..pincount do
+      xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
+      yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
+      edges = case pin do
+                   1 -> [2,3,4,5,6]
+           ^pincount -> [0,4,5,6,7]
+                   _ -> [4,5,6]
+              end
+       for n <- edges, do: make_pin_outline(pinpitch, n,"F.SilkS",{xc,yc})
+    end
+
+    hmmm3 = if rowcount > 1 do
+      for row <- 2..rowcount-1 do
+         for pin <- 1..pincount do
+            xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
+            yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
+            edges = case pin do
+                         1 -> [2,3,4]
+                 ^pincount -> [0,6,7]
+                         _ -> []
+                    end
+             for n <- edges, do: make_pin_outline(pinpitch, n,"F.SilkS",{xc,yc})
+          end
+        end
+    else
+      []
+    end
+
+    List.flatten(hmmm) ++ List.flatten(hmmm2) ++ List.flatten(hmmm3)
+  end
 
   def make_pad(params, pin, row, pincount, rowcount) do
     pinpitch        = params[:pinpitch]
@@ -38,57 +81,58 @@ defmodule Footprints.PTHHeader do
     totalwid  = bodywid
 
     xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
-    yc = rowpitch*(rowcount-1)/2.0 - row*rowpitch
-    pn = (pin-1)*rowcount + row + 1#pin + (row)*pincount
+    yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
+    pn = (pin-1)*rowcount + row
 
-    frontSilkBorder = for n <- 0..7, do: make_outline(pinpitch, n,"F.SilkS",{xc,yc})
-    backSilkBorder  = for n <- 0..7, do: make_outline(pinpitch, n,"B.SilkS",{xc,yc})
-
-    p = %Comps.PadPTH{name: "#{pn}", shape: "oval", at: {xc,yc},
-           size: {padwidth,padheight}, drill: drilldia}
+    p = Comps.padPTH(name: "#{pn}", shape: "oval", at: {xc,yc},
+                     size: {padwidth,padheight}, drill: drilldia)
 
     xcc = totallen/2 + padwidth/4
     ycc = totalwid/2 + padheight/4
-    c = %Comps.Circle{center: {-xcc,ycc}, radius: 0.1, layer: "F.SilkS", width: 0.125}
-    [p] ++ frontSilkBorder ++ backSilkBorder ++ [c]
+    c = Comps.circle(center: {-xcc,ycc}, radius: 0.1, layer: "F.SilkS", width: 0.125)
+    [p] ++ [c]
   end
 
 
   def create_mod(params, pincount, rowcount, filename) do
-    silktextheight  = params[:silktextheight]
-    courtyardmargin = params[:courtyardmargin]
-    pinpitch        = params[:pinpitch]
-    rowpitch        = params[:rowpitch]
-    padwidth        = params[:padwidth]
-    padheight       = params[:padheight]
+      silktextheight  = params[:silktextheight]
+      courtyardmargin = params[:courtyardmargin]
+      pinpitch        = params[:pinpitch]
+      rowpitch        = params[:rowpitch]
+      padwidth        = params[:padwidth]
+      padheight       = params[:padheight]
 
-    bodylen     = pinpitch * (pincount - 1) + padwidth
-    bodywid     = rowpitch * (rowcount - 1) + padheight
-    bodyrad     = pinpitch / :math.cos(22.5 * :math.pi / 180.0) / 2.0
-    crtydlength = bodylen / 2 + bodyrad / 2 + courtyardmargin
-    crtydwidth  = bodywid / 2 + bodyrad / 2 + courtyardmargin / 2
+      bodylen     = pinpitch*(pincount-1) + padwidth  # extent in x
+      bodywid     = rowpitch*(rowcount-1) + padheight # extent in y
 
-    fcrtyd = make_box(crtydlength, crtydwidth, "F.CrtYd", 0.1)
-    bcrtyd = make_box(crtydlength, crtydwidth, "B.CrtYd", 0.1)
+      crtydlength = (bodylen + padheight) + courtyardmargin
+      crtydwidth  = (bodywid + padwidth) + courtyardmargin
+      courtyard = Comps.box(ll: {-crtydlength/2,  crtydwidth/2},
+                            ur: { crtydlength/2, -crtydwidth/2},
+                            layer: "F.CrtYd", width: 0.1)
 
-    pins = for row <- 0..rowcount-1, do:
-             for pin <- 1..pincount, do: make_pad(params, pin, row, pincount, rowcount)
+      pins = for row <- 1..rowcount, do:
+               for pin <- 1..pincount, do: make_pad(params, pin, row, pincount, rowcount)
 
-    features = List.flatten(pins) ++ fcrtyd ++ bcrtyd
+      frontSilkBorder = make_outline(params, pincount, rowcount)
 
-    {:ok, file} = File.open filename, [:write]
-    refloc      = {0, -crtydwidth - 0.75 * silktextheight, 0}
-    valloc      = {0, +crtydwidth + 0.75 * silktextheight, 0}
-    m = %Comps.Module{name: "Header-1x1",
-                           reflocation: refloc,
-                           valuelocation: valloc,
-                           textsize: {1,1}, textwidth: 0.15,
-                           descr: "0.10in (2.54 mm) spacing unshrouded header",
-                           tags: ["PTH", "unshrouded", "header"], isSMD: false,
-                           features: features}
-    IO.binwrite file, "#{m}"
-    File.close file
-  end
+      features = List.flatten(pins) ++ courtyard ++ frontSilkBorder
+
+      {:ok, file} = File.open filename, [:write]
+      refloc      = {-crtydlength/2 - 0.75*silktextheight, 0, 90}
+      valloc      = { crtydlength/2 + 0.75*silktextheight, 0, 90}
+      m = Comps.module(name: "Header",
+                       valuelocation: valloc,
+                       referencelocation: refloc,
+                       textsize: {1,1},
+                       textwidth: 0.15,
+                       descr: "0.10in (2.54 mm) spacing unshrouded header",
+                       tags: ["PTH", "unshrouded", "header"],
+                       isSMD: false,
+                       features: features)
+      IO.binwrite file, "#{m}"
+      File.close file
+    end
 
 
   def build(output_base_directory, library_name) do

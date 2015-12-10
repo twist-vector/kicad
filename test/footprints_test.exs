@@ -33,29 +33,28 @@ defmodule FootprintsTest do
   end
 
   test "Components" do
-    line = %Comps.Line{start: {-1, 1}, end: {1, 1}, layer: "F.SilkS", width: 0.1}
+    line = Comps.line(start: {-1, 1}, end: {1, 1}, layer: "F.SilkS", width: 0.1)
     assert "#{line}" == "(fp_line (start -1.0 1.0) (end 1.0 1.0) (layer F.SilkS) (width 0.1))"
 
-    circle = %Comps.Circle{center: {0,0}, radius: 1.1, layer: "B.SilkS", width: 0.1}
-    assert "#{circle}" == "(fp_circle (center 0 0) (end 1.1 0) (layer B.SilkS) (width 0.1))"
+    circle = Comps.circle(center: {0,0}, radius: 1.1, layer: "B.SilkS", width: 0.1)
+    assert "#{circle}" == "(fp_circle (center 0.0 0.0) (end 1.1 0.0) (layer B.SilkS) (width 0.1))"
 
-    text = %Comps.Text{value: "Hello", location: {1,2}, layer: "F.SilkS",
-                            size: {1.2,1.3}, thickness: 0.125}
-    assert "#{text}" == "(fp_text user Hello (at 1.0 2.0) (layer F.SilkS) (effects (font (size 1.2 1.3) (thickness 0.125))))"
+    text = Comps.text("Hello", at: {1,2,0}, layer: "F.SilkS", size: {1.2,1.3}, width: 0.125)
+    assert "#{text}" == "(fp_text user Hello (at 1.0 2.0 0.0) (layer F.SilkS) (effects (font (size 1.2 1.3) (thickness 0.125))))"
 
-    padsmd = %Comps.PadSMD{name: "1", shape: "rect", at: {-1,1}, size: {0.1,0.2}}
+    padsmd = Comps.padSMD(name: "1", shape: "rect", at: {-1,1}, size: {0.1,0.2})
     assert "#{padsmd}" == "(pad 1 smd rect (at -1.0 1.0) (size 0.1 0.2) (layers F.Cu F.Paste F.Mask))"
 
-    padpth = %Comps.PadPTH{name: "1", shape: "rect", at: {-1,1}, size: {0.1,0.2}, drill: 1.23}
+    padpth = Comps.padPTH(name: "1", shape: "rect", at: {-1,1}, size: {0.1,0.2}, drill: 1.23)
     assert "#{padpth}" == "(pad 1 thru_hole rect (at -1.0 1.0) (size 0.1 0.2) (drill 1.23) (layers *.Cu *.Mask F.SilkS))"
   end
 
   test "Module" do
-    ref = %Comps.ReferenceText{location: {1,-1},  size: {2,3}, thickness: 0.23}
-    assert "#{ref}" == "(fp_text reference REF** (at 1.0 -1.0) (layer F.Fab) (effects (font (size 2.0 3.0) (thickness 0.23))))"
+    ref = Comps.textRef(at: {1,-1,0},  size: {2,3}, width: 0.23)
+    assert "#{ref}" == "(fp_text reference REF** (at 1.0 -1.0 0.0) (layer F.Fab) (effects (font (size 2.0 3.0) (thickness 0.23))))"
 
-    val = %Comps.ValueText{location: {1,-1},  size: {2,3}, thickness: 0.23}
-    assert "#{val}" == "(fp_text value VAL** (at 1.0 -1.0) (layer F.Fab) (effects (font (size 2.0 3.0) (thickness 0.23))))"
+    val = Comps.textVal(at: {1,-1,0},  size: {2,3}, width: 0.23)
+    assert "#{val}" == "(fp_text value VAL** (at 1.0 -1.0 0.0) (layer F.Fab) (effects (font (size 2.0 3.0) (thickness 0.23))))"
   end
 
 end
