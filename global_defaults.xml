@@ -1,0 +1,27 @@
+<root>
+    <defaults>
+        <!-- SMD pad geometry default values and tolerances-->
+        <param name="toefillet"         descr="toe joint fillet allowance">0.50</param>
+        <param name="heelfillet"        descr="heel joint fillet allowance">0.10</param>
+        <param name="sidefillet"        descr="side joint fillet allowance">0.00</param>
+        <param name="fabtol"            descr="fabrication tolerance">0.10</param>
+        <param name="placetol"          descr="placement tolerance">0.10</param>
+        <param name="lentol"            descr="component length tolerance">0.10</param>
+        <param name="widtol"            descr="component width tolerance">0.10</param>
+        <param name="pinlentol"         descr="component pin length tolerance">0.05</param>
+        <param name="pinwidthtol"       descr="component pin width tolerance">0.00</param>
+
+        <!-- Documentation and silk screen geometry limits and fabrication/assembly tolerances -->
+        <param name="minpadspacing"     descr="minimum allowable distance between pads">0.15</param>
+        <param name="placetickmargin"   descr="distance between pad and any placement marks">0.10</param>
+        <param name="padplaceroundoff"  descr="roundoff (ceiling) for pad positions">0.01</param>
+        <param name="padsizeroundoff"   descr="roundoff (ceiling) for pad sizes">0.01</param>
+        <param name="silkoutlinewidth"  descr="width of line used on silk screen">0.12</param>
+        <param name="silkroundoff"      descr="roundoff (ceiling) for silkscreen positions">0.01</param>
+        <param name="silktextheight"    descr="height of text on silkscreen">1.0</param>
+        <param name="silktextwidth"     descr="height of text on silkscreen">18</param>
+        <param name="courtoutlinewidth" descr="width of line used for courtyard (documentation layer)">0.075</param>
+        <param name="courtyardmargin"   descr="distance around component that must be left clear">0.50</param>
+        <param name="courtyardroundoff" descr="roundoff (ceiling) for courtyard positions">0.01</param>
+    </defaults>
+</root>

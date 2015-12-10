@@ -1,0 +1,7 @@
+<root>
+    <defaults>
+      <param name="toefillet"         descr="toe joint fillet allowance">1.50</param>
+      <param name="heelfillet"        descr="heel joint fillet allowance">1.10</param>
+      <param name="sidefillet"        descr="side joint fillet allowance">1.00</param>
+    </defaults>
+</root>

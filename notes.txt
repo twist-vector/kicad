@@ -1,0 +1,33 @@
+
+Possible layers:
+  F.Cu F.Paste F.Mask F.SilkS F.Fab
+  B.CrtYd  F.CrtYd
+  (layers
+    (15 F.Cu signal)
+    (0 B.Cu signal)
+    (16 B.Adhes user)
+    (17 F.Adhes user)
+    (18 B.Paste user)
+    (19 F.Paste user)
+    (20 B.SilkS user)
+    (21 F.SilkS user)
+    (22 B.Mask user)
+    (23 F.Mask user)
+    (24 Dwgs.User user)
+    (25 Cmts.User user)
+    (26 Eco1.User user)
+    (27 Eco2.User user)
+    (28 Edge.Cuts user)
+  )
+
+  data PcbnewLayerT = FSilkS    | FCu       | FPaste    | FMask     | BSilkS
+                   | BCu       | BPaste    | BMask     | DwgsUser  | CmtsUser
+                   | FAdhes    | AllSilk   | FandBCu   | AllCu     | AllMask
+                   | EdgeCuts  | FCrtYd    | BCrtYd
+                   | Inner1Cu  | Inner2Cu  | Inner3Cu  | Inner4Cu  | Inner5Cu
+                   | Inner6Cu  | Inner7Cu  | Inner8Cu  | Inner9Cu  | Inner10Cu
+                   | Inner11Cu | Inner12Cu | Inner13Cu | Inner14Cu | Inner15Cu
+                   | Inner16Cu | Inner17Cu | Inner18Cu | Inner19Cu | Inner20Cu
+                   | Inner21Cu | Inner22Cu | Inner23Cu | Inner24Cu | Inner25Cu
+                   | Inner26Cu | Inner27Cu | Inner28Cu | Inner29Cu | Inner30Cu
+                   | Inner31Cu | Inner32Cu
