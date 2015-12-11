@@ -28,10 +28,14 @@ defmodule Footprints.PTHHeader do
     bottom = for pin <- 1..pincount do
       xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
       yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
-      edges = case pin do
+      edges = if rowcount == 1  and pincount == 1 do
+                0..7
+              else
+                case pin do
                    1 -> [0,1,2,3,4]
            ^pincount -> [0,1,2,6,7]
                    _ -> [0,1,2]
+                end
               end
        for n <- edges, do: make_pin_outline(pinpitch, n,"F.SilkS",{xc,yc})
     end

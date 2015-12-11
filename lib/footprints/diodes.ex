@@ -105,8 +105,6 @@ defmodule Footprints.Diodes do
     params = Map.merge defaults, %{}
 
     sizes = [#{ len, wid, legland, metriccode, imperialcode }
-              { 0.6, 0.3, 0.10, "0603", "0201" },
-              { 1.0, 0.5, 0.35, "1005", "0402" },
               {	1.6, 0.8, 0.35, "1608", "0603" },
               {	2.0, 1.2, 0.50, "2012", "0805" },
               {	2.5, 2.0, 0.50, "2520", "1008" },

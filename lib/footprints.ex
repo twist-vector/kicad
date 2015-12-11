@@ -14,9 +14,9 @@ defmodule Footprints do
   def process(options) do
     IO.puts "Using #{options[:dir]}"
 
-    #Footprints.PTHHeader.build(options[:dir], "PTH_Headers")
-    #Footprints.PTHHeaderRA.build(options[:dir], "PTH_Headers")
-    #Footprints.Passives.build(options[:dir], "SMD_Passives")
+    Footprints.PTHHeader.build(options[:dir], "PTH_Headers")
+    Footprints.PTHHeaderRA.build(options[:dir], "PTH_Headers")
+    Footprints.Passives.build(options[:dir], "SMD_Passives")
     Footprints.Diodes.build(options[:dir], "SMD_Diodes")
   end
 
