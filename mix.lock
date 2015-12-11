@@ -1,1 +1,2 @@
-%{"exml": {:hex, :exml, "0.1.0"}}
+%{"exml": {:hex, :exml, "0.1.0"},
+  "exprintf": {:hex, :exprintf, "0.1.6"}}

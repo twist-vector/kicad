@@ -25,7 +25,7 @@ defmodule Footprints.PTHHeader do
     rowpitch        = params[:rowpitch]
 
     row = 1
-    hmmm = for pin <- 1..pincount do
+    bottom = for pin <- 1..pincount do
       xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
       yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
       edges = case pin do
@@ -37,7 +37,7 @@ defmodule Footprints.PTHHeader do
     end
 
     row = rowcount
-    hmmm2 = for pin <- 1..pincount do
+    top = for pin <- 1..pincount do
       xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
       yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
       edges = case pin do
@@ -48,7 +48,7 @@ defmodule Footprints.PTHHeader do
        for n <- edges, do: make_pin_outline(pinpitch, n,"F.SilkS",{xc,yc})
     end
 
-    hmmm3 = if rowcount > 1 do
+    rest = if rowcount > 1 do
       for row <- 2..rowcount-1 do
          for pin <- 1..pincount do
             xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
@@ -65,8 +65,9 @@ defmodule Footprints.PTHHeader do
       []
     end
 
-    List.flatten(hmmm) ++ List.flatten(hmmm2) ++ List.flatten(hmmm3)
+    List.flatten(bottom) ++ List.flatten(top) ++ List.flatten(rest)
   end
+
 
   def make_pad(params, pin, row, pincount, rowcount) do
     pinpitch        = params[:pinpitch]
@@ -121,12 +122,12 @@ defmodule Footprints.PTHHeader do
       {:ok, file} = File.open filename, [:write]
       refloc      = {-crtydlength/2 - 0.75*silktextheight, 0, 90}
       valloc      = { crtydlength/2 + 0.75*silktextheight, 0, 90}
-      m = Comps.module(name: "Header",
+      m = Comps.module(name: "Header_#{pincount}x#{rowcount}",
                        valuelocation: valloc,
                        referencelocation: refloc,
                        textsize: {1,1},
                        textwidth: 0.15,
-                       descr: "0.10in (2.54 mm) spacing unshrouded header",
+                       descr: "#{pincount}x#{rowcount} 0.10in (2.54 mm) spacing unshrouded header",
                        tags: ["PTH", "unshrouded", "header"],
                        isSMD: false,
                        features: features)
