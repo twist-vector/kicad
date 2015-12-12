@@ -1,0 +1,19 @@
+defaults:
+   toefillet:                 0.50
+   heelfillet:                0.10
+   sidefillet:                0.00
+   fabtol:                    0.10
+   placetol:                  0.10
+   lentol:                    0.10
+   widtol:                    0.10
+   pinlentol:                 0.05
+   pinwidthtol:               0.00
+   minpadspacing:             0.15
+   placetickmargin:           0.10
+   silkoutlinewidth:          0.12
+   silktextheight:             1.0
+   silktextwidth:              1.0
+   silktextthickness:          0.1
+   courtoutlinewidth:        0.075
+   courtyardmargin:           0.50
+   docoutlinewidth:           0.10

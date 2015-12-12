@@ -1,0 +1,41 @@
+defaults:
+   bodywid:                    5.8
+   pinpitch:                  2.54
+   pinrad:                    0.45
+   drilldia:                  1.19
+   rowcount:                     1
+   padheight:                  2.1
+   padwidth:                   2.1
+
+
+kk6410:
+   - pincount:           2
+
+   - pincount:           3
+
+   - pincount:           4
+
+   - pincount:           5
+
+   - pincount:           6
+
+   - pincount:           7
+
+   - pincount:           8
+
+   - pincount:           9
+
+   - pincount:          10
+
+   - pincount:          11
+
+   - pincount:          12
+
+   - pincount:          13
+
+   - pincount:          14
+
+   - pincount:          15
+
+   - pincount:          16
+

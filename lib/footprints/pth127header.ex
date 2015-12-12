@@ -1,0 +1,94 @@
+defmodule Footprints.PTH127Header do
+  alias Footprints.Components, as: Comps
+
+
+
+
+  def create_mod(params, pincount, rowcount, filename) do
+      silktextheight    = params[:silktextheight]
+      silktextwidth     = params[:silktextwidth]
+      silktextthickness = params[:silktextthickness]
+      silkoutlinewidth  = params[:silkoutlinewidth]
+      courtyardmargin   = params[:courtyardmargin]
+      pinpitch          = params[:pinpitch]
+      rowpitch          = params[:rowpitch]
+      padwidth          = params[:padwidth]
+      padheight         = params[:padheight]
+
+      bodylen     = pinpitch*(pincount-1) + padwidth  # extent in x
+      bodywid     = rowpitch*(rowcount-1) + padheight # extent in y
+
+      # Bounding "courtyard" for the device
+      crtydlength = (bodylen + padheight) + courtyardmargin
+      crtydwidth  = (bodywid + padwidth) + courtyardmargin
+      courtyard = Comps.box(ll: {-crtydlength/2,  crtydwidth/2},
+                            ur: { crtydlength/2, -crtydwidth/2},
+                            layer: "F.CrtYd", width: silkoutlinewidth)
+
+      # The grid of pads.  We'll call the common function from the PTHHeader
+      # module for each pin location.
+      pads = for row <- 1..rowcount, do:
+               for pin <- 1..pincount, do:
+                 Footprints.PTHHeader.make_pad(params, pin, row, pincount, rowcount)
+
+      # Add the header outline.  The PTHHeader function draws the outside boundary
+      # rather than the outline of each individual pin.
+      frontSilkBorder = Footprints.PTHHeader.make_outline(params, pincount, rowcount)
+
+      # Pin 1 marker (circle)
+      xcc = bodylen/2 + padwidth/4
+      ycc = bodywid/2 + padheight/4
+      c = Comps.circle(center: {-xcc,ycc}, radius: silkoutlinewidth,
+                       layer: "F.SilkS", width: silkoutlinewidth)
+
+
+      # Put all the module pieces together, create, and write the module
+      features = List.flatten(pads) ++ courtyard ++ frontSilkBorder ++ [c]
+
+      refloc      = {-crtydlength/2 - 0.75*silktextheight, 0, 90}
+      valloc      = { crtydlength/2 + 0.75*silktextheight, 0, 90}
+      {:ok, file} = File.open filename, [:write]
+      m = Comps.module(name: "Header_#{pincount}x#{rowcount}",
+                       valuelocation: valloc,
+                       referencelocation: refloc,
+                       textsize: {silktextheight,silktextwidth},
+                       textwidth: silktextthickness,
+                       descr: "#{pincount}x#{rowcount} 0.05in (1.27 mm) spacing unshrouded header",
+                       tags: ["PTH", "unshrouded", "header"],
+                       isSMD: false,
+                       features: features)
+      IO.binwrite file, "#{m}"
+      File.close file
+    end
+
+
+  def build(defaults, output_base_directory, config_base_directory) do
+    library_name = "PTH_Headers"
+    output_directory = "#{output_base_directory}/#{library_name}.pretty"
+    File.mkdir(output_directory)
+
+    # Note that for the headers we'll just define the pin layouts (counts)
+    # programatically.  We won't use the device sections of the config file.
+    # Each header pitch has its own config file so they can be customized.
+
+    #
+    # 0.05" (1.27 mm) headers
+    #
+
+    # Override default parameters for this library (set of modules) and add
+    # device specific values.
+    temp = YamlElixir.read_from_file("#{config_base_directory}/PTH127Header_devices.yml")
+    params = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
+             |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
+             |> Map.merge defaults
+
+    pinpitch = params[:pinpitch]
+    devices = for pincount <- 1..40, rowcount <- 1..3, pincount>=rowcount, do: {pincount,rowcount}
+    Enum.map(devices, fn {pincount,rowcount} ->
+                  filename = "#{output_directory}/HDR#{round(pinpitch*100.0)}P#{pincount}x#{rowcount}.kicad_mod"
+                  create_mod(params, pincount, rowcount, filename)
+                end)
+    :ok
+  end
+
+end

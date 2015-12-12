@@ -1,0 +1,11 @@
+defaults:
+   pinpitch:                  2.54
+   rowpitch:                  2.54
+   padheight:                 1.57
+   padwidth:                  1.57
+   pindia:                    0.64
+   drilldia:                  0.90
+   silkoutlinewidth:          0.15
+   pinlength:                 5.84
+   bodyoffset:                1.52
+   bodythick:                 2.54

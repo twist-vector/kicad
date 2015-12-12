@@ -1,0 +1,79 @@
+defaults:
+   pinpitch:                  1.27
+   padheight:                 1.14
+   padwidth:                  0.80
+   drilldia:                  0.57
+   silkoutlinewidth:          0.10
+
+
+df13:
+   - pincount:           2
+
+   - pincount:           3
+
+   - pincount:           4
+
+   - pincount:           5
+
+   - pincount:           6
+
+   - pincount:           7
+
+   - pincount:           8
+
+   - pincount:           9
+
+   - pincount:          10
+
+   - pincount:          11
+
+   - pincount:          12
+
+   - pincount:          13
+
+   - pincount:          14
+
+   - pincount:          15
+
+   - pincount:          20
+
+   - pincount:          30
+
+   - pincount:          40
+
+
+df13ra:
+   - pincount:           2
+
+   - pincount:           3
+
+   - pincount:           4
+
+   - pincount:           5
+
+   - pincount:           6
+
+   - pincount:           7
+
+   - pincount:           8
+
+   - pincount:           9
+
+   - pincount:          10
+
+   - pincount:          11
+
+   - pincount:          12
+
+   - pincount:          13
+
+   - pincount:          14
+
+   - pincount:          15
+
+   - pincount:          20
+
+   - pincount:          30
+
+   - pincount:          40
+

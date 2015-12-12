@@ -1,0 +1,139 @@
+defaults:
+   legland:                   0.60
+   toefillet:                 0.25
+   heelfillet:                0.10
+   sidefillet:               -0.05
+   height:                     1.0
+   pinheight:                  0.1
+   pinthick:                  0.25
+
+
+qfp:
+   - pinpitch:         0.5
+     totallen:         7.0
+     pinwidth:        0.22
+     totalwid:         7.0
+     bodylen:          5.0
+     pincount:          32
+     bodywid:          5.0
+
+   - pinpitch:         0.8
+     totallen:         9.0
+     pinwidth:        0.35
+     totalwid:         9.0
+     bodylen:          7.0
+     pincount:          32
+     bodywid:          7.0
+
+   - pinpitch:         0.5
+     totallen:         9.0
+     pinwidth:        0.22
+     totalwid:         9.0
+     bodylen:          7.0
+     pincount:          48
+     bodywid:          7.0
+
+   - pinpitch:         0.4
+     totallen:         9.0
+     pinwidth:        0.18
+     totalwid:         9.0
+     bodylen:          7.0
+     pincount:          64
+     bodywid:          7.0
+
+   - pinpitch:         0.8
+     totallen:        12.0
+     pinwidth:        0.35
+     totalwid:        12.0
+     bodylen:         10.0
+     pincount:          44
+     bodywid:         10.0
+
+   - pinpitch:        0.65
+     totallen:        12.0
+     pinwidth:        0.30
+     totalwid:        12.0
+     bodylen:         10.0
+     pincount:          52
+     bodywid:         10.0
+
+   - pinpitch:         0.5
+     totallen:        12.0
+     pinwidth:        0.22
+     totalwid:        12.0
+     bodylen:         10.0
+     pincount:          64
+     bodywid:         10.0
+
+   - pinpitch:         0.4
+     totallen:        12.0
+     pinwidth:        0.18
+     totalwid:        12.0
+     bodylen:         10.0
+     pincount:          80
+     bodywid:         10.0
+
+   - pinpitch:         0.5
+     totallen:        14.0
+     pinwidth:        0.22
+     totalwid:        14.0
+     bodylen:         12.0
+     pincount:          80
+     bodywid:         12.0
+
+   - pinpitch:         1.0
+     totallen:        16.0
+     pinwidth:        0.40
+     totalwid:        16.0
+     bodylen:         14.0
+     pincount:          52
+     bodywid:         14.0
+
+   - pinpitch:         1.0
+     totallen:        16.0
+     pinwidth:        0.40
+     totalwid:        16.0
+     bodylen:         14.0
+     pincount:          44
+     bodywid:         14.0
+
+   - pinpitch:         0.8
+     totallen:        16.0
+     pinwidth:        0.35
+     totalwid:        16.0
+     bodylen:         14.0
+     pincount:          64
+     bodywid:         14.0
+
+   - pinpitch:        0.65
+     totallen:        16.0
+     pinwidth:        0.30
+     totalwid:        16.0
+     bodylen:         14.0
+     pincount:          80
+     bodywid:         14.0
+
+   - pinpitch:         0.5
+     totallen:        16.0
+     pinwidth:        0.22
+     totalwid:        16.0
+     bodylen:         14.0
+     pincount:         100
+     bodywid:         14.0
+
+   - pinpitch:         0.4
+     totallen:        16.0
+     pinwidth:        0.18
+     totalwid:        16.0
+     bodylen:         14.0
+     pincount:         120
+     bodywid:         14.0
+
+   - pinpitch:         0.5
+     totallen:        22.0
+     pinwidth:        0.20
+     totalwid:        22.0
+     bodylen:         20.0
+     pincount:         144
+     bodywid:         20.0
+

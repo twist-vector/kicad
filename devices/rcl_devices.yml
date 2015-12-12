@@ -1,0 +1,414 @@
+defaults:
+   toefillet:                  0.5
+   heelfillet:                 0.1
+   sidefillet:                 0.1
+   placetickmargin:           0.20
+   polarized:                 false
+
+
+capcp:
+   - legland:          0.25
+     toefillet:        0.15
+     bodylen:          1.0
+     bodywid:          0.5
+     heelfillet:      -0.05
+     height:           0.8
+     polarized:        true
+     courtyardmargin:  0.35
+     silkoutlinewidth: 0.05
+
+   - bodywid:          0.8
+     legland:         0.35
+     bodylen:          1.6
+     height:           0.8
+     toefillet:        0.3
+     courtyardmargin:  0.35
+     polarized:        true
+
+   - bodywid:          1.2
+     legland:         0.50
+     bodylen:          2.0
+     height:           0.8
+     polarized:        true
+
+   - bodywid:          2.0
+     legland:         0.50
+     bodylen:          2.5
+     height:           1.0
+     polarized:        true
+
+   - bodywid:          2.8
+     legland:         0.50
+     bodylen:          2.8
+     height:           1.0
+     polarized:        true
+
+   - bodywid:          1.6
+     legland:         0.50
+     inchcode:        1206
+     bodylen:          3.2
+     height:           1.0
+     polarized:        true
+
+   - bodywid:          2.5
+     legland:         0.50
+     inchcode:        1210
+     bodylen:          3.2
+     height:           1.0
+     polarized:        true
+
+   - bodywid:          2.4
+     legland:         0.50
+     inchcode:        1410
+     bodylen:          3.5
+     height:           1.0
+     polarized:        true
+
+   - bodywid:          1.2
+     legland:         0.50
+     bodylen:          4.5
+     height:           1.5
+     polarized:        true
+
+   - bodywid:          2.0
+     legland:         0.60
+     bodylen:          4.5
+     height:           1.5
+     polarized:        true
+
+   - bodywid:          3.2
+     legland:         0.60
+     inchcode:        1812
+     bodylen:          4.5
+     height:           1.8
+     polarized:        true
+
+   - bodywid:          2.8
+     legland:         0.60
+     bodylen:          5.7
+     height:           1.8
+     polarized:        true
+
+   - bodywid:          5.0
+     legland:         0.60
+     bodylen:          5.7
+     height:           1.8
+     polarized:        true
+
+   - bodywid:          5.0
+     legland:         0.80
+     bodylen:          6.0
+     height:           2.5
+     polarized:        true
+
+   - bodywid:          6.3
+     legland:         0.80
+     bodylen:          7.5
+     height:           2.5
+     polarized:        true
+
+   - bodywid:          4.3
+     legland:         0.80
+     bodylen:          7.3
+     height:           2.5
+     polarized:        true
+
+
+indc:
+   - legland:          0.25
+     toefillet:        0.15
+     bodylen:          1.0
+     bodywid:          0.5
+     heelfillet:      -0.05
+     height:           0.8
+     courtyardmargin:  0.35
+     silkoutlinewidth: 0.05
+
+   - bodywid:          0.8
+     legland:         0.35
+     bodylen:          1.6
+     height:           0.8
+     toefillet:        0.3
+     courtyardmargin:  0.35
+
+   - bodywid:          1.2
+     legland:         0.50
+     bodylen:          2.0
+     height:           0.8
+
+   - bodywid:          2.0
+     legland:         0.50
+     bodylen:          2.5
+     height:           1.0
+
+   - bodywid:          2.8
+     legland:         0.50
+     bodylen:          2.8
+     height:           1.0
+
+   - bodywid:          1.6
+     legland:         0.50
+     inchcode:        1206
+     bodylen:          3.2
+     height:           1.0
+
+   - bodywid:          2.5
+     legland:         0.50
+     inchcode:        1210
+     bodylen:          3.2
+     height:           1.0
+
+   - bodywid:          2.4
+     legland:         0.50
+     inchcode:        1410
+     bodylen:          3.5
+     height:           1.0
+
+   - bodywid:          1.2
+     legland:         0.50
+     bodylen:          4.5
+     height:           1.5
+
+   - bodywid:          2.0
+     legland:         0.60
+     bodylen:          4.5
+     height:           1.5
+
+   - bodywid:          3.2
+     legland:         0.60
+     inchcode:        1812
+     bodylen:          4.5
+     height:           1.8
+
+   - bodywid:          2.8
+     legland:         0.60
+     bodylen:          5.7
+     height:           1.8
+
+   - bodywid:          5.0
+     legland:         0.60
+     bodylen:          5.7
+     height:           1.8
+
+   - bodywid:          5.0
+     legland:         0.80
+     bodylen:          6.0
+     height:           2.5
+
+   - bodywid:          6.3
+     legland:         0.80
+     bodylen:          7.5
+     height:           2.5
+
+
+resc:
+   - legland:          0.25
+     toefillet:        0.15
+     bodylen:          1.0
+     bodywid:          0.5
+     heelfillet:      -0.05
+     height:           0.8
+     courtyardmargin:  0.35
+     silkoutlinewidth: 0.05
+
+   - bodywid:          0.8
+     legland:         0.35
+     bodylen:          1.6
+     height:           0.8
+     toefillet:        0.3
+     courtyardmargin:  0.35
+
+   - bodywid:          1.2
+     legland:         0.50
+     bodylen:          2.0
+     height:           0.8
+
+   - bodywid:          2.0
+     legland:         0.50
+     bodylen:          2.5
+     height:           1.0
+
+   - bodywid:          2.8
+     legland:         0.50
+     bodylen:          2.8
+     height:           1.0
+
+   - bodywid:          1.6
+     legland:         0.50
+     inchcode:        1206
+     bodylen:          3.2
+     height:           1.0
+
+   - bodywid:          2.5
+     legland:         0.50
+     inchcode:        1210
+     bodylen:          3.2
+     height:           1.0
+
+   - bodywid:          2.4
+     legland:         0.50
+     inchcode:        1410
+     bodylen:          3.5
+     height:           1.0
+
+   - bodywid:          1.2
+     legland:         0.50
+     bodylen:          4.5
+     height:           1.5
+
+   - bodywid:          2.0
+     legland:         0.60
+     bodylen:          4.5
+     height:           1.5
+
+   - bodywid:          3.2
+     legland:         0.60
+     inchcode:        1812
+     bodylen:          4.5
+     height:           1.8
+
+   - bodywid:          9.0
+     legland:         0.60
+     bodylen:          4.5
+     height:           1.5
+
+   - bodywid:          2.5
+     legland:         0.60
+     bodylen:          5.0
+     height:           1.8
+
+   - bodywid:          6.4
+     legland:         0.80
+     bodylen:          5.6
+     height:           2.5
+
+   - bodywid:          2.8
+     legland:         0.60
+     bodylen:          5.7
+     height:           1.8
+
+   - bodywid:          5.0
+     legland:         0.60
+     bodylen:          5.7
+     height:           1.8
+
+   - bodywid:          5.0
+     legland:         0.80
+     bodylen:          6.0
+     height:           2.5
+
+   - inchcode:        2512
+     legland:         0.80
+     bodylen:          6.4
+     bodywid:          3.2
+     height:           1.5
+     sidefillet:       0.25
+     toefillet:       0.75
+     heelfillet:       0.50
+
+   - bodywid:          4.0
+     legland:         0.80
+     bodylen:          7.1
+     height:           2.5
+
+   - bodywid:          6.3
+     legland:         0.80
+     bodylen:          7.5
+     height:           2.5
+
+   - bodywid:          4.5
+     legland:         0.80
+     bodylen:          9.0
+     height:           2.5
+
+   - bodywid:          1.0
+     legland:         0.80
+     bodylen:          9.1
+     height:           2.5
+
+
+capc:
+   - legland:         0.25
+     toefillet:        0.15
+     bodylen:          1.0
+     bodywid:          0.5
+     heelfillet:      -0.05
+     height:           0.8
+     courtyardmargin:  0.35
+     silkoutlinewidth: 0.05
+
+   - bodywid:          0.8
+     legland:         0.35
+     bodylen:          1.6
+     height:           0.8
+     toefillet:        0.3
+     courtyardmargin:  0.35
+
+   - bodywid:          1.2
+     legland:         0.50
+     bodylen:          2.0
+     height:           0.8
+
+   - bodywid:          2.0
+     legland:         0.50
+     bodylen:          2.5
+     height:           1.0
+
+   - bodywid:          2.8
+     legland:         0.50
+     bodylen:          2.8
+     height:           1.0
+
+   - bodywid:          1.6
+     legland:         0.50
+     inchcode:        1206
+     bodylen:          3.2
+     height:           1.0
+
+   - bodywid:          2.5
+     legland:         0.50
+     inchcode:        1210
+     bodylen:          3.2
+     height:           1.0
+
+   - bodywid:          2.4
+     legland:         0.50
+     inchcode:        1410
+     bodylen:          3.5
+     height:           1.0
+
+   - bodywid:          1.2
+     legland:         0.50
+     bodylen:          4.5
+     height:           1.5
+
+   - bodywid:          2.0
+     legland:         0.60
+     bodylen:          4.5
+     height:           1.5
+
+   - bodywid:          3.2
+     legland:         0.60
+     inchcode:        1812
+     bodylen:          4.5
+     height:           1.8
+
+   - bodywid:          2.8
+     legland:         0.60
+     bodylen:          5.7
+     height:           1.8
+
+   - bodywid:          5.0
+     legland:         0.60
+     bodylen:          5.7
+     height:           1.8
+
+   - bodywid:          5.0
+     legland:         0.80
+     bodylen:          6.0
+     height:           2.5
+
+   - bodywid:          6.3
+     legland:         0.80
+     bodylen:          7.5
+     height:           2.5

@@ -1,0 +1,81 @@
+defaults:
+   legland:                   0.40
+   toefillet:                 0.15
+   heelfillet:                0.05
+   sidefillet:               -0.05
+   pinheight:                  0.1
+
+
+qfn:
+   - pinwidth:        0.25
+     bodylen:          4.0
+     pincount:          24
+     bodywid:          4.0
+     height:          0.50
+     pinpitch:         0.5
+     epadwid:         2.15
+     epadlen:         2.15
+
+   - pinwidth:        0.25
+     bodylen:          5.0
+     pincount:          28
+     bodywid:          5.0
+     height:          0.50
+     pinpitch:         0.5
+     epadwid:         3.30
+     epadlen:         3.30
+
+   - pinwidth:        0.23
+     bodylen:          5.0
+     pincount:          32
+     bodywid:          5.0
+     height:          0.50
+     pinpitch:         0.5
+     epadwid:         3.30
+     epadlen:         3.30
+
+   - pinwidth:        0.25
+     bodylen:          6.0
+     pincount:          40
+     bodywid:          6.0
+     height:          0.50
+     pinpitch:         0.5
+     epadwid:         4.15
+     epadlen:         4.15
+
+   - pinwidth:        0.25
+     bodylen:          7.0
+     pincount:          48
+     bodywid:          7.0
+     height:          0.75
+     pinpitch:         0.5
+     epadwid:         5.15
+     epadlen:         5.15
+
+   - pinwidth:        0.22
+     bodylen:          8.0
+     pincount:          64
+     bodywid:          8.0
+     height:          0.75
+     pinpitch:         0.4
+     epadwid:          5.7
+     epadlen:         5.70
+
+   - pinwidth:        0.22
+     bodylen:          9.0
+     pincount:          64
+     bodywid:          9.0
+     height:          0.75
+     pinpitch:         0.5
+     epadwid:         7.15
+     epadlen:         7.15
+
+   - pinwidth:        0.22
+     bodylen:          8.0
+     pincount:         68F
+     bodywid:          8.0
+     height:          0.75
+     pinpitch:         0.4
+     epadwid:          5.7
+     epadlen:         5.70
+

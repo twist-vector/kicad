@@ -3,7 +3,7 @@ defmodule Footprints.Passives do
 
 
 
-  def create_mod(params, name, descr, bodylen, bodywid, legland, polarized, tags, filename) do
+  def create_mod(params, name, descr, tags, filename) do
     #
     # Device oriented left-to-right:  Body length is then in the KiCad x
     # direction, body width is in the y direction.
@@ -22,6 +22,10 @@ defmodule Footprints.Passives do
     fabtol            = params[:fabtol]
     widtol            = params[:widtol]
     courtyardmargin   = params[:courtyardmargin]
+    bodylen           = params[:bodylen]
+    bodywid           = params[:bodywid]
+    legland           = params[:legland]
+    polarized         = params[:polarized]
 
     totaltol  = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -100,65 +104,47 @@ defmodule Footprints.Passives do
   end
 
 
-  def build(output_base_directory, library_name) do
+  def build(basedefaults, output_base_directory, config_base_directory) do
+    library_name = "SMD_Passives"
     output_directory = "#{output_base_directory}/#{library_name}.pretty"
-
     File.mkdir(output_directory)
 
-    # Read in default values
-    defaults = Footprints.Xml.read_defaults(%{}, "global_defaults.xml")
+    # Override default parameters for this library (set of modules) and add
+    # device specific values.
+    temp = YamlElixir.read_from_file("#{config_base_directory}/rcl_devices.yml")
+    d = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
+               |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
+    defaults =  Map.merge basedefaults, d
 
-    # Append specific parameters for this library (set of modules)
-    params = Map.merge defaults, %{}
+    for dev_name <- Dict.keys(temp) do
+      if dev_name != "defaults" do
 
-    sizes = [#{ len, wid, legland, metriccode, imperialcode }
-              { 0.6, 0.3, 0.10, "0603", "0201" },
-              { 1.0, 0.5, 0.35, "1005", "0402" },
-              {	1.6, 0.8, 0.35, "1608", "0603" },
-              {	2.0, 1.2, 0.50, "2012", "0805" },
-              {	2.5, 2.0, 0.50, "2520", "1008" },
-              {	2.8, 2.8, 0.50, "2828", "1111" },
-              {	3.2, 1.6, 0.50, "3216", "1206" },
-              {	3.2, 2.5, 0.50, "3225", "1210" },
-              {	3.5, 2.4, 0.50, "3524", "1410" },
-              {	4.5, 1.2, 0.50, "4512", "1805" },
-              {	4.5, 2.0, 0.60, "4520", "1808" },
-              {	4.5, 3.2, 0.60, "4532", "1812" },
-              {	5.7, 2.8, 0.60, "5728", "2211" },
-              {	5.7, 5.0, 0.60, "5750", "2220" },
-              {	6.0, 5.0, 0.80, "6050", "2420" },
-              {	7.5, 6.3, 0.80, "7563", "3025" }
-            ]
+        # temp[dev_name] is a list of Dicts.  Each element is the parameters list
+        # to be used for the device
+        Enum.map(temp[dev_name], fn d ->
+          p = Enum.map(d, fn {k,v} -> Map.put(%{}, String.to_atom(k), v) end)
+              |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
+          params = Map.merge defaults, p
 
-    # Non-polarized capacitors (CAPC-)
-    Enum.map( sizes, fn {len, wid, legland, metriccode, imperialcode} ->
-        filename = "#{output_directory}/CAPC-#{metriccode}-#{imperialcode}.kicad_mod"
-        tags = ["SMD", "capacitor", metriccode]
-        create_mod(params, "#{len}x#{wid}_chip_cap",
-                   "#{len}x#{wid} (#{metriccode} metric) non-polarized chip capacitor",
-                   len, wid, legland, false, tags, filename)
+          bl = params[:bodylen]*10
+          bw = params[:bodywid]*10
+          metriccode = List.flatten(:io_lib.format("~2..0w~2..0w", [round(bl),round(bw)]))
+          imperialcode = if params[:inchcode] == nil do
+            bli = bl * 0.393701
+            bwi = bw * 0.393701
+             List.flatten(:io_lib.format("~2..0w~2..0w", [round(bli),round(bwi)]))
+          else
+             params[:inchcode]
+          end
+
+          filename = "#{output_directory}/#{dev_name}-#{metriccode}-#{imperialcode}.kicad_mod"
+          tags = ["SMD", "chip", metriccode]
+          create_mod(params, "#{metriccode}_chip_cap",
+                     "#{metriccode} (metric) non-polarized chip capacitor",
+                     tags, filename)
+        end)
       end
-    )
-
-    # Polarized capacitors (CAPCP-)
-    Enum.map( sizes, fn {len, wid, legland, metriccode, imperialcode} ->
-        filename = "#{output_directory}/CAPCP-#{metriccode}-#{imperialcode}.kicad_mod"
-        tags = ["SMD", "polarized", "capacitor", metriccode]
-        create_mod(params, "#{len}x#{wid}_chip_cap_polar",
-                   "#{len}x#{wid} (#{metriccode} metric) polarized chip capacitor",
-                   len, wid, legland, true, tags, filename)
-      end
-    )
-
-    # Chip resistors (non-polarized) resistors (RESC-)
-    Enum.map( sizes, fn {len, wid, legland, metriccode, imperialcode} ->
-        filename = "#{output_directory}/RESC-#{metriccode}-#{imperialcode}.kicad_mod"
-        tags = ["SMD", "resistor", metriccode]
-        create_mod(params, "#{len}x#{wid}_chip_resistor",
-                   "#{len}x#{wid} (#{metriccode} metric) chip resistor",
-                   len, wid, legland, false, tags, filename)
-      end
-    )
+    end
 
     :ok
   end

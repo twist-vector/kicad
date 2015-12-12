@@ -1,0 +1,81 @@
+defaults:
+   toefillet:                 0.50
+   heelfillet:                0.50
+   sidefillet:                0.10
+   pinlentol:                  0.4
+   pinthick:                  0.25
+   pinheight:                 0.25
+   legland:                    0.6
+   placetickmargin:            0.5
+
+
+to:
+   - pinwidth:        0.75
+     legland:          0.7
+     totalwid:         9.1
+     bodylen:          6.6
+     pincount:           2
+     bodywid:         6.14
+     height:           2.5
+     pinpitch:        4.57
+     epadohang:        1.0
+     sidefillet:       0.15
+     toefillet:        1.0
+     epadwid:          5.4
+     epadlen:          5.4
+     heelfillet:        1.0
+
+   - pinwidth:        0.82
+     legland:         2.54
+     totalwid:        14.2
+     bodylen:         10.2
+     pincount:           2
+     bodywid:         9.15
+     height:           4.5
+     pinpitch:        5.08
+     epadohang:      1.335
+     sidefillet:       0.25
+     toefillet:        1.0
+     epadwid:          7.5
+     epadlen:          8.5
+     heelfillet:        1.0
+
+   - pinwidth:        0.82
+     legland:         1.27
+     totalwid:       12.52
+     bodylen:         10.3
+     pincount:           5
+     bodywid:          8.9
+     height:           4.5
+     pinpitch:       1.702
+     epadohang:        1.5
+     sidefillet:      0.075
+     toefillet:        1.0
+     epadwid:          6.1
+     epadlen:         7.62
+     heelfillet:        1.0
+
+   - pinwidth:        0.71
+     legland:          2.3
+     totalwid:        13.6
+     bodylen:         10.2
+     pincount:           7
+     bodywid:          9.0
+     height:           4.5
+     pinpitch:        1.27
+     epadohang:       1.68
+     epadwid:         6.86
+     epadlen:         6.22
+
+   - pinwidth:        0.77
+     legland:         1.27
+     totalwid:        13.6
+     bodylen:         10.2
+     pincount:           7
+     bodywid:          9.0
+     height:           4.5
+     pinpitch:        1.27
+     epadohang:       1.52
+     epadwid:         4.65
+     epadlen:          6.5
+
