@@ -33,6 +33,7 @@ defmodule Footprints do
     Footprints.PTH127HeaderRA.build(defaults, output_base_directory, config_base_directory)
     Footprints.Passives.build(defaults, output_base_directory, config_base_directory)
     Footprints.Diodes.build(defaults, output_base_directory, config_base_directory)
+    Footprints.SOIC.build(defaults, output_base_directory, config_base_directory)
   end
 
 
