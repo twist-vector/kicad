@@ -1,55 +1,71 @@
 defaults:
-   toefillet:                 0.50
-   heelfillet:                0.10
-   sidefillet:                0.05
-   height:                     1.0
-   pinlentol:                0.435
-   pinthick:                  0.25
-   pinheight:                 0.25
-   pinwidth:                  0.25
-   pinpitch:                  0.96
-   legland:                    0.6
+   toefillet:                 0.5
+   heelfillet:                0.2
+   sidefillet:                0.1
+   pinlentol:                 0.0
+   pinwidth:                  0.44
+   legland:                   0.45
    placetickmargin:           0.20
+   courtoutlinewidth:         0.075
+   docoutlinewidth:           0.02
+   silkoutlinewidth:          0.075
 
-
-sot363:
-   - bodywid:         1.25
-     pincount:           3
-     pinwidth:       0.225
-     bodylen:          2.0
-     totalwid:         2.1
-
-   - bodywid:         1.25
-     pincount:           5
-     pinwidth:       0.225
-     bodylen:          2.0
-     totalwid:         2.1
-
-   - bodywid:         1.25
-     pincount:           6
-     pinwidth:       0.225
-     bodylen:          2.0
-     totalwid:         2.1
 
 
 sot23:
    - pincount:           3
      bodywid:          1.3
      bodylen:          2.9
-     totalwid:        2.37
+     totalwid:        2.64
+     pinpitch:        0.96
 
    - pincount:           4
      bodywid:          1.3
      bodylen:          2.9
      totalwid:        2.37
+     pinpitch:        0.96
 
    - pincount:           5
      bodywid:          1.3
      bodylen:          2.9
      totalwid:        2.37
+     sidefillet:      0.0
+     pinpitch:        0.96
 
    - pincount:           6
      bodywid:          1.3
      bodylen:          2.9
      totalwid:        2.37
+     sidefillet:      0.0
+     pinpitch:        0.96
 
+
+sot363:
+   - bodywid:         1.25
+     pincount:           3
+     pinwidth:       0.225
+     bodylen:          2.2
+     totalwid:         2.1
+     pinpitch:        0.65
+     toefillet:       0.2
+     heelfillet:      0.1
+
+   - bodywid:         1.25
+     pincount:           5
+     pinwidth:       0.225
+     bodylen:          2.2
+     totalwid:         2.1
+     pinpitch:        0.65
+     sidefillet:      0.0
+     toefillet:       0.2
+     heelfillet:      0.1
+
+   - bodywid:         1.25
+     pincount:           6
+     pinwidth:       0.225
+     bodylen:          2.2
+     totalwid:         2.1
+     pinpitch:        0.65
+     sidefillet:      0.0
+     toefillet:       0.2
+     heelfillet:      0.1

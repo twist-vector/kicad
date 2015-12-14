@@ -61,7 +61,8 @@ defmodule Footprints do
     # Footprints.DF13HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
     # Footprints.QFP.build(defaults, overrides, output_base_directory, config_base_directory)
     # Footprints.QFN.build(defaults, overrides, output_base_directory, config_base_directory)
-    Footprints.Drills.build(defaults, overrides, output_base_directory, config_base_directory)
+    #Footprints.Drills.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.SOT.build(defaults, overrides, output_base_directory, config_base_directory)
   end
 
 
