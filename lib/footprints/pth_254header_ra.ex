@@ -1,6 +1,8 @@
 defmodule Footprints.PTH254HeaderRA do
   alias Footprints.Components, as: Comps
 
+  @library_name "PTH_Headers"
+  @device_file_name "PTH254Header_devices.yml"
 
   def create_mod(params, pincount, rowcount, filename) do
     silktextheight    = params[:silktextheight]
@@ -82,25 +84,26 @@ defmodule Footprints.PTH254HeaderRA do
   end
 
 
-  def build(defaults, output_base_directory, config_base_directory) do
-    library_name = "PTH_Headers"
-    output_directory = "#{output_base_directory}/#{library_name}.pretty"
+  def build(defaults, overrides, output_base_directory, config_base_directory) do
+    output_directory = "#{output_base_directory}/#{@library_name}.pretty"
     File.mkdir(output_directory)
 
     # Note that for the headers we'll just define the pin layouts (counts)
-    # programatically.  We won't use the device sections of the config file.
-    # Each header pitch has its own config file so they can be customized.
+    # programatically.  We won't use the device sections of the config file
+    # to define the number of pins or rows.
 
     #
     # 0.1" (2.54 mm) headers
     #
 
     # Override default parameters for this library (set of modules) and add
-    # device specific values.
-    temp = YamlElixir.read_from_file("#{config_base_directory}/PTH254Header_devices.yml")
+    # device specific values.  The override based on command line parameters
+    # (passed in via `overrides` variable)
+    temp = YamlElixir.read_from_file("#{config_base_directory}/#{@device_file_name}")
     p = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
         |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-    params = Map.merge defaults, p
+    p2 = Map.merge defaults, p
+    params = Map.merge p2, overrides
 
     pinpitch = params[:pinpitch]
     devices = for pincount <- 1..40, rowcount <- 1..3, pincount>=rowcount, do: {pincount,rowcount}

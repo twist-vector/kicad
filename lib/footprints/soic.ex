@@ -1,6 +1,9 @@
 defmodule Footprints.SOIC do
   alias Footprints.Components, as: Comps
 
+  @library_name "SOP"
+  @device_file_name "SOP_devices.yml"
+
 
   def create_mod(params, name, descr, tags, filename) do
     #
@@ -101,11 +104,27 @@ defmodule Footprints.SOIC do
     c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth,
                      layer: "F.SilkS", width: silkoutlinewidth)
 
-    features = List.flatten(pads) ++ epad ++ courtyard ++ [c] ++
-               List.flatten(pins) ++ List.flatten(outline)
+   # Center of mass fiducial
+   com = [Footprints.Components.circle(center: {0,0}, radius: 0.5,
+                                       layer: "Eco1.User", width: silkoutlinewidth),
+          Footprints.Components.line(start: {-0.75,0}, end: {0.75,0},
+                                     layer: "Eco1.User", width: silkoutlinewidth),
+          Footprints.Components.line(start: {0,-0.75}, end: {0,0.75},
+                                     layer: "Eco1.User", width: silkoutlinewidth)]
 
-    refloc      = {-crtydSizeX/2 - 0.75*silktextheight, 0, 90}
-    valloc      = { crtydSizeX/2 + 0.75*silktextheight, 0, 90}
+
+    features = List.flatten(pads) ++ epad ++ courtyard ++ [c] ++
+               List.flatten(pins) ++ List.flatten(outline)++ com
+
+    refloc = if params[:refsinside], do:
+                 {0, bodywid/4-silktextheight/2, 0},   #{0, 0.8*silktextheight, 0},
+             else:
+                 {-crtydSizeX/2 - 0.75*silktextheight, 0, 90}
+    valloc = if params[:refsinside], do:
+                 {0, -bodywid/4+silktextheight/2, 0},   #{0, -0.8*silktextheight, 0},
+             else:
+                 { crtydSizeX/2 + 0.75*silktextheight, 0, 90}
+
     m = Comps.module(name: name,
                      valuelocation: valloc,
                      referencelocation: refloc,
@@ -121,17 +140,18 @@ defmodule Footprints.SOIC do
   end
 
 
-  def build(basedefaults, output_base_directory, config_base_directory) do
-    library_name = "SOP"
-    output_directory = "#{output_base_directory}/#{library_name}.pretty"
+  def build(basedefaults, overrides, output_base_directory, config_base_directory) do
+    output_directory = "#{output_base_directory}/#{@library_name}.pretty"
     File.mkdir(output_directory)
 
     # Override default parameters for this library (set of modules) and add
-    # device specific values.
-    temp = YamlElixir.read_from_file("#{config_base_directory}/SOP_devices.yml")
-    d = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
-               |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-    defaults =  Map.merge basedefaults, d
+    # device specific values.  The override based on command line parameters
+    # (passed in via `overrides` variable)
+    temp = YamlElixir.read_from_file("#{config_base_directory}/#{@device_file_name}")
+    p = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
+        |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
+    p2 = Map.merge basedefaults, p
+    defaults = Map.merge p2, overrides
 
     for dev_name <- Dict.keys(temp) do
       if dev_name != "defaults" do
@@ -155,10 +175,12 @@ defmodule Footprints.SOIC do
           end
 
           #  Example: SOIC127P490x600-8-T330x241
-          filename = "#{output_directory}/#{String.upcase(dev_name)}#{pitchcode}P#{lencode}x#{widcode}-#{pincount}#{padcode}.kicad_mod"
-          IO.puts filename
-          tags = ["SMD", "SOIC"]
-          create_mod(params, "name", "descr", tags, filename)
+          devcode = "#{String.upcase(dev_name)}#{pitchcode}P#{lencode}x#{widcode}-#{pincount}#{padcode}"
+          filename = "#{output_directory}/#{devcode}.kicad_mod"
+          tags = ["SMD", "#{String.upcase(dev_name)}"]
+          name = "#{devcode}"
+          descr = "#{params[:pincount]} pin #{params[:pinpitch]}in pitch #{params[:bodylen]}x#{params[:totalwid]} #{String.upcase(dev_name)} device"
+          create_mod(params, name, descr, tags, filename)
         end)
       end
     end

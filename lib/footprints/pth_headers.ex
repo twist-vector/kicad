@@ -73,7 +73,7 @@ defmodule Footprints.PTHHeader do
 
 
 
-  def make_pad(params, pin, row, pincount, rowcount) do
+  def make_pad(params, pin, row, pincount, rowcount, shape \\ "oval") do
     pinpitch        = params[:pinpitch]
     rowpitch        = params[:rowpitch]
     padwidth        = params[:padwidth]
@@ -84,7 +84,7 @@ defmodule Footprints.PTHHeader do
     yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
     pn = (pin-1)*rowcount + row
 
-    Comps.padPTH(name: "#{pn}", shape: "oval", at: {xc,yc},
+    Comps.padPTH(name: "#{pn}", shape: shape, at: {xc,yc},
                  size: {padwidth,padheight}, drill: drilldia)
   end
 

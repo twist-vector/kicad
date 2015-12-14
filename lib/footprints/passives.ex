@@ -1,7 +1,8 @@
 defmodule Footprints.Passives do
   alias Footprints.Components, as: Comps
 
-
+  @library_name "SMD_Passives"
+  @device_file_name "rcl_devices.yml"
 
   def create_mod(params, name, descr, tags, filename) do
     #
@@ -104,17 +105,18 @@ defmodule Footprints.Passives do
   end
 
 
-  def build(basedefaults, output_base_directory, config_base_directory) do
-    library_name = "SMD_Passives"
-    output_directory = "#{output_base_directory}/#{library_name}.pretty"
+  def build(basedefaults, overrides, output_base_directory, config_base_directory) do
+    output_directory = "#{output_base_directory}/#{@library_name}.pretty"
     File.mkdir(output_directory)
 
     # Override default parameters for this library (set of modules) and add
-    # device specific values.
-    temp = YamlElixir.read_from_file("#{config_base_directory}/rcl_devices.yml")
-    d = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
-               |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-    defaults =  Map.merge basedefaults, d
+    # device specific values.  The override based on command line parameters
+    # (passed in via `overrides` variable)
+    temp = YamlElixir.read_from_file("#{config_base_directory}/#{@device_file_name}")
+    p = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
+        |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
+    p2 = Map.merge basedefaults, p
+    defaults = Map.merge p2, overrides
 
     for dev_name <- Dict.keys(temp) do
       if dev_name != "defaults" do
@@ -139,8 +141,8 @@ defmodule Footprints.Passives do
 
           filename = "#{output_directory}/#{dev_name}-#{metriccode}-#{imperialcode}.kicad_mod"
           tags = ["SMD", "chip", metriccode]
-          create_mod(params, "#{metriccode}_chip_cap",
-                     "#{metriccode} (metric) non-polarized chip capacitor",
+          create_mod(params, "#{metriccode}_chip_dev",
+                     "#{metriccode} (metric) chip device",
                      tags, filename)
         end)
       end

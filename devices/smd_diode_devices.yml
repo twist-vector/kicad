@@ -1,6 +1,6 @@
 defaults:
    toefillet:                  0.5
-   heelfillet:                 0.0
+   heelfillet:                -0.05
    sidefillet:                 0.1
    placetickmargin:           0.20
 
@@ -13,7 +13,6 @@ diodec:
      courtyardmargin:  0.4
      silkoutlinewidth: 0.05
      toefillet:        0.15
-     heelfillet:      -0.05
      sidefillet:       0.0
 
    - bodywid:          0.8

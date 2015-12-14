@@ -7,9 +7,27 @@ defmodule Footprints do
     |> process
   end
 
-  # def process([]) do
-  #   IO.puts "Usage: footprints --dir=[output directory]  --cfg=[configuration directory]"
-  # end
+
+  def check_ret( {_,""} ), do: true
+  def check_ret( :error ), do: false
+  def check_ret( _ ), do: false
+
+  def to_native(v) do
+    cond do
+      check_ret( Integer.parse(v) ) -> # integer
+        {v,_rest} = Integer.parse(v)
+        v
+      check_ret( Float.parse(v) )   -> # float
+        {v,_rest} = Float.parse(v)
+        v
+      String.upcase(v) == "TRUE"    -> # boolean
+        true
+      String.upcase(v) == "FALSE"   -> # boolean
+        false
+      true                          -> v
+    end
+  end
+
 
   def process(options) do
     # Set defaults if no command line arguments
@@ -27,13 +45,18 @@ defmodule Footprints do
                |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
 
 
-    Footprints.PTH254Header.build(defaults, output_base_directory, config_base_directory)
-    Footprints.PTH254HeaderRA.build(defaults, output_base_directory, config_base_directory)
-    Footprints.PTH127Header.build(defaults, output_base_directory, config_base_directory)
-    Footprints.PTH127HeaderRA.build(defaults, output_base_directory, config_base_directory)
-    Footprints.Passives.build(defaults, output_base_directory, config_base_directory)
-    Footprints.Diodes.build(defaults, output_base_directory, config_base_directory)
-    Footprints.SOIC.build(defaults, output_base_directory, config_base_directory)
+    overrides = Enum.map(options, fn({k,v})-> Map.put(%{}, k, to_native(v)) end)
+                |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
+
+    Footprints.PTH254Header.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.PTH254HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.PTH127Header.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.PTH127HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.Passives.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.Diodes.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.SOIC.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.DF13Header.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.DF13HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
   end
 
 
