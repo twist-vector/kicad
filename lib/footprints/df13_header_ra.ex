@@ -5,16 +5,14 @@ defmodule Footprints.DF13HeaderRA do
   @device_file_name "DF13Header_devices.yml"
 
 
-  def create_mod(params, pincount, rowcount, filename) do
+  def create_mod(params, pincount, _rowcount, filename) do
       silktextheight    = params[:silktextheight]
       silktextwidth     = params[:silktextwidth]
       silktextthickness = params[:silktextthickness]
       silkoutlinewidth  = params[:silkoutlinewidth]
       courtyardmargin   = params[:courtyardmargin]
       pinpitch          = params[:pinpitch]
-      padwidth          = params[:padwidth]
       padheight         = params[:padheight]
-      bodywid           = params[:bodywid]
 
       # All pins aligned at y=0
       #  lower face at y=0.90
@@ -22,11 +20,7 @@ defmodule Footprints.DF13HeaderRA do
       lower = 0.90
       upper = -4.50
 
-      rowpitch = pinpitch
-
       bodylen  = pinpitch*(pincount-1) + 2.9
-      totallen = bodylen;
-      totalwid = bodywid;
 
       # Bounding "courtyard" for the device
       crtydlength = (bodylen + padheight) + courtyardmargin

@@ -45,18 +45,23 @@ defmodule Footprints do
                |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
 
 
-    overrides = Enum.map(options, fn({k,v})-> Map.put(%{}, k, to_native(v)) end)
-                |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
+    overrides = if options != [], do:
+                   Enum.map(options, fn({k,v})-> Map.put(%{}, k, to_native(v)) end)
+                   |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end),
+                 else: %{}
 
-    Footprints.PTH254Header.build(defaults, overrides, output_base_directory, config_base_directory)
-    Footprints.PTH254HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
-    Footprints.PTH127Header.build(defaults, overrides, output_base_directory, config_base_directory)
-    Footprints.PTH127HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
-    Footprints.Passives.build(defaults, overrides, output_base_directory, config_base_directory)
-    Footprints.Diodes.build(defaults, overrides, output_base_directory, config_base_directory)
-    Footprints.SOIC.build(defaults, overrides, output_base_directory, config_base_directory)
-    Footprints.DF13Header.build(defaults, overrides, output_base_directory, config_base_directory)
-    Footprints.DF13HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.PTH254Header.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.PTH254HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.PTH127Header.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.PTH127HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.Passives.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.Diodes.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.SOIC.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.DF13Header.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.DF13HeaderRA.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.QFP.build(defaults, overrides, output_base_directory, config_base_directory)
+    # Footprints.QFN.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.Drills.build(defaults, overrides, output_base_directory, config_base_directory)
   end
 
 

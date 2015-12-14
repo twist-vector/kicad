@@ -1,11 +1,21 @@
 defaults:
    legland:                   0.60
-   toefillet:                 0.25
-   heelfillet:                0.10
-   sidefillet:               -0.05
-   height:                     1.0
-   pinheight:                  0.1
+   toefillet:                 0.3
+   heelfillet:                0.1
+   sidefillet:                0.0
+   fabtol:                    0.05
+   placetol:                  0.05
+   lentol:                    0.05
+   widtol:                    0.05
+   pinlentol:                 0.02
+   pinwidthtol:               0.00
+   pinheight:                 0.1
    pinthick:                  0.25
+   lentol:                    0.0
+   courtoutlinewidth:         0.1
+   docoutlinewidth:           0.02
+   refsinside:                true
+
 
 
 qfp:
@@ -136,4 +146,3 @@ qfp:
      bodylen:         20.0
      pincount:         144
      bodywid:         20.0
-

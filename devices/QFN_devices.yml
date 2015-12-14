@@ -4,6 +4,17 @@ defaults:
    heelfillet:                0.05
    sidefillet:               -0.05
    pinheight:                  0.1
+   placetol:                  0.05
+   lentol:                    0.05
+   widtol:                    0.05
+   pinlentol:                 0.02
+   pinwidthtol:               0.00
+   pinheight:                 0.1
+   pinthick:                  0.25
+   lentol:                    0.0
+   courtoutlinewidth:         0.1
+   docoutlinewidth:           0.02
+   refsinside:                false
 
 
 qfn:
@@ -72,10 +83,9 @@ qfn:
 
    - pinwidth:        0.22
      bodylen:          8.0
-     pincount:         68F
+     pincount:          68
      bodywid:          8.0
      height:          0.75
      pinpitch:         0.4
      epadwid:          5.7
      epadlen:         5.70
-

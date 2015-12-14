@@ -5,16 +5,14 @@ defmodule Footprints.DF13Header do
   @device_file_name "DF13Header_devices.yml"
 
 
-  def create_mod(params, pincount, rowcount, filename) do
+  def create_mod(params, pincount, _rowcount, filename) do
       silktextheight    = params[:silktextheight]
       silktextwidth     = params[:silktextwidth]
       silktextthickness = params[:silktextthickness]
       silkoutlinewidth  = params[:silkoutlinewidth]
       courtyardmargin   = params[:courtyardmargin]
       pinpitch          = params[:pinpitch]
-      padwidth          = params[:padwidth]
       padheight         = params[:padheight]
-      bodywid           = params[:bodywid]
 
       # All pins aligned at y=0
       #  lower face at y=1.21
@@ -22,11 +20,7 @@ defmodule Footprints.DF13Header do
       lower = 1.21
       upper = -2.19
 
-      rowpitch = pinpitch
-
       bodylen  = pinpitch*(pincount-1) + 2.9
-      totallen = bodylen;
-      totalwid = bodywid;
 
       # Bounding "courtyard" for the device
       crtydlength = (bodylen + padheight) + courtyardmargin
@@ -69,8 +63,8 @@ defmodule Footprints.DF13Header do
       # Put all the module pieces together, create, and write the module
       features = List.flatten(pads) ++ courtyard ++ outline
 
-      refloc      = {-crtydlength/2 - 0.75*silktextheight, (lower+upper)/2, 90}
-      valloc      = { crtydlength/2 + 0.75*silktextheight, (lower+upper)/2, 90}
+      refloc = {-crtydlength/2 - 0.75*silktextheight, (lower+upper)/2, 90}
+      valloc = { crtydlength/2 + 0.75*silktextheight, (lower+upper)/2, 90}
       descr = "Hirose DF13 through hole connector";
       tags = ["PTH", "header", "shrouded"]
       name = "DF13-#{pincount}P-1.25DSA"

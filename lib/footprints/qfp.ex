@@ -1,14 +1,10 @@
-defmodule Footprints.SOIC do
+defmodule Footprints.QFP do
   alias Footprints.Components, as: Comps
 
-  @library_name "SOP"
-  @device_file_name "SOP_devices.yml"
+  @library_name "QFP"
+  @device_file_name "QFP_devices.yml"
 
   def create_mod(params, name, descr, tags, filename) do
-    #
-    # Device oriented left-to-right:  Body length is then in the KiCad x
-    # direction, body width is in the y direction.
-    #
     silktextheight    = params[:silktextheight]
     silktextwidth     = params[:silktextwidth]
     silkoutlinewidth  = params[:silkoutlinewidth]
@@ -29,24 +25,24 @@ defmodule Footprints.SOIC do
     pincount          = params[:pincount]
     pinpitch          = params[:pinpitch]
     totalwid          = params[:totalwid]
-    pinonesidelineoffset = params[:pinonesidelineoffset]
 
     totaltol = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
-    maxOutsideWidth = totalwid + 2*(legland+pinlentol)
+    maxOutsideLength = (totalwid+pinlentol)
 
-    stride = round(pincount/2)
-    span = (pincount/2-1)*pinpitch
+    stride = round(pincount/4)
+    span = (pincount/4-1)*pinpitch
     padSizeY = legland + heelfillet + toefillet + totaltol
     padSizeX = (pinwidth - pinwidthtol) + 2*sidefillet + totaltol
 
-
-
     pads = for pinpair <- 1..stride do
-      y = totalwid/2.0
       x = -span/2.0 + (pinpair-1)*pinpitch
-      [Comps.padSMD(name: "#{pinpair}", shape: "rect", at: {x, y}, size: {padSizeX, padSizeY}),
-       Comps.padSMD(name: "#{pincount-pinpair+1}", shape: "rect", at: {x, -y}, size: {padSizeX, padSizeY})]
+      y = (totalwid-legland)/2.0 + toefillet/2 - + heelfillet/2
+
+      [Comps.padSMD(name: "#{pinpair}",            shape: "rect", at: { x,  y}, size: {padSizeX, padSizeY}),
+       Comps.padSMD(name: "#{3*stride-pinpair+1}", shape: "rect", at: { x, -y}, size: {padSizeX, padSizeY}),
+       Comps.padSMD(name: "#{4*stride-pinpair+1}", shape: "rect", at: {-y, -x}, size: {padSizeY, padSizeX}),
+       Comps.padSMD(name: "#{2*stride-pinpair+1}", shape: "rect", at: { y,  x}, size: {padSizeY, padSizeX})]
     end
 
     epad = if params[:epadwid] != nil do
@@ -58,42 +54,42 @@ defmodule Footprints.SOIC do
 
     pins = for pinpair <- 1..stride do
       x = -span/2.0 + (pinpair-1)*pinpitch
-      [Footprints.Components.box(ll: {x-pinwidth/2, bodywid/2},
-                                 ur: {x+pinwidth/2, totalwid/2},
-                                 layer: "Dwgs.User", width: courtoutlinewidth),
-       Footprints.Components.box(ll: {x-pinwidth/2, -bodywid/2},
-                                 ur: {x+pinwidth/2, -totalwid/2},
-                                 layer: "Dwgs.User", width: courtoutlinewidth)]
+      topbot =
+      [Footprints.Components.box(ll: {x-pinwidth/2,  bodywid/2}, ur: {x+pinwidth/2,  totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth),
+       Footprints.Components.box(ll: {x-pinwidth/2, -bodywid/2}, ur: {x+pinwidth/2, -totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth)] ++
+      [Footprints.Components.box(ll: {x-pinwidth/2,  bodywid/2}, ur: {x+pinwidth/2, (totalwid)/2-legland}, layer: "Dwgs.User", width: docoutlinewidth),
+       Footprints.Components.box(ll: {x-pinwidth/2, -bodywid/2}, ur: {x+pinwidth/2, -(totalwid)/2+legland}, layer: "Dwgs.User", width: docoutlinewidth)]
+
+      y = -span/2.0 + (pinpair-1)*pinpitch
+      leftright =
+      [Footprints.Components.box(ll: {-bodywid/2, y-pinwidth/2, }, ur: {-totalwid/2, y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth),
+       Footprints.Components.box(ll: { bodywid/2, y-pinwidth/2, }, ur: { totalwid/2, y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth)] ++
+      [Footprints.Components.box(ll: {-bodywid/2, y-pinwidth/2}, ur: {-(totalwid/2-legland), y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth),
+       Footprints.Components.box(ll: { bodywid/2, y-pinwidth/2}, ur: { (totalwid/2-legland), y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth)]
+
+      topbot ++ leftright
     end
 
 
-    crtydSizeX = bodylen
-    crtydSizeY = maxOutsideWidth + 2*toefillet + 2*courtyardmargin
-    courtyard = Footprints.Components.box(ll: {-crtydSizeX/2,crtydSizeY/2},
-                                          ur: {crtydSizeX/2,-crtydSizeY/2},
+    crtydSizeX = maxOutsideLength + 2*toefillet + 2*courtyardmargin
+    crtydSizeY = crtydSizeX
+    courtyard = Footprints.Components.box(ll: {-crtydSizeX/2, crtydSizeY/2},
+                                          ur: { crtydSizeX/2,-crtydSizeY/2},
                                           layer: "F.CrtYd", width: courtoutlinewidth)
 
 
-    outline = [Footprints.Components.box(ll: {-bodylen/2,bodywid/2},
-                                        ur: {bodylen/2,-bodywid/2},
-                                        layer: "F.SilkS", width: docoutlinewidth),
-               Footprints.Components.line(start: {-bodylen/2,bodywid/2-pinonesidelineoffset},
-                                            end: {bodylen/2,bodywid/2-pinonesidelineoffset},
-                                          layer: "F.SilkS", width: silkoutlinewidth)]
+    outline = [Footprints.Components.box(ll: {-bodylen/2, bodywid/2}, ur: { bodylen/2,-bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
+               Footprints.Components.line(start: {-bodylen/2,bodywid/2-0.75}, end: {-bodylen/2+0.75,bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth)]
 
     # Pin 1 marker (circle)
     xcc = -span/2 - padSizeX/2 - 3*silkoutlinewidth
     ycc = totalwid/2
-    c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth,
-                     layer: "F.SilkS", width: silkoutlinewidth)
+    c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
 
    # Center of mass fiducial
-   com = [Footprints.Components.circle(center: {0,0}, radius: 0.5,
-                                       layer: "Eco1.User", width: silkoutlinewidth),
-          Footprints.Components.line(start: {-0.75,0}, end: {0.75,0},
-                                     layer: "Eco1.User", width: silkoutlinewidth),
-          Footprints.Components.line(start: {0,-0.75}, end: {0,0.75},
-                                     layer: "Eco1.User", width: silkoutlinewidth)]
+   com = [Footprints.Components.circle(center: {0,0}, radius: 0.5, layer: "Eco1.User", width: silkoutlinewidth),
+          Footprints.Components.line(start: {-0.75,0}, end: {0.75,0}, layer: "Eco1.User", width: silkoutlinewidth),
+          Footprints.Components.line(start: {0,-0.75}, end: {0,0.75}, layer: "Eco1.User", width: silkoutlinewidth)]
 
 
     features = List.flatten(pads) ++ epad ++ courtyard ++ [c] ++
