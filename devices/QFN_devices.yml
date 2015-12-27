@@ -18,6 +18,15 @@ defaults:
 
 
 qfn:
+   - pinwidth:        0.20
+     bodylen:          3.0
+     pincount:          24
+     bodywid:          3.0
+     height:          0.50
+     pinpitch:         0.4
+     epadwid:         1.54
+     epadlen:         1.70
+
    - pinwidth:        0.25
      bodylen:          4.0
      pincount:          24
