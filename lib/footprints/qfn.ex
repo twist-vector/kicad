@@ -24,6 +24,7 @@ defmodule Footprints.QFN do
     pinwidth          = params[:pinwidth]
     pincount          = params[:pincount]
     pinpitch          = params[:pinpitch]
+    placetickmargin   = params[:placetickmargin]
 
     totaltol = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -77,9 +78,19 @@ defmodule Footprints.QFN do
                                           layer: "F.CrtYd", width: courtoutlinewidth)
 
 
-    off = min(0.75, bodylen/2-(span/2+padSizeX/2)-silkoutlinewidth )
-    outline = [Footprints.Components.box(ll: {-bodylen/2, bodywid/2}, ur: { bodylen/2,-bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
-               Footprints.Components.line(start: {-bodylen/2,bodywid/2-off}, end: {-bodylen/2+off,bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth)]
+    x = (pincount/4-1)*pinpitch/2 + padSizeX/2 + silkoutlinewidth + placetickmargin
+    y = (pincount/4-1)*pinpitch/2 + padSizeX/2 + silkoutlinewidth + placetickmargin
+    outline = [Footprints.Components.line(start: {-bodylen/2, bodywid/2}, end: {-x, bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
+               Footprints.Components.line(start: {-bodylen/2, bodywid/2}, end: {-bodylen/2, y}, layer: "F.SilkS", width: silkoutlinewidth),
+               Footprints.Components.line(start: { bodylen/2, bodywid/2}, end: { x, bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
+               Footprints.Components.line(start: { bodylen/2, bodywid/2}, end: { bodylen/2, y}, layer: "F.SilkS", width: silkoutlinewidth),
+               Footprints.Components.line(start: {-bodylen/2,-bodywid/2}, end: {-x,-bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
+               Footprints.Components.line(start: {-bodylen/2,-bodywid/2}, end: {-bodylen/2,-y}, layer: "F.SilkS", width: silkoutlinewidth),
+               Footprints.Components.line(start: { bodylen/2,-bodywid/2}, end: { x,-bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
+               Footprints.Components.line(start: { bodylen/2,-bodywid/2}, end: { bodylen/2,-y}, layer: "F.SilkS", width: silkoutlinewidth),
+
+               Footprints.Components.line(start: {-bodylen/2, y}, end: {-x, bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth)
+              ]
 
     # Pin 1 marker (circle)
     xcc = -span/2 - padSizeX/2 - 3*silkoutlinewidth

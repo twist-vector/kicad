@@ -1,4 +1,4 @@
-(module 6050_chip_dev (layer F.Cu) (tedit 567FE440)
+(module 6050_chip_dev (layer F.Cu) (tedit 567FECE8)
   (at 0 0)
   (descr "6050 (metric) chip device")
   (tags "SMD chip 6050")

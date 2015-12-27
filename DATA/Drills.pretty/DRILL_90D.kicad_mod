@@ -1,4 +1,4 @@
-(module DRILL_90D (layer F.Cu) (tedit 567FE441)
+(module DRILL_90D (layer F.Cu) (tedit 567FECE9)
   (at 0 0)
   (descr "Drill for an M9 size screw")
   (tags "PTH drill")

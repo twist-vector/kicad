@@ -1,4 +1,4 @@
-(module 2828_chip_diode (layer F.Cu) (tedit 567FE440)
+(module 2828_chip_diode (layer F.Cu) (tedit 567FECE8)
   (at 0 0)
   (descr "2828 (metric) chip diode")
   (tags "SMD chip 2828")

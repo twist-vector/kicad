@@ -1,4 +1,4 @@
-(module Header_39x1_RA (layer F.Cu) (tedit 567FE440)
+(module Header_39x1_RA (layer F.Cu) (tedit 567FECE8)
   (at 0 0)
   (descr "39x1 0.05in (1.27 mm) spacing right angle unshrouded header")
   (tags "PTH unshrouded header")

@@ -1,4 +1,4 @@
-(module SOP127P500x600-8-T320x240 (layer F.Cu) (tedit 567FE441)
+(module SOP127P500x600-8-T320x240 (layer F.Cu) (tedit 567FECE8)
   (at 0 0)
   (descr "8 pin 1.27in pitch 5.0x6.0 SOP device")
   (tags "SMD SOP")

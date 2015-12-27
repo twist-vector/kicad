@@ -1,4 +1,4 @@
-(module SOT23-96P290x264-3 (layer F.Cu) (tedit 567FE441)
+(module SOT23-96P290x264-3 (layer F.Cu) (tedit 567FECE9)
   (at 0 0)
   (descr "3 pin 0.96in pitch 2.9x2.64 SOT23 device")
   (tags "SMD SOT23")
