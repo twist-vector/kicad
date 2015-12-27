@@ -24,6 +24,14 @@ qfn:
      bodywid:          3.0
      legland:          0.21
      pinpitch:         0.4
+     silkoutlinewidth: 0.05
+
+   - pinwidth:        0.20
+     bodylen:          3.0
+     pincount:          24
+     bodywid:          3.0
+     legland:          0.21
+     pinpitch:         0.4
      epadwid:         1.54
      epadlen:         1.70
      silkoutlinewidth: 0.05
