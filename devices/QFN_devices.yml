@@ -23,6 +23,7 @@ qfn:
      pincount:          24
      bodywid:          3.0
      legland:          0.21
+     heelfillet:      -0.02
      pinpitch:         0.4
      silkoutlinewidth: 0.05
 
@@ -34,6 +35,7 @@ qfn:
      pinpitch:         0.4
      epadwid:         1.54
      epadlen:         1.70
+     heelfillet:       -0.02
      silkoutlinewidth: 0.05
 
    - pinwidth:        0.25

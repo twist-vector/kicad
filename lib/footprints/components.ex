@@ -26,15 +26,18 @@ defmodule Footprints.Components do
     textGeneric(type: "value", value: "VAL**", at: at, layer: "F.SilkS", size: size, width: wid)
 
 
-  def pad(name: name, type: type, shape: shape, at: {x,y}, size: {xs,ys}, layers: layers) do
+  def pad(name: name, type: type, shape: shape, at: {x,y}, size: {xs,ys}, layers: layers, pastemargin: pastemargin) do
+    pastemargintext = if pastemargin != 0, do: "(solder_paste_margin_ratio #{pastemargin})", else: ""
+
     "(pad #{name} #{type} #{shape} (at #{p(x)} #{p(y)}) (size #{p(xs)} #{p(ys)})" <>
     " (layers " <>
-    Enum.join(layers, " ") <> "))"
+    Enum.join(layers, " ") <> ") #{pastemargintext})"
   end
 
-  def padSMD(name: name, shape: shape, at: {x,y}, size: {xs,ys}), do:
+  def padSMD(name: name, shape: shape, at: {x,y}, size: {xs,ys}, pastemargin: pastemargin), do:
      pad(name: name, type: "smd", shape: shape, at: {x,y},
-         size: {xs,ys}, layers: ["F.Cu", "F.Paste", "F.Mask"])
+         size: {xs,ys}, layers: ["F.Cu", "F.Paste", "F.Mask"],
+         pastemargin: pastemargin)
 
   def padPTH(name: name, shape: shape, at: {x,y}, size: {xs,ys}, drill: drill), do:
      "(pad #{name} thru_hole #{shape} (at #{p(x)} #{p(y)}) " <>

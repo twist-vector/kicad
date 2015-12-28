@@ -26,6 +26,7 @@ defmodule Footprints.SOT do
     pincount          = params[:pincount]
     pinpitch          = params[:pinpitch]
     totalwid          = params[:totalwid]
+    pastemargin       = params[:solderpastemarginratio]
 
     totaltol = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -36,27 +37,27 @@ defmodule Footprints.SOT do
 
     y = (totalwid-legland)/2.0 + toefillet/2 - + heelfillet/2
     pads = case pincount do
-             3 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "2", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "3", shape: "rect", at: { 0, -y}, size: {padSizeX, padSizeY})]
+             3 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "2", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "3", shape: "rect", at: { 0, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin)]
 
-             4 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "2", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "3", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY})]
+             4 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "2", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "3", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin)]
 
-             5 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "2", shape: "rect", at: { 0, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "3", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "5", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY})]
+             5 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "2", shape: "rect", at: { 0, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "3", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "5", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin)]
 
-             6 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "2", shape: "rect", at: { 0, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "3", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "5", shape: "rect", at: {0, -y}, size: {padSizeX, padSizeY}),
-                   Comps.padSMD(name: "6", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY})]
+             6 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "2", shape: "rect", at: { 0, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "3", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "5", shape: "rect", at: {0, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+                   Comps.padSMD(name: "6", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin)]
              _ -> []
            end
 

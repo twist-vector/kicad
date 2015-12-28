@@ -25,6 +25,8 @@ defmodule Footprints.QFP do
     pincount          = params[:pincount]
     pinpitch          = params[:pinpitch]
     totalwid          = params[:totalwid]
+    pastemargin       = params[:solderpastemarginratio]
+    epadpastemargin   = params[:epadsolderpastemarginratio]
 
     totaltol = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -39,15 +41,16 @@ defmodule Footprints.QFP do
       x = -span/2.0 + (pinpair-1)*pinpitch
       y = (totalwid-legland)/2.0 + toefillet/2 - + heelfillet/2
 
-      [Comps.padSMD(name: "#{pinpair}",            shape: "rect", at: { x,  y}, size: {padSizeX, padSizeY}),
-       Comps.padSMD(name: "#{3*stride-pinpair+1}", shape: "rect", at: { x, -y}, size: {padSizeX, padSizeY}),
-       Comps.padSMD(name: "#{4*stride-pinpair+1}", shape: "rect", at: {-y, -x}, size: {padSizeY, padSizeX}),
-       Comps.padSMD(name: "#{2*stride-pinpair+1}", shape: "rect", at: { y,  x}, size: {padSizeY, padSizeX})]
+      [Comps.padSMD(name: "#{pinpair}",            shape: "rect", at: { x,  y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+       Comps.padSMD(name: "#{3*stride-pinpair+1}", shape: "rect", at: { x, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
+       Comps.padSMD(name: "#{4*stride-pinpair+1}", shape: "rect", at: {-y, -x}, size: {padSizeY, padSizeX}, pastemargin: pastemargin),
+       Comps.padSMD(name: "#{2*stride-pinpair+1}", shape: "rect", at: { y,  x}, size: {padSizeY, padSizeX}, pastemargin: pastemargin)]
     end
 
     epad = if params[:epadwid] != nil do
       [Comps.padSMD(name: "EP", shape: "rect", at: {0,0},
-              size: {params[:epadlen], params[:epadwid]})]
+              size: {params[:epadlen], params[:epadwid]},
+              pastemargin: epadpastemargin)]
     else
       []
     end

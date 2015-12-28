@@ -1,8 +1,8 @@
-defmodule Footprints.SOIC do
+defmodule Footprints.DPak do
   alias Footprints.Components, as: Comps
 
-  @library_name "SOP"
-  @device_file_name "SOP_devices.yml"
+  @library_name "DPAK"
+  @device_file_name "TO_devices.yml"
 
   def create_mod(params, name, descr, tags, filename) do
     #
@@ -17,77 +17,85 @@ defmodule Footprints.SOIC do
     toefillet         = params[:toefillet]
     heelfillet        = params[:heelfillet]
     sidefillet        = params[:sidefillet]
-    pinlentol         = params[:pinlentol] # pin length is in the x direction
-    pinwidthtol       = params[:pinwidthtol]
+    pinlentol         = params[:pinlentol]
     placetol          = params[:placetol]
     fabtol            = params[:fabtol]
     courtyardmargin   = params[:courtyardmargin]
-    bodylen           = params[:bodylen]
-    bodywid           = params[:bodywid]
-    legland           = params[:legland]
-    pinwidth          = params[:pinwidth]
     pincount          = params[:pincount]
     pinpitch          = params[:pinpitch]
-    totalwid          = params[:totalwid]
-    pinonesidelineoffset = params[:pinonesidelineoffset]
-    pastemargin       = params[:solderpastemarginratio]
-    epadpastemargin   = params[:epadsolderpastemarginratio]
 
-    totaltol = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
+    totalwidmin = params[:totalwidmin]
+    totalwidmax = params[:totalwidmax]
+    bodyspanminx = params[:bodyspanminx]
+    bodyspanmaxx = params[:bodyspanmaxx]
+    bodyspanminy = params[:bodyspanminy]
+    bodyspanmaxy = params[:bodyspanmaxy]
+    pinwidthmin = params[:pinwidthmin]
+    pinwidthmax = params[:pinwidthmax]
+    leglandmin = params[:leglandmin]
+    leglandmax = params[:leglandmax]
+    epadohangmin = params[:epadohangmin]
+    epadohangmax = params[:epadohangmax]
+    epadspanx = params[:epadspanx]
+    epadspany = params[:epadspany]
+
+    totaltol = 0#:math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
+
+    bodywid = (bodyspanminy+bodyspanmaxy)/2
+    bodylen = (bodyspanminx+bodyspanmaxx)/2
+    totalwid = (totalwidmin+totalwidmax)/2
+    legland  = (leglandmin+leglandmax)/2
+    pinwidth = (pinwidthmin+pinwidthmax)/2
+    epadohang = (epadohangmin+epadohangmax)/2
+
+    pinwidthtol = (pinwidthmax-pinwidthmin)/2
+    pinlentol = (totalwidmax-totalwidmin)/2
+    bodywidtol = (bodyspanmaxy-bodyspanminy)/2
 
     maxOutsideWidth = totalwid + 2*(legland+pinlentol)
+
+    wmin = pinwidth - pinwidthtol;
 
     stride = round(pincount/2)
     span = (pincount/2-1)*pinpitch
     padSizeY = legland + heelfillet + toefillet + totaltol
     padSizeX = (pinwidth - pinwidthtol) + 2*sidefillet + totaltol
 
-
-
-    pads = for pinpair <- 1..stride do
-      y = totalwid/2.0
-      x = -span/2.0 + (pinpair-1)*pinpitch
-      [Comps.padSMD(name: "#{pinpair}", shape: "rect", at: {x, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
-       Comps.padSMD(name: "#{pincount-pinpair+1}", shape: "rect", at: {x, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin)]
+    y = totalwid-bodywid/2 - legland/2 + toefillet/2 - heelfillet/2
+    pads = for pin <- 1..pincount do
+      ###x = -pinpitch*(pincount)/2 + 2*(pin-1)*pinpitch
+      x = -pinpitch + (pin-1) * (2*pinpitch)/(pincount-1)
+      Comps.padSMD(name: "#{pin}", shape: "rect", at: {x, y}, size: {padSizeX, padSizeY})
     end
 
-    epad = if params[:epadwid] != nil do
-      [Comps.padSMD(name: "EP", shape: "rect", at: {0,0},
-              size: {params[:epadlen], params[:epadwid]}, pastemargin: epadpastemargin)]
-    else
-      []
-    end
+    epad = [Comps.padSMD(name: "#{pincount+1}", shape: "rect",
+                           at: {0,-epadohang},
+                         size: {epadspanx+2*sidefillet, epadspany+2*sidefillet})]
 
-    pins = for pinpair <- 1..stride do
-      x = -span/2.0 + (pinpair-1)*pinpitch
-      [Footprints.Components.box(ll: {x-pinwidth/2, bodywid/2},
-                                 ur: {x+pinwidth/2, totalwid/2},
+    pins = for pin <- 1..pincount do
+      x = -pinpitch + (pin-1) * (2*pinpitch)/(pincount-1)
+      [Footprints.Components.box(ll: {x-pinwidth/2, totalwid-bodywid/2},
+                                 ur: {x+pinwidth/2, bodywid/2},
                                  layer: "Dwgs.User", width: courtoutlinewidth),
-       Footprints.Components.box(ll: {x-pinwidth/2, -bodywid/2},
-                                 ur: {x+pinwidth/2, -totalwid/2},
-                                 layer: "Dwgs.User", width: courtoutlinewidth)]
+       Footprints.Components.box(ll: {x-pinwidth/2, totalwid-bodywid/2-legland},
+                                  ur: {x+pinwidth/2, bodywid/2},
+                                  layer: "Dwgs.User", width: courtoutlinewidth)]
     end
 
 
-    crtydSizeX = bodylen
-    crtydSizeY = maxOutsideWidth + 2*toefillet + 2*courtyardmargin
-    courtyard = Footprints.Components.box(ll: {-crtydSizeX/2,crtydSizeY/2},
-                                          ur: {crtydSizeX/2,-crtydSizeY/2},
+
+    crtydSizeX = bodylen + 2*courtyardmargin
+    courtyard = Footprints.Components.box(ll: {-crtydSizeX/2, totalwid-bodywid/2 + toefillet + courtyardmargin},
+                                          ur: { crtydSizeX/2, -bodywid/2 - courtyardmargin - epadohang/2},
                                           layer: "F.CrtYd", width: courtoutlinewidth)
 
 
-    outline = [Footprints.Components.box(ll: {-bodylen/2,bodywid/2},
-                                        ur: {bodylen/2,-bodywid/2},
-                                        layer: "F.SilkS", width: docoutlinewidth),
-               Footprints.Components.line(start: {-bodylen/2,bodywid/2-pinonesidelineoffset},
-                                            end: {bodylen/2,bodywid/2-pinonesidelineoffset},
-                                          layer: "F.SilkS", width: silkoutlinewidth)]
+    outline = [Footprints.Components.box(ll: {-bodylen/2, bodywid/2}, ur: { bodylen/2,-bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth)]
 
     # Pin 1 marker (circle)
-    xcc = -span/2 - padSizeX/2 - 3*silkoutlinewidth
-    ycc = totalwid/2
-    c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth,
-                     layer: "F.SilkS", width: silkoutlinewidth)
+    xcc = -pinpitch*(pincount)/2 - padSizeX/2 - 4*silkoutlinewidth
+    ycc = totalwid-bodywid/2
+    c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
 
    # Center of mass fiducial
    com = [Footprints.Components.circle(center: {0,0}, radius: 0.5,
@@ -149,22 +157,24 @@ defmodule Footprints.SOIC do
           params = Map.merge defaults, p
 
           pincount = params[:pincount]
+          totalwid = (params[:totalwidmin]+params[:totalwidmax])/2
+          bodylen = (params[:bodyspanminx]+params[:bodyspanmaxx])/2
           pitchcode = List.flatten(:io_lib.format("~w", [round(params[:pinpitch]*100)]))
-          widcode = List.flatten(:io_lib.format("~w", [round(params[:totalwid]*100)]))
-          lencode = List.flatten(:io_lib.format("~w", [round(params[:bodylen]*100)]))
-          padcode = if params[:epadwid] != nil do
-            List.flatten(:io_lib.format("-T~wx~w", [round(params[:epadlen]*100),
-                                                    round(params[:epadwid]*100)]))
+          widcode = List.flatten(:io_lib.format("~w", [round(totalwid*100)]))
+          lencode = List.flatten(:io_lib.format("~w", [round(bodylen*100)]))
+          padcode = if params[:epadspany] != nil do
+            List.flatten(:io_lib.format("-T~wx~w", [round(params[:epadspanx]*100),
+                                                    round(params[:epadspany]*100)]))
           else
             ""
           end
 
-          #  Example: SOIC127P490x600-8-T330x241
-          devcode = "#{String.upcase(dev_name)}#{pitchcode}P#{lencode}x#{widcode}-#{pincount}#{padcode}"
+          #  Example: TO-263-457P660x910-2-T540
+          devcode = "#{String.upcase(dev_name)}-#{pitchcode}P#{lencode}x#{widcode}-#{pincount}#{padcode}"
           filename = "#{output_directory}/#{devcode}.kicad_mod"
           tags = ["SMD", "#{String.upcase(dev_name)}"]
           name = "#{devcode}"
-          descr = "#{params[:pincount]} pin #{params[:pinpitch]}in pitch #{params[:bodylen]}x#{params[:totalwid]} #{String.upcase(dev_name)} device"
+          descr = "#{params[:pincount]+1} pin #{params[:pinpitch]}in pitch #{params[:bodylen]}x#{params[:totalwid]} #{String.upcase(dev_name)} device"
           create_mod(params, name, descr, tags, filename)
         end)
       end

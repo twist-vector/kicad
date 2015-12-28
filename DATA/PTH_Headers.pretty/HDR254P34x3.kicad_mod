@@ -1,4 +1,4 @@
-(module Header_34x3 (layer F.Cu) (tedit 56807D6B)
+(module Header_34x3 (layer F.Cu) (tedit 568150F2)
   (at 0 0)
   (descr "34x3 0.10in (2.54 mm) spacing unshrouded header")
   (tags "PTH unshrouded header")
