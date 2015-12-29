@@ -64,6 +64,7 @@ defmodule Footprints do
     Footprints.Drills.build(defaults, overrides, output_base_directory, config_base_directory)
     Footprints.SOT.build(defaults, overrides, output_base_directory, config_base_directory)
     # Footprints.DPak.build(defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.DIP.build(defaults, overrides, output_base_directory, config_base_directory)
   end
 
 

@@ -1,4 +1,4 @@
-(module 5664_chip_dev (layer F.Cu) (tedit 568150F3)
+(module 5664_chip_dev (layer F.Cu) (tedit 5682A51B)
   (at 0 0)
   (descr "5664 (metric) chip device")
   (tags "SMD chip 5664")

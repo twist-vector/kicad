@@ -1,72 +1,74 @@
 defaults:
    pinpitch:                  2.54
-   pinrad:                     0.6
-   drilldia:                   0.8
-   bodyheight=:                3.3
+   pinrad:                    0.6
+   drilldia:                  0.8
+   padheight:                 1.57
+   padwidth:                  1.57
+   pinonesidelineoffset:      0.5
+   refsinside:                true
 
 
 dip:
    - pincount:           8
-     bodywid:          6.4
-     rowpitch:        7.62
+     bodywid:          6.1
+     totalwid:        7.62
 
    - pincount:          14
-     bodywid:          6.4
-     rowpitch:        7.62
+     bodywid:          6.1
+     totalwid:        7.62
 
    - pincount:          16
      bodywid:          6.4
-     rowpitch:        7.62
+     totalwid:        7.62
 
    - pincount:          18
      bodywid:          6.4
-     rowpitch:        7.62
+     totalwid:        7.62
 
    - pincount:          20
      bodywid:          6.4
-     rowpitch:        7.62
+     totalwid:        7.62
 
    - pincount:          22
      bodywid:          6.4
-     rowpitch:        7.62
+     totalwid:        7.62
 
    - pincount:          24
      bodywid:          6.4
-     rowpitch:        7.62
+     totalwid:        7.62
 
    - pincount:          28
      bodywid:          6.4
-     rowpitch:        7.62
+     totalwid:        7.62
 
    - pincount:           8
      bodywid:           14
-     rowpitch:       15.24
+     totalwid:       15.24
 
    - pincount:          14
      bodywid:           14
-     rowpitch:       15.24
+     totalwid:       15.24
 
    - pincount:          16
      bodywid:           14
-     rowpitch:       15.24
+     totalwid:       15.24
 
    - pincount:          18
      bodywid:           14
-     rowpitch:       15.24
+     totalwid:       15.24
 
    - pincount:          20
      bodywid:           14
-     rowpitch:       15.24
+     totalwid:       15.24
 
    - pincount:          22
      bodywid:           14
-     rowpitch:       15.24
+     totalwid:       15.24
 
    - pincount:          24
      bodywid:           14
-     rowpitch:       15.24
+     totalwid:       15.24
 
    - pincount:          28
      bodywid:           14
-     rowpitch:       15.24
-
+     totalwid:       15.24

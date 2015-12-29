@@ -1,4 +1,4 @@
-(module SOP50P300x490-10 (layer F.Cu) (tedit 568150F3)
+(module SOP50P300x490-10 (layer F.Cu) (tedit 5682A51B)
   (at 0 0)
   (descr "10 pin 0.5in pitch 3.0x4.9 SOP device")
   (tags "SMD SOP")

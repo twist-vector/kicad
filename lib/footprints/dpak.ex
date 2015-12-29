@@ -13,17 +13,12 @@ defmodule Footprints.DPak do
     silktextwidth     = params[:silktextwidth]
     silkoutlinewidth  = params[:silkoutlinewidth]
     courtoutlinewidth = params[:courtoutlinewidth]
-    docoutlinewidth   = params[:docoutlinewidth]
     toefillet         = params[:toefillet]
     heelfillet        = params[:heelfillet]
     sidefillet        = params[:sidefillet]
-    pinlentol         = params[:pinlentol]
-    placetol          = params[:placetol]
-    fabtol            = params[:fabtol]
     courtyardmargin   = params[:courtyardmargin]
     pincount          = params[:pincount]
     pinpitch          = params[:pinpitch]
-
     totalwidmin = params[:totalwidmin]
     totalwidmax = params[:totalwidmax]
     bodyspanminx = params[:bodyspanminx]
@@ -49,15 +44,7 @@ defmodule Footprints.DPak do
     epadohang = (epadohangmin+epadohangmax)/2
 
     pinwidthtol = (pinwidthmax-pinwidthmin)/2
-    pinlentol = (totalwidmax-totalwidmin)/2
-    bodywidtol = (bodyspanmaxy-bodyspanminy)/2
 
-    maxOutsideWidth = totalwid + 2*(legland+pinlentol)
-
-    wmin = pinwidth - pinwidthtol;
-
-    stride = round(pincount/2)
-    span = (pincount/2-1)*pinpitch
     padSizeY = legland + heelfillet + toefillet + totaltol
     padSizeX = (pinwidth - pinwidthtol) + 2*sidefillet + totaltol
 
