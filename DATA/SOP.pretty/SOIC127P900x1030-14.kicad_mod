@@ -1,4 +1,4 @@
-(module SOIC127P900x1030-14 (layer F.Cu) (tedit 5682A51B)
+(module SOIC127P900x1030-14 (layer F.Cu) (tedit 573B01FD)
   (at 0 0)
   (descr "14 pin 1.27in pitch 9.0x10.3 SOIC device")
   (tags "SMD SOIC")

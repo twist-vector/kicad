@@ -1,4 +1,4 @@
-(module SOP66P2000x1900-60 (layer F.Cu) (tedit 5682A51B)
+(module SOP66P2000x1900-60 (layer F.Cu) (tedit 573B01FD)
   (at 0 0)
   (descr "60 pin 0.66in pitch 20.0x19.0 SOP device")
   (tags "SMD SOP")

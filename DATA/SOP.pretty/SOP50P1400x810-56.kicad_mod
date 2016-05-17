@@ -1,4 +1,4 @@
-(module SOP50P1400x810-56 (layer F.Cu) (tedit 5682A51B)
+(module SOP50P1400x810-56 (layer F.Cu) (tedit 573B01FD)
   (at 0 0)
   (descr "56 pin 0.5in pitch 14.0x8.1 SOP device")
   (tags "SMD SOP")

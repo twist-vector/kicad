@@ -34,17 +34,20 @@ defmodule Footprints.PTH127Header do
 
       # Add the header outline.  The PTHHeader function draws the outside boundary
       # rather than the outline of each individual pin.
-      frontSilkBorder = Footprints.PTHHeader.make_outline(params, pincount, rowcount)
+      frontSilkBorder = Footprints.PTHHeader.make_outline(params, pincount, rowcount, "F.SilkS")
+      backSilkBorder = Footprints.PTHHeader.make_outline(params, pincount, rowcount, "B.SilkS")
 
       # Pin 1 marker (circle)
       xcc = bodylen/2 + padwidth/4
       ycc = bodywid/2 + padheight/4
-      c = Comps.circle(center: {-xcc,ycc}, radius: silkoutlinewidth,
-                       layer: "F.SilkS", width: silkoutlinewidth)
+      cFront = Comps.circle(center: {-xcc,ycc}, radius: silkoutlinewidth,
+                            layer: "F.SilkS", width: silkoutlinewidth)
+      cBack = Comps.circle(center: {-xcc,ycc}, radius: silkoutlinewidth,
+                            layer: "B.SilkS", width: silkoutlinewidth)
 
 
       # Put all the module pieces together, create, and write the module
-      features = List.flatten(pads) ++ courtyard ++ frontSilkBorder ++ [c]
+      features = List.flatten(pads) ++ courtyard ++ frontSilkBorder ++ backSilkBorder ++ [cFront] ++ [cBack]
 
       refloc      = {-crtydlength/2 - 0.75*silktextheight, 0, 90}
       valloc      = { crtydlength/2 + 0.75*silktextheight, 0, 90}

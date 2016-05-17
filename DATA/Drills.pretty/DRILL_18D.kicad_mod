@@ -1,4 +1,4 @@
-(module DRILL_18D (layer F.Cu) (tedit 5682A51C)
+(module DRILL_18D (layer F.Cu) (tedit 573B01FE)
   (at 0 0)
   (descr "Drill for an M1.8 size screw")
   (tags "PTH drill")

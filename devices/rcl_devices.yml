@@ -169,6 +169,12 @@ indc:
      bodylen:          4.5
      height:           1.5
 
+   - bodywid:          1.6
+     legland:         0.50
+     bodylen:          4.5
+     inchcode:        1806
+     height:           1.5
+
    - bodywid:          2.0
      legland:         0.60
      bodylen:          4.5

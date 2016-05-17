@@ -1,4 +1,4 @@
-(module 4590_chip_dev (layer F.Cu) (tedit 5682A51B)
+(module 4590_chip_dev (layer F.Cu) (tedit 573B01FD)
   (at 0 0)
   (descr "4590 (metric) chip device")
   (tags "SMD chip 4590")

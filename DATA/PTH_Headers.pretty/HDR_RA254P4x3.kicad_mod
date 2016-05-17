@@ -1,4 +1,4 @@
-(module Header_4x3_RA (layer F.Cu) (tedit 5682A51A)
+(module Header_4x3_RA (layer F.Cu) (tedit 573B01FD)
   (at 0 0)
   (descr "4x3 0.10in (2.54 mm) spacing right angle unshrouded header")
   (tags "PTH unshrouded header")

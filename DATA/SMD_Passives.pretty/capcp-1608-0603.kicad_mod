@@ -1,4 +1,4 @@
-(module 1608_chip_dev (layer F.Cu) (tedit 5682A51B)
+(module 1608_chip_dev (layer F.Cu) (tedit 573B01FD)
   (at 0 0)
   (descr "1608 (metric) chip device")
   (tags "SMD chip 1608")

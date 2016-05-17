@@ -19,7 +19,7 @@ defmodule Footprints.PTHHeader do
 
 
 
-  def make_outline(params, pincount, rowcount) do
+  def make_outline(params, pincount, rowcount, layer) do
     pinpitch        = params[:pinpitch]
     rowpitch        = params[:rowpitch]
 
@@ -36,7 +36,7 @@ defmodule Footprints.PTHHeader do
                    _ -> [0,1,2]
                 end
               end
-       for n <- edges, do: Footprints.PTHHeader.make_pin_outline(pinpitch, n,"F.SilkS",{xc,yc})
+       for n <- edges, do: Footprints.PTHHeader.make_pin_outline(pinpitch, n,layer,{xc,yc})
     end
 
     row = rowcount
@@ -48,7 +48,7 @@ defmodule Footprints.PTHHeader do
            ^pincount -> [0,4,5,6,7]
                    _ -> [4,5,6]
               end
-       for n <- edges, do: Footprints.PTHHeader.make_pin_outline(pinpitch, n,"F.SilkS",{xc,yc})
+       for n <- edges, do: Footprints.PTHHeader.make_pin_outline(pinpitch, n,layer,{xc,yc})
     end
 
     rest = if rowcount > 1 do
@@ -61,7 +61,7 @@ defmodule Footprints.PTHHeader do
                  ^pincount -> [0,6,7]
                          _ -> []
                     end
-             for n <- edges, do: Footprints.PTHHeader.make_pin_outline(pinpitch, n,"F.SilkS",{xc,yc})
+             for n <- edges, do: Footprints.PTHHeader.make_pin_outline(pinpitch, n,layer,{xc,yc})
           end
         end
     else
