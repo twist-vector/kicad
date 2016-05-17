@@ -1,4 +1,4 @@
-(module 5728_chip_dev (layer F.Cu) (tedit 573B01FD)
+(module 5728_chip_dev (layer F.Cu) (tedit 573B53FA)
   (at 0 0)
   (descr "5728 (metric) chip device")
   (tags "SMD chip 5728")

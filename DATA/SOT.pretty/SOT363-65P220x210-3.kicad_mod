@@ -1,4 +1,4 @@
-(module SOT363-65P220x210-3 (layer F.Cu) (tedit 573B01FE)
+(module SOT363-65P220x210-3 (layer F.Cu) (tedit 573B53FB)
   (at 0 0)
   (descr "3 pin 0.65in pitch 2.2x2.1 SOT363 device")
   (tags "SMD SOT363")

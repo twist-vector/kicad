@@ -1,4 +1,4 @@
-(module 4532_chip_diode (layer F.Cu) (tedit 573B01FD)
+(module 4532_chip_diode (layer F.Cu) (tedit 573B53FA)
   (at 0 0)
   (descr "4532 (metric) chip diode")
   (tags "SMD chip 4532")

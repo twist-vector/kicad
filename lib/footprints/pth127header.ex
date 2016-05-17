@@ -42,12 +42,10 @@ defmodule Footprints.PTH127Header do
       ycc = bodywid/2 + padheight/4
       cFront = Comps.circle(center: {-xcc,ycc}, radius: silkoutlinewidth,
                             layer: "F.SilkS", width: silkoutlinewidth)
-      cBack = Comps.circle(center: {-xcc,ycc}, radius: silkoutlinewidth,
-                            layer: "B.SilkS", width: silkoutlinewidth)
 
 
       # Put all the module pieces together, create, and write the module
-      features = List.flatten(pads) ++ courtyard ++ frontSilkBorder ++ backSilkBorder ++ [cFront] ++ [cBack]
+      features = List.flatten(pads) ++ courtyard ++ frontSilkBorder ++ backSilkBorder ++ [cFront]
 
       refloc      = {-crtydlength/2 - 0.75*silktextheight, 0, 90}
       valloc      = { crtydlength/2 + 0.75*silktextheight, 0, 90}

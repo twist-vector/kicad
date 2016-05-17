@@ -1,4 +1,4 @@
-(module Header_14x2 (layer F.Cu) (tedit 573B01FD)
+(module Header_14x2 (layer F.Cu) (tedit 573B53FA)
   (at 0 0)
   (descr "14x2 0.05in (1.27 mm) spacing unshrouded header")
   (tags "PTH unshrouded header")
@@ -245,5 +245,4 @@
   (fp_line (start 8.518 0.0) (end 8.89 0.372) (layer B.SilkS) (width 0.1))
   (fp_line (start 8.89 0.372) (end 8.89 0.898) (layer B.SilkS) (width 0.1))
   (fp_circle (center -8.968 1.348) (end -8.868 1.348) (layer F.SilkS) (width 0.1))
-  (fp_circle (center -8.968 1.348) (end -8.868 1.348) (layer B.SilkS) (width 0.1))
 )
