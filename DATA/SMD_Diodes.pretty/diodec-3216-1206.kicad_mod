@@ -1,4 +1,4 @@
-(module 3216_chip_diode (layer F.Cu) (tedit 573B53FA)
+(module 3216_chip_diode (layer F.Cu) (tedit 573B83F3)
   (at 0 0)
   (descr "3216 (metric) chip diode")
   (tags "SMD chip 3216")

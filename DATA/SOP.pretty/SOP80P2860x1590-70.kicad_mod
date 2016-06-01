@@ -1,4 +1,4 @@
-(module SOP80P2860x1590-70 (layer F.Cu) (tedit 573B53FA)
+(module SOP80P2860x1590-70 (layer F.Cu) (tedit 573B83F3)
   (at 0 0)
   (descr "70 pin 0.8in pitch 28.6x15.9 SOP device")
   (tags "SMD SOP")

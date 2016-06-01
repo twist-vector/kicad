@@ -85,9 +85,13 @@ defmodule Footprints.Passives do
                                         ur: {bodylen/2,-bodywid/2},
                                         layer: "Dwgs.User", width: docoutlinewidth)
 
+    # Center of mass fiducial
+    com = [Footprints.Components.circle(center: {0,0}, radius: 0.5, layer: "Eco1.User", width: silkoutlinewidth),
+           Footprints.Components.line(start: {-0.75,0}, end: {0.75,0}, layer: "Eco1.User", width: silkoutlinewidth),
+           Footprints.Components.line(start: {0,-0.75}, end: {0,0.75}, layer: "Eco1.User", width: silkoutlinewidth)]
 
     features = pads ++ [Enum.join(courtyard, "\n  ")] ++
-        [Enum.join(outline, "\n  ")] ++ silk
+        [Enum.join(outline, "\n  ")] ++ silk ++ com
 
     refloc      = {-crtydSizeX/2 - 0.75*silktextheight, 0, 90}
     valloc      = { crtydSizeX/2 + 0.75*silktextheight, 0, 90}
