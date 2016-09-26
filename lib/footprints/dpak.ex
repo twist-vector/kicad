@@ -1,9 +1,6 @@
 defmodule Footprints.DPak do
   alias Footprints.Components, as: Comps
 
-  @library_name "DPAK"
-  @device_file_name "TO_devices.yml"
-
   def create_mod(params, name, descr, tags, filename) do
     #
     # Device oriented left-to-right:  Body length is then in the KiCad x
@@ -19,20 +16,21 @@ defmodule Footprints.DPak do
     courtyardmargin   = params[:courtyardmargin]
     pincount          = params[:pincount]
     pinpitch          = params[:pinpitch]
-    totalwidmin = params[:totalwidmin]
-    totalwidmax = params[:totalwidmax]
-    bodyspanminx = params[:bodyspanminx]
-    bodyspanmaxx = params[:bodyspanmaxx]
-    bodyspanminy = params[:bodyspanminy]
-    bodyspanmaxy = params[:bodyspanmaxy]
-    pinwidthmin = params[:pinwidthmin]
-    pinwidthmax = params[:pinwidthmax]
-    leglandmin = params[:leglandmin]
-    leglandmax = params[:leglandmax]
-    epadohangmin = params[:epadohangmin]
-    epadohangmax = params[:epadohangmax]
-    epadspanx = params[:epadspanx]
-    epadspany = params[:epadspany]
+    pastemargin       = params[:solderpastemarginratio]
+    totalwidmin       = params[:totalwidmin]
+    totalwidmax       = params[:totalwidmax]
+    bodyspanminx      = params[:bodyspanminx]
+    bodyspanmaxx      = params[:bodyspanmaxx]
+    bodyspanminy      = params[:bodyspanminy]
+    bodyspanmaxy      = params[:bodyspanmaxy]
+    pinwidthmin       = params[:pinwidthmin]
+    pinwidthmax       = params[:pinwidthmax]
+    leglandmin        = params[:leglandmin]
+    leglandmax        = params[:leglandmax]
+    epadohangmin      = params[:epadohangmin]
+    epadohangmax      = params[:epadohangmax]
+    epadspanx         = params[:epadspanx]
+    epadspany         = params[:epadspany]
 
     totaltol = 0#:math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -52,12 +50,13 @@ defmodule Footprints.DPak do
     pads = for pin <- 1..pincount do
       ###x = -pinpitch*(pincount)/2 + 2*(pin-1)*pinpitch
       x = -pinpitch + (pin-1) * (2*pinpitch)/(pincount-1)
-      Comps.padSMD(name: "#{pin}", shape: "rect", at: {x, y}, size: {padSizeX, padSizeY})
+      Comps.padSMD(name: "#{pin}", shape: "rect", at: {x, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin)
     end
 
     epad = [Comps.padSMD(name: "#{pincount+1}", shape: "rect",
                            at: {0,-epadohang},
-                         size: {epadspanx+2*sidefillet, epadspany+2*sidefillet})]
+                         size: {epadspanx+2*sidefillet, epadspany+2*sidefillet},
+                  pastemargin: pastemargin)]
 
     pins = for pin <- 1..pincount do
       x = -pinpitch + (pin-1) * (2*pinpitch)/(pincount-1)
@@ -120,18 +119,15 @@ defmodule Footprints.DPak do
   end
 
 
-  def build(basedefaults, overrides, output_base_directory, config_base_directory) do
-    output_directory = "#{output_base_directory}/#{@library_name}.pretty"
+  def build(library_name, device_file_name, basedefaults, overrides, output_base_directory, config_base_directory) do
+    output_directory = "#{output_base_directory}/#{library_name}.pretty"
     File.mkdir(output_directory)
 
     # Override default parameters for this library (set of modules) and add
     # device specific values.  The override based on command line parameters
     # (passed in via `overrides` variable)
-    temp = YamlElixir.read_from_file("#{config_base_directory}/#{@device_file_name}")
-    p = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
-        |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-    p2 = Map.merge basedefaults, p
-    defaults = Map.merge p2, overrides
+    temp = YamlElixir.read_from_file("#{config_base_directory}/#{device_file_name}")
+    defaults = FootprintSupport.make_params("#{config_base_directory}/#{device_file_name}", basedefaults, overrides)
 
     for dev_name <- Dict.keys(temp) do
       if dev_name != "defaults" do
@@ -141,7 +137,8 @@ defmodule Footprints.DPak do
         Enum.map(temp[dev_name], fn d ->
           p = Enum.map(d, fn {k,v} -> Map.put(%{}, String.to_atom(k), v) end)
               |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-          params = Map.merge defaults, p
+          params = Map.merge(defaults, p)
+                   |> Map.merge(overrides)
 
           pincount = params[:pincount]
           totalwid = (params[:totalwidmin]+params[:totalwidmax])/2

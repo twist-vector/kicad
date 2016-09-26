@@ -1,9 +1,6 @@
 defmodule Footprints.Passives do
   alias Footprints.Components, as: Comps
 
-  @library_name "SMD_Passives"
-  @device_file_name "rcl_devices.yml"
-
   def create_mod(params, name, descr, tags, filename) do
     #
     # Device oriented left-to-right:  Body length is then in the KiCad x
@@ -110,18 +107,15 @@ defmodule Footprints.Passives do
   end
 
 
-  def build(basedefaults, overrides, output_base_directory, config_base_directory) do
-    output_directory = "#{output_base_directory}/#{@library_name}.pretty"
+  def build(library_name, device_file_name, basedefaults, overrides, output_base_directory, config_base_directory) do
+    output_directory = "#{output_base_directory}/#{library_name}.pretty"
     File.mkdir(output_directory)
 
     # Override default parameters for this library (set of modules) and add
     # device specific values.  The override based on command line parameters
     # (passed in via `overrides` variable)
-    temp = YamlElixir.read_from_file("#{config_base_directory}/#{@device_file_name}")
-    p = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
-        |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-    p2 = Map.merge basedefaults, p
-    defaults = Map.merge p2, overrides
+    temp = YamlElixir.read_from_file("#{config_base_directory}/#{device_file_name}")
+    defaults = FootprintSupport.make_params("#{config_base_directory}/#{device_file_name}", basedefaults, overrides)
 
     for dev_name <- Dict.keys(temp) do
       if dev_name != "defaults" do
@@ -131,18 +125,19 @@ defmodule Footprints.Passives do
         Enum.map(temp[dev_name], fn d ->
           p = Enum.map(d, fn {k,v} -> Map.put(%{}, String.to_atom(k), v) end)
               |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-          params = Map.merge defaults, p
+          params = Map.merge(defaults, p)
+                   |> Map.merge(overrides)
 
           bl = params[:bodylen]*10
           bw = params[:bodywid]*10
           metriccode = List.flatten(:io_lib.format("~2..0w~2..0w", [round(bl),round(bw)]))
           imperialcode = if params[:inchcode] == nil do
-            bli = bl * 0.393701
-            bwi = bw * 0.393701
-             List.flatten(:io_lib.format("~2..0w~2..0w", [round(bli),round(bwi)]))
-          else
-             params[:inchcode]
-          end
+                            bli = bl * 0.393701
+                            bwi = bw * 0.393701
+                            List.flatten(:io_lib.format("~2..0w~2..0w", [round(bli),round(bwi)]))
+                         else
+                            params[:inchcode]
+                         end
 
           filename = "#{output_directory}/#{dev_name}-#{metriccode}-#{imperialcode}.kicad_mod"
           tags = ["SMD", "chip", metriccode]

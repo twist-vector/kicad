@@ -1,9 +1,6 @@
 defmodule Footprints.Combicon do
   alias Footprints.Components, as: Comps
 
-  @library_name "COMBICON_Headers"
-  @device_file_name "combicon_devices.yml"
-
 
   def create_mod(params, pincount, filename) do
       silktextheight    = params[:silktextheight]
@@ -31,7 +28,7 @@ defmodule Footprints.Combicon do
       # The grid of pads.  We'll call the common function from the PTHHeader
       # module for each pin location.
       pads = for pin <- 1..pincount, do:
-               Footprints.PTHHeader.make_pad(params, pin, 1, pincount, 1)
+               Footprints.PTHHeaderSupport.make_pad(params, pin, 1, pincount, 1)
 
       # Add the header outline.
       frontSilkBorder = [Comps.box(ll: {-bodylen/2-bodyoffsetx/2,  bodywid/2-bodyoffsety},
@@ -81,8 +78,8 @@ defmodule Footprints.Combicon do
                        referencelocation: refloc,
                        textsize: {silktextheight,silktextwidth},
                        textwidth: silktextthickness,
-                       descr: "#{pincount} Spring-Cage PCB Termination Blocks",
-                       tags: ["PTH", "unshrouded", "header"],
+                       descr: "#{pincount} Spring-Cage PCB Wire-to-Board Termination Blocks",
+                       tags: ["PTH", "wire2board", "header", "COMBICON", "PTSA"],
                        isSMD: false,
                        features: features)
       IO.binwrite file, "#{m}"
@@ -90,27 +87,18 @@ defmodule Footprints.Combicon do
     end
 
 
-  def build(defaults, overrides, output_base_directory, config_base_directory) do
-    output_directory = "#{output_base_directory}/#{@library_name}.pretty"
+  def build(library_name, device_file_name, defaults, overrides, output_base_directory, config_base_directory) do
+    output_directory = "#{output_base_directory}/#{library_name}.pretty"
     File.mkdir(output_directory)
-
-    # Note that for the headers we'll just define the pin layouts (counts)
-    # programatically.  We won't use the device sections of the config file
-    # to define the number of pins or rows.
-
-    #
-    # 0.05" (1.27 mm) headers
-    #
 
     # Override default parameters for this library (set of modules) and add
     # device specific values.  The override based on command line parameters
     # (passed in via `overrides` variable)
-    temp = YamlElixir.read_from_file("#{config_base_directory}/#{@device_file_name}")
-    p = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
-        |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-    p2 = Map.merge defaults, p
-    params = Map.merge p2, overrides
+    params = FootprintSupport.make_params("#{config_base_directory}/#{device_file_name}", defaults, overrides)
 
+    # Note that for the headers we'll just define the pin layouts (counts)
+    # programatically.  We won't use the device sections of the config file
+    # to define the number of pins or rows.
     pinpitch = params[:pinpitch]
     devices = for pincount <- 2..24, do: {pincount}
     Enum.map(devices, fn {pincount} ->

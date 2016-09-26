@@ -1,8 +1,6 @@
 defmodule Footprints.Drills do
   alias Footprints.Components, as: Comps
 
-  @library_name "Drills"
-
 
   def create_mod(params, name, m_text, drilldia, filename) do
     silktextheight    = params[:silktextheight]
@@ -11,8 +9,9 @@ defmodule Footprints.Drills do
     silkoutlinewidth  = params[:silkoutlinewidth]
     courtyardmargin   = params[:courtyardmargin]
     courtoutlinewidth = params[:courtoutlinewidth]
+    padscale          = params[:padscale]
 
-    padsize = drilldia * 1.75
+    padsize = drilldia * padscale
     pad = Comps.padPTH(name: "1", shape: "oval", at: {0,0}, size: {padsize,padsize}, drill: drilldia)
 
     # Bounding "courtyard" for the device
@@ -45,20 +44,18 @@ defmodule Footprints.Drills do
   end
 
 
-  def build(defaults, overrides, output_base_directory, _config_base_directory) do
-    output_directory = "#{output_base_directory}/#{@library_name}.pretty"
+  def build(library_name, device_file_name, defaults, overrides, output_base_directory, config_base_directory) do
+    output_directory = "#{output_base_directory}/#{library_name}.pretty"
     File.mkdir(output_directory)
+
+    # Override default parameters for this library (set of modules) and add
+    # device specific values.  The override based on command line parameters
+    # (passed in via `overrides` variable)
+    params = FootprintSupport.make_params("#{config_base_directory}/#{device_file_name}", defaults, overrides)
 
     # Note that for the drills we'll just define the drill diameters
     # programatically.  We won't use the device sections of the config file
     # to define the number of pins or rows.
-
-
-    # Override default parameters for this library (set of modules) and add
-    # device sqpecific values.  The override based on command line parameters
-    # (passed in via `overrides` variable)
-    params = Map.merge defaults, overrides
-
     m_sizes = [0.5, 0.75, 1, 1.5, 1.6, 1.8, 2, 2.2, 2.5, 3, 3.5, 3.8, 4, 4.5, 5, 5.5, 6, 7, 8, 9, 10]
     Enum.map(m_sizes, fn s ->
                   m_text = to_string List.flatten( :io_lib.format("M~w", [s]) )

@@ -1,9 +1,6 @@
 defmodule Footprints.SOIC do
   alias Footprints.Components, as: Comps
 
-  @library_name "SOP"
-  @device_file_name "SOP_devices.yml"
-
   def create_mod(params, name, descr, tags, filename) do
     #
     # Device oriented left-to-right:  Body length is then in the KiCad x
@@ -125,18 +122,15 @@ defmodule Footprints.SOIC do
   end
 
 
-  def build(basedefaults, overrides, output_base_directory, config_base_directory) do
-    output_directory = "#{output_base_directory}/#{@library_name}.pretty"
+  def build(library_name, device_file_name, basedefaults, overrides, output_base_directory, config_base_directory) do
+    output_directory = "#{output_base_directory}/#{library_name}.pretty"
     File.mkdir(output_directory)
 
     # Override default parameters for this library (set of modules) and add
     # device specific values.  The override based on command line parameters
     # (passed in via `overrides` variable)
-    temp = YamlElixir.read_from_file("#{config_base_directory}/#{@device_file_name}")
-    p = Enum.map(temp["defaults"], fn({k,v})-> Map.put(%{}, String.to_atom(k), v) end)
-        |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-    p2 = Map.merge basedefaults, p
-    defaults = Map.merge p2, overrides
+    temp = YamlElixir.read_from_file("#{config_base_directory}/#{device_file_name}")
+    defaults = FootprintSupport.make_params("#{config_base_directory}/#{device_file_name}", basedefaults, overrides)
 
     for dev_name <- Dict.keys(temp) do
       if dev_name != "defaults" do
@@ -146,7 +140,8 @@ defmodule Footprints.SOIC do
         Enum.map(temp[dev_name], fn d ->
           p = Enum.map(d, fn {k,v} -> Map.put(%{}, String.to_atom(k), v) end)
               |> Enum.reduce(fn(data, acc)-> Map.merge(data,acc) end)
-          params = Map.merge defaults, p
+          params = Map.merge(defaults, p)
+                   |> Map.merge(overrides)
 
           pincount = params[:pincount]
           pitchcode = List.flatten(:io_lib.format("~w", [round(params[:pinpitch]*100)]))

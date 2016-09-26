@@ -34,10 +34,10 @@ defmodule Footprints.Components do
     Enum.join(layers, " ") <> ") #{pastemargintext})"
   end
 
-  def padSMD(name: name, shape: shape, at: {x,y}, size: {xs,ys}, pastemargin: pastemargin), do:
-     pad(name: name, type: "smd", shape: shape, at: {x,y},
-         size: {xs,ys}, layers: ["F.Cu", "F.Paste", "F.Mask"],
-         pastemargin: pastemargin)
+  def padSMD(name: name, shape: shape, at: {x,y}, size: {xs,ys}, pastemargin: pastemargin) do
+     pad(name: name, type: "smd", shape: shape, at: {x,y}, size: {xs,ys}, 
+         layers: ["F.Cu", "F.Paste", "F.Mask"], pastemargin: pastemargin)
+  end
 
   def padPTH(name: name, shape: shape, at: {x,y}, size: {xs,ys}, drill: drill), do:
      "(pad #{name} thru_hole #{shape} (at #{p(x)} #{p(y)}) " <>
