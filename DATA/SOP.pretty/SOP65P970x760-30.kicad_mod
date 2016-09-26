@@ -1,4 +1,4 @@
-(module SOP65P970x760-30 (layer F.Cu) (tedit 573B83F3)
+(module SOP65P970x760-30 (layer F.Cu) (tedit 57E913B5)
   (at 0 0)
   (descr "30 pin 0.65in pitch 9.7x7.6 SOP device")
   (tags "SMD SOP")

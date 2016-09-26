@@ -1,4 +1,4 @@
-(module 1005_chip_diode (layer F.Cu) (tedit 573B83F3)
+(module 1005_chip_diode (layer F.Cu) (tedit 57E913B5)
   (at 0 0)
   (descr "1005 (metric) chip diode")
   (tags "SMD chip 1005")

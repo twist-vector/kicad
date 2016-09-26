@@ -1,4 +1,4 @@
-(module DIP254P2332x1400-18 (layer F.Cu) (tedit 573B83F3)
+(module DIP254P2332x1400-18 (layer F.Cu) (tedit 57E913B5)
   (at 0 0)
   (descr "18 pin 2.54in pitch x15.24 DIP device")
   (tags "PTH DIP")

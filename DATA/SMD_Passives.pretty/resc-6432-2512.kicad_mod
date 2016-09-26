@@ -1,4 +1,4 @@
-(module 6432_chip_dev (layer F.Cu) (tedit 573B83F3)
+(module 6432_chip_dev (layer F.Cu) (tedit 57E913B5)
   (at 0 0)
   (descr "6432 (metric) chip device")
   (tags "SMD chip 6432")

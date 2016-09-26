@@ -1,4 +1,4 @@
-(module DF13-6P-1.25DSA (layer F.Cu) (tedit 573B83F3)
+(module DF13-6P-1.25DSA (layer F.Cu) (tedit 57E913B5)
   (at 0 0)
   (descr "Hirose DF13 through hole connector")
   (tags "PTH header shrouded")

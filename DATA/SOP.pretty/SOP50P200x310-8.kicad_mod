@@ -1,4 +1,4 @@
-(module SOP50P200x310-8 (layer F.Cu) (tedit 573B83F3)
+(module SOP50P200x310-8 (layer F.Cu) (tedit 57E913B5)
   (at 0 0)
   (descr "8 pin 0.5in pitch 2.0x3.1 SOP device")
   (tags "SMD SOP")

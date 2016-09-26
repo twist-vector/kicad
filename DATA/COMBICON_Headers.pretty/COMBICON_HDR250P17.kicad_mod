@@ -1,4 +1,4 @@
-(module Combicon_Header_17 (layer F.Cu) (tedit 573B83F3)
+(module Combicon_Header_17 (layer F.Cu) (tedit 57E913B5)
   (at 0 0)
   (descr "17 Spring-Cage PCB Termination Blocks")
   (tags "PTH unshrouded header")
