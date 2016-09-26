@@ -50,19 +50,19 @@ defmodule Footprints.Passives do
     pads = [Comps.padSMD(name: "1", shape: "rect", at: {-padCenterX, padCenterY}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
             Comps.padSMD(name: "2", shape: "rect", at: { padCenterX, padCenterY}, size: {padSizeX, padSizeY}, pastemargin: pastemargin)]
 
-    if polarized do
-      silk = [Comps.line(start: {-padCenterX-padSizeX/2, -padSizeY/2-2*silkoutlinewidth},
-                           end: { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
-                         layer: "F.SilkS",
-                         width: silkoutlinewidth)] ++
+    silk = if polarized do
+      [Comps.line(start: {-padCenterX-padSizeX/2, -padSizeY/2-2*silkoutlinewidth},
+                  end: { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
+                  layer: "F.SilkS",
+                  width: silkoutlinewidth)] ++
              [Comps.line(start: {-padCenterX-padSizeX/2, padSizeY/2+2*silkoutlinewidth},
-                           end: { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
+                         end: { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
                          layer: "F.SilkS",
                          width: silkoutlinewidth)] ++
               [Comps.circle(center: {-padCenterX-padSizeX/2-0.25,0}, radius: 0.05,
                             layer: "F.SilkS", width: silkoutlinewidth)]
     else
-      silk = [Comps.line(start: {-minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
+      [Comps.line(start: {-minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
                            end: { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
                          layer: "F.SilkS",
                          width: silkoutlinewidth)] ++

@@ -31,10 +31,10 @@ defmodule Footprints do
 
   def process(options) do
     # Set defaults if no command line arguments
-    if !options[:dir], do: output_base_directory = "DATA",
-    else:                  output_base_directory = options[:dir]
-    if !options[:cfg], do: config_base_directory = "devices",
-    else:                  config_base_directory = options[:dir]
+    output_base_directory = if !options[:dir], do: "DATA",
+                            else:                  options[:dir]
+    config_base_directory = if !options[:cfg], do: "devices",
+                            else:                  options[:dir]
 
     IO.puts "Input config directory:   #{config_base_directory}"
     IO.puts "Output library directory: #{output_base_directory}"

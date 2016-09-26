@@ -13,7 +13,7 @@ defmodule Footprints.Drills do
     courtoutlinewidth = params[:courtoutlinewidth]
 
     padsize = drilldia * 1.75
-    pad = Comps.padPTH(name: "D", shape: "oval", at: {0,0}, size: {padsize,padsize}, drill: drilldia)
+    pad = Comps.padPTH(name: "1", shape: "oval", at: {0,0}, size: {padsize,padsize}, drill: drilldia)
 
     # Bounding "courtyard" for the device
     crtydsize = padsize + 2*courtyardmargin
@@ -55,11 +55,11 @@ defmodule Footprints.Drills do
 
 
     # Override default parameters for this library (set of modules) and add
-    # device specific values.  The override based on command line parameters
+    # device sqpecific values.  The override based on command line parameters
     # (passed in via `overrides` variable)
     params = Map.merge defaults, overrides
 
-    m_sizes = [1.5, 1.6, 1.8, 2, 2.2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 7, 8, 9, 10]
+    m_sizes = [0.5, 0.75, 1, 1.5, 1.6, 1.8, 2, 2.2, 2.5, 3, 3.5, 3.8, 4, 4.5, 5, 5.5, 6, 7, 8, 9, 10]
     Enum.map(m_sizes, fn s ->
                   m_text = to_string List.flatten( :io_lib.format("M~w", [s]) )
                   drilldia = 1.1 * s

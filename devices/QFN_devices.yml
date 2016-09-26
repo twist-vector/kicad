@@ -1,6 +1,6 @@
 defaults:
    legland:                   0.40
-   toefillet:                 0.15
+   toefillet:                 0.25
    heelfillet:                0.05
    sidefillet:               -0.05
    pinheight:                  0.1

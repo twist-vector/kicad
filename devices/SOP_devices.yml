@@ -32,6 +32,8 @@ soic:
 
    - pincount:          14
      bodylen:          9.0
+     totalwid:         6.0
+     bodywid:         3.90
 
    - pincount:          16
      bodylen:         10.3
