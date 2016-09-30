@@ -10,6 +10,16 @@ defmodule Footprints.Components do
   def line(start: {xs,ys}, end: {xe,ye}, layer: lay, width: wid), do:
     "(fp_line (start #{p(xs)} #{p(ys)}) (end #{p(xe)} #{p(ye)}) (layer #{lay}) (width #{wid}))"
 
+  def box(ll: ll={llx,lly}, ur: ur={urx,ury}, layer: layer, width: thick) do
+    [line(start:         ll, end: {urx, lly}, layer: layer, width: thick),
+     line(start: {urx, lly}, end:         ur, layer: layer, width: thick),
+     line(start:         ur, end: {llx, ury}, layer: layer, width: thick),
+     line(start: {llx, ury}, end:         ll, layer: layer, width: thick)]
+  end
+
+  def arc(start: {xs,ys}, end: {xe,ye}, angle: angle, layer: lay, width: wid), do:
+    "(fp_arc (start #{p(xs)} #{p(ys)}) (end #{p(xe)} #{p(ye)}) (angle #{p(angle)}) (layer #{lay}) (width #{wid}))"
+
 
   def textGeneric(type: type, value: value, at: {x,y,a}, layer: lay, size: {xs,ys}, width: wid), do:
     "(fp_text #{type} #{value} (at #{p(x)} #{p(y)} #{p(a)}) (layer #{lay}) " <>
@@ -35,7 +45,7 @@ defmodule Footprints.Components do
   end
 
   def padSMD(name: name, shape: shape, at: {x,y}, size: {xs,ys}, pastemargin: pastemargin) do
-     pad(name: name, type: "smd", shape: shape, at: {x,y}, size: {xs,ys}, 
+     pad(name: name, type: "smd", shape: shape, at: {x,y}, size: {xs,ys},
          layers: ["F.Cu", "F.Paste", "F.Mask"], pastemargin: pastemargin)
   end
 
@@ -65,15 +75,6 @@ defmodule Footprints.Components do
     "  " <> Enum.join( Enum.map(features, fn a -> "#{a}" end), "\n  " ) <> "\n" <>
     ")"
   end
-
-
-  def box(ll: ll={llx,lly}, ur: ur={urx,ury}, layer: layer, width: thick) do
-    [line(start:         ll, end: {urx, lly}, layer: layer, width: thick),
-     line(start: {urx, lly}, end:         ur, layer: layer, width: thick),
-     line(start:         ur, end: {llx, ury}, layer: layer, width: thick),
-     line(start: {llx, ury}, end:         ll, layer: layer, width: thick)]
-  end
-
 
 
 end

@@ -1,0 +1,65 @@
+defaults:
+   toefillet:                  0.3
+   heelfillet:                 0.1
+   sidefillet:                 0.1
+   placetickmargin:           0.20
+   courtyardmargin:           0.50
+
+
+# Length is the x dimension, width is the y dimension
+# Oriented with opeitive (pin 1) to right
+capmp:
+  - bodylen:          3.3
+    bodywid:          3.3
+    cyldiam:          3.0
+    pinwidthmin:      0.4
+    pinwidthmax:      0.6
+    legland:          1.5
+    pinsep:           0.6
+    silkoutlinewidth: 0.1
+    fiduciallen:      0.5
+    fiducialradius:   0.25
+    courtyardmargin:  0.25
+
+
+  # http://www.nichicon.co.jp/english/products/alm_chip/index.html
+  - bodylen:          4.3 # B
+    bodywid:          4.3 # C
+    cyldiam:          4.0 # D
+    pinwidthmin:      0.5 # min
+    pinwidthmax:      0.8 # max
+    legland:          1.8 # A
+    pinsep:           1.0 # E
+
+  - bodylen:          5.3 # B
+    bodywid:          5.3 # C
+    cyldiam:          5.0 # D
+    pinwidthmin:      0.5 # min
+    pinwidthmax:      0.8 # max
+    legland:          2.1 # A
+    pinsep:           1.3 # E
+
+  # http://www.nichicon.co.jp/english/products/alm_chip/index.html
+  - bodylen:          6.6 # B
+    bodywid:          6.6 # C
+    cyldiam:          6.3 # D
+    pinwidthmin:      0.5 # min
+    pinwidthmax:      0.8 # max
+    legland:          2.4 # A
+    pinsep:           2.2 # E
+
+  - bodylen:          8.3
+    bodywid:          8.3
+    cyldiam:          8.0
+    pinwidthmin:      0.6
+    pinwidthmax:      0.8
+    legland:          3.4
+    pinsep:           2.2
+
+  - bodylen:         10.3
+    bodywid:         10.3
+    cyldiam:         10.0
+    pinwidthmin:      0.8
+    pinwidthmax:      1.0
+    legland:          3.5
+    pinsep:           4.6

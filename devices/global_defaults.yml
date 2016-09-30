@@ -19,3 +19,5 @@ defaults:
    docoutlinewidth:           0.10
    solderpastemarginratio:    -0.05
    epadsolderpastemarginratio: -0.10
+   fiduciallen:               0.75
+   fiducialradius:             0.5
