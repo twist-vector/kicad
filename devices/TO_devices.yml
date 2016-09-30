@@ -53,3 +53,26 @@ to-263:
      heelfillet:       0.4
      sidefillet:       0.4
      altnames:         [D2PAK,TO263AB]
+
+sot-223:
+   # http://www.nxp.com/documents/outline_drawing/SOT223.pdf
+   - pincount:         3
+     totalwidmin:      5.10 # (H_e - E) + ((H_e - E))/2 (min)
+     totalwidmax:      5.40 # (H_e - E) + ((H_e - E))/2 (max):
+     leglandmin:       0.70 # L_p (min)
+     leglandmax:       1.10 # L_p (max)
+     pinwidthmin:      0.60 # b_p (min)
+     pinwidthmax:      0.80 # b_p (max)
+     pinpitch:         2.30 # e_1
+     bodyspanminx:     6.30 # D (min)
+     bodyspanmaxx:     6.70 # D (max)
+     bodyspanminy:     3.30 # E (min)
+     bodyspanmaxy:     3.70 # E (max)
+     epadohangmin:     1.70 # ((H_e - E))/2 (min)
+     epadohangmax:     1.80 # ((H_e - E))/2 (max)
+     epadspanx:        3.00 # b1
+     epadspany:        1.70 # ((H_e - E))/2
+     toefillet:        0.3
+     heelfillet:       0.1
+     sidefillet:       0.1
+     altnames:         []
