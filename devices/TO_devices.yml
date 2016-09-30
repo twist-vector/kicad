@@ -4,23 +4,52 @@ defaults:
    sidefillet:                0.0
 
 
+# http://www.diodes.com/catalog/Single_LDOs_50/AP1122_10284
+# "pincount" is the number of pins not including the large pad
+# Length is the x dimension, width is the y dimension
+# "totalwid*" includes the body and pins but _not_ the large pad
+
+
 to-252:
-   - totalwidmin:      9.35
-     totalwidmax:     10.10
-     bodyspanminx:     6.4
-     bodyspanmaxx:     6.6
-     bodyspanminy:     6.0
-     bodyspanmaxy:     6.2
-     pincount:          2
-     pinwidthmin:      0.64
-     pinwidthmax:      0.90
-     leglandmin:       1.0
-     leglandmax:       1.5
-     pinpitch:         2.28
-     epadohangmin:     0.80
-     epadohangmax:     0.80
-     epadspanx:        4.70
-     epadspany:        5.10
-     toefillet:        0.7
-     heelfillet:       0.5
+   - pincount:         2
+     totalwidmin:      8.74 # D + 2.74 (min):
+     totalwidmax:      8.94 # D + 2.74 (max):
+     leglandmin:       1.40 # L (min)
+     leglandmax:       1.78 # L (max)
+     pinwidthmin:      0.64 # b (min)
+     pinwidthmax:      0.88 # b (max)
+     pinpitch:         2.28 # e
+     bodyspanminx:     6.45 # E (min)
+     bodyspanmaxx:     6.70 # E (max)
+     bodyspanminy:     6.00 # D (min)
+     bodyspanmaxy:     6.20 # D (max)
+     epadohangmin:     0.88 # L3 (min)
+     epadohangmax:     1.27 # L3 (max)
+     epadspanx:        4.32 # E1
+     epadspany:        5.21 # D1
+     toefillet:        0.4
+     heelfillet:       0.4
+     sidefillet:       0.2
+     altnames:         [DPAK]
+
+to-263:
+   - pincount:         2
+     totalwidmin:     14.61 # H (min)
+     totalwidmax:     15.87 # H (max):
+     leglandmin:       1.78 # L (min)
+     leglandmax:       2.79 # L (max)
+     pinwidthmin:      0.51 # b (min)
+     pinwidthmax:      0.99 # b (max)
+     pinpitch:         2.54 # e
+     bodyspanminx:     9.66 # E (min)
+     bodyspanmaxx:    10.66 # E (max)
+     bodyspanminy:     8.39 # D (min)
+     bodyspanmaxy:     9.65 # D (max)
+     epadohangmin:     1.67 # L1 (min)
+     epadohangmax:     1.67 # L1 (max)
+     epadspanx:        7.23 # E1
+     epadspany:        6.75 # D1
+     toefillet:        0.4
+     heelfillet:       0.4
      sidefillet:       0.4
+     altnames:         [D2PAK,TO263AB]

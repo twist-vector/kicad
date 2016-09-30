@@ -156,7 +156,7 @@ defmodule Footprints.DPak do
           #  Example: TO-263-457P660x910-2-T540
           devcode = "#{String.upcase(dev_name)}-#{pitchcode}P#{lencode}x#{widcode}-#{pincount}#{padcode}"
           filename = "#{output_directory}/#{devcode}.kicad_mod"
-          tags = ["SMD", "#{String.upcase(dev_name)}"]
+          tags = ["SMD", "#{String.upcase(dev_name)}"] ++ params[:altnames]
           name = "#{devcode}"
           descr = "#{params[:pincount]+1} pin #{params[:pinpitch]}in pitch #{params[:bodylen]}x#{params[:totalwid]} #{String.upcase(dev_name)} device"
           create_mod(params, name, descr, tags, filename)

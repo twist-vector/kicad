@@ -75,22 +75,21 @@ defmodule Footprints do
     # function to write out the devices.  They'll all need to defaults and overrides
     # lists to specify default values.  Device-specific parameters will be loaded
     # from file in the  'config_base_directory' directory.
-    # Footprints.PTHHeader.build("PTH_Headers", "PTH254Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.PTHHeader.build("PTH_Headers", "PTH127Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.PTHHeaderRA.build("PTH_Headers", "PTH254Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.PTHHeaderRA.build("PTH_Headers", "PTH127Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.DF13Header.build("PTH_Headers", "DF13Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.DF13HeaderRA.build("PTH_Headers", "DF13Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.Combicon.build("PTH_Headers", "combicon_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.Drills.build("Drills", "drills.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.Passives.build("SMD_Passives", "rcl_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.Diodes.build("SMD_Passives", "smd_diode_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.DIP.build("DIP", "DIP_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.SOIC.build("SOP", "SOP_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.QFP.build("QFP", "QFP_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.QFN.build("QFN", "QFN_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    # Footprints.SOT.build("SOT", "SOT_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
-    #
+    Footprints.PTHHeader.build("PTH_Headers", "PTH254Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.PTHHeader.build("PTH_Headers", "PTH127Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.PTHHeaderRA.build("PTH_Headers", "PTH254Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.PTHHeaderRA.build("PTH_Headers", "PTH127Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.DF13Header.build("PTH_Headers", "DF13Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.DF13HeaderRA.build("PTH_Headers", "DF13Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.Combicon.build("PTH_Headers", "combicon_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.Drills.build("Drills", "drills.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.Passives.build("SMD_Passives", "rcl_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.Diodes.build("SMD_Passives", "smd_diode_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.DIP.build("DIP", "DIP_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.SOIC.build("SOP", "SOP_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.QFP.build("QFP", "QFP_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.QFN.build("QFN", "QFN_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.SOT.build("SOT", "SOT_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
     Footprints.DPak.build("TO", "TO_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
   end
 
