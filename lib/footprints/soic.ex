@@ -32,7 +32,7 @@ defmodule Footprints.SOIC do
 
     totaltol = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
-    maxOutsideWidth = totalwid + 2*(legland+pinlentol)
+    maxOutsideWidth = totalwid + (legland+pinlentol)
 
     stride = round(pincount/2)
     span = (pincount/2-1)*pinpitch
@@ -66,7 +66,7 @@ defmodule Footprints.SOIC do
     end
 
 
-    crtydSizeX = bodylen
+    crtydSizeX = bodylen+ 2*courtyardmargin
     crtydSizeY = maxOutsideWidth + 2*toefillet + 2*courtyardmargin
     courtyard = Footprints.Components.box(ll: {-crtydSizeX/2,crtydSizeY/2},
                                           ur: {crtydSizeX/2,-crtydSizeY/2},
@@ -99,11 +99,11 @@ defmodule Footprints.SOIC do
                List.flatten(pins) ++ List.flatten(outline)++ com
 
     refloc = if params[:refsinside], do:
-                 {0, bodywid/4-silktextheight/2, 0},   #{0, 0.8*silktextheight, 0},
+                 {0, bodywid/4-0.75*silktextheight/2, 0},   #{0, 0.8*silktextheight, 0},
              else:
                  {-crtydSizeX/2 - 0.75*silktextheight, 0, 90}
     valloc = if params[:refsinside], do:
-                 {0, -bodywid/4+silktextheight/2, 0},   #{0, -0.8*silktextheight, 0},
+                 {0, -bodywid/4+0.75*silktextheight/2, 0},   #{0, -0.8*silktextheight, 0},
              else:
                  { crtydSizeX/2 + 0.75*silktextheight, 0, 90}
 
