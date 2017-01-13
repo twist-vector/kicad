@@ -36,22 +36,24 @@ defmodule Footprints.Components do
     textGeneric(type: "value", value: "VAL**", at: at, layer: "F.SilkS", size: size, width: wid)
 
 
-  def pad(name: name, type: type, shape: shape, at: {x,y}, size: {xs,ys}, layers: layers, pastemargin: pastemargin) do
+  def pad(name: name, type: type, shape: shape, at: {x,y}, size: {xs,ys}, layers: layers, pastemargin: pastemargin, maskmargin: maskmargin) do
     pastemargintext = if pastemargin != 0, do: "(solder_paste_margin_ratio #{pastemargin})", else: ""
-
+    maskmargintext = if maskmargin != 0, do: "(solder_mask_margin #{maskmargin})", else: ""
     "(pad #{name} #{type} #{shape} (at #{p(x)} #{p(y)}) (size #{p(xs)} #{p(ys)})" <>
     " (layers " <>
-    Enum.join(layers, " ") <> ") #{pastemargintext})"
+    Enum.join(layers, " ") <> ") #{pastemargintext} #{maskmargintext})"
   end
 
-  def padSMD(name: name, shape: shape, at: {x,y}, size: {xs,ys}, pastemargin: pastemargin) do
+  def padSMD(name: name, shape: shape, at: {x,y}, size: {xs,ys}, pastemargin: pastemargin, maskmargin: maskmargin) do
      pad(name: name, type: "smd", shape: shape, at: {x,y}, size: {xs,ys},
-         layers: ["F.Cu", "F.Paste", "F.Mask"], pastemargin: pastemargin)
+         layers: ["F.Cu", "F.Paste", "F.Mask"], pastemargin: pastemargin, maskmargin: maskmargin)
   end
 
-  def padPTH(name: name, shape: shape, at: {x,y}, size: {xs,ys}, drill: drill), do:
-     "(pad #{name} thru_hole #{shape} (at #{p(x)} #{p(y)}) " <>
-     "(size #{p(xs)} #{p(ys)}) (drill #{drill}) (layers *.Cu *.Mask F.SilkS))"
+  def padPTH(name: name, shape: shape, at: {x,y}, size: {xs,ys}, drill: drill, maskmargin: maskmargin), do:
+     pad(name: name, type: "thru_hole", shape: shape, at: {x,y}, size: {xs,ys},
+         layers: ["*.Cu", "*.SilkS", "*.Mask"], pastemargin: 0, maskmargin: maskmargin)
+    #  "(pad #{name} thru_hole #{shape} (at #{p(x)} #{p(y)}) " <>
+    #  "(size #{p(xs)} #{p(ys)}) (drill #{drill}) (layers *.Cu *.Mask F.SilkS) #{maskmargintext})"
 
   def module(name: name,
              valuelocation: refAt = {_xr,_yr,_ar},

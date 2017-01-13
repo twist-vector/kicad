@@ -13,6 +13,7 @@ defmodule Footprints.PTHHeader do
       rowpitch          = params[:rowpitch]
       padwidth          = params[:padwidth]
       padheight         = params[:padheight]
+      maskmargin        = params[:soldermaskmargin]
 
       bodylen     = pinpitch*(pincount-1) + padwidth  # extent in x
       bodywid     = rowpitch*(rowcount-1) + padheight # extent in y
@@ -28,7 +29,7 @@ defmodule Footprints.PTHHeader do
       # module for each pin location.
       pads = for row <- 1..rowcount, do:
                for pin <- 1..pincount, do:
-                 Footprints.PTHHeaderSupport.make_pad(params, pin, row, pincount, rowcount)
+                 Footprints.PTHHeaderSupport.make_pad(params, pin, row, pincount, rowcount, maskmargin)
 
       # Add the header outline.  The PTHHeader function draws the outside boundary
       # rather than the outline of each individual pin.

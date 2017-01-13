@@ -73,7 +73,7 @@ defmodule Footprints.PTHHeaderSupport do
 
 
 
-  def make_pad(params, pin, row, pincount, rowcount, shape \\ "oval") do
+  def make_pad(params, pin, row, pincount, rowcount, shape \\ "oval", maskmargin) do
     pinpitch        = params[:pinpitch]
     rowpitch        = params[:rowpitch]
     padwidth        = params[:padwidth]
@@ -85,7 +85,7 @@ defmodule Footprints.PTHHeaderSupport do
     pn = (pin-1)*rowcount + row
 
     Comps.padPTH(name: "#{pn}", shape: shape, at: {xc,yc},
-                 size: {padwidth,padheight}, drill: drilldia)
+                 size: {padwidth,padheight}, drill: drilldia, maskmargin: maskmargin)
   end
 
 

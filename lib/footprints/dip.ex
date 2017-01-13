@@ -25,6 +25,7 @@ defmodule Footprints.DIP do
     padheight         = params[:padheight]
     drilldia          = params[:drilldia]
     pinrad            = params[:pinrad]
+    maskmargin        = params[:soldermaskmargin]
 
 
     bodylen = get_body_len(params)
@@ -34,8 +35,8 @@ defmodule Footprints.DIP do
     pads = for pinpair <- 1..stride do
       y = totalwid/2.0
       x = -span/2.0 + (pinpair-1)*pinpitch
-      [Comps.padPTH(name: "#{pinpair}", shape: "oval", at: {x,y}, size: {padwidth, padheight}, drill: drilldia),
-       Comps.padPTH(name: "#{pincount-pinpair+1}", shape: "oval", at: {x,-y}, size: {padwidth, padheight}, drill: drilldia)]
+      [Comps.padPTH(name: "#{pinpair}", shape: "oval", at: {x,y}, size: {padwidth, padheight}, drill: drilldia, maskmargin: maskmargin),
+       Comps.padPTH(name: "#{pincount-pinpair+1}", shape: "oval", at: {x,-y}, size: {padwidth, padheight}, drill: drilldia, maskmargin: maskmargin)]
     end
 
 

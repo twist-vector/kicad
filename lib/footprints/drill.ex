@@ -10,9 +10,10 @@ defmodule Footprints.Drills do
     courtyardmargin   = params[:courtyardmargin]
     courtoutlinewidth = params[:courtoutlinewidth]
     padscale          = params[:padscale]
+    maskmargin        = params[:soldermaskmargin]
 
     padsize = drilldia * padscale
-    pad = Comps.padPTH(name: "1", shape: "oval", at: {0,0}, size: {padsize,padsize}, drill: drilldia)
+    pad = Comps.padPTH(name: "1", shape: "oval", at: {0,0}, size: {padsize,padsize}, drill: drilldia, maskmargin: maskmargin)
 
     # Bounding "courtyard" for the device
     crtydsize = padsize + 2*courtyardmargin

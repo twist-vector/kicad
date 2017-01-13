@@ -10,6 +10,7 @@ defmodule Footprints.DF13HeaderRA do
       courtyardmargin   = params[:courtyardmargin]
       pinpitch          = params[:pinpitch]
       padheight         = params[:padheight]
+      maskmargin        = params[:soldermaskmargin]
 
       # All pins aligned at y=0
       #  lower face at y=0.90
@@ -29,9 +30,9 @@ defmodule Footprints.DF13HeaderRA do
       # module for each pin location.
       pads = for pin <- 1..pincount, do:
                 if pin == 1, do:
-                  Footprints.PTHHeaderSupport.make_pad(params, pin, 1, pincount, 1, "rect"),
+                  Footprints.PTHHeaderSupport.make_pad(params, pin, 1, pincount, 1, "rect", maskmargin),
                 else:
-                  Footprints.PTHHeaderSupport.make_pad(params, pin, 1, pincount, 1)
+                  Footprints.PTHHeaderSupport.make_pad(params, pin, 1, pincount, 1, "oval", maskmargin)
 
 
       # Outline

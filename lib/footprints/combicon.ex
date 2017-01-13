@@ -10,6 +10,7 @@ defmodule Footprints.Combicon do
       courtyardmargin   = params[:courtyardmargin]
       pinpitch          = params[:pinpitch]
       drilldia          = params[:drilldia]
+      maskmargin        = params[:soldermaskmargin]
 
       bodyedgex         = 2.5
       bodyoffsetx       = 1.5
@@ -28,7 +29,7 @@ defmodule Footprints.Combicon do
       # The grid of pads.  We'll call the common function from the PTHHeader
       # module for each pin location.
       pads = for pin <- 1..pincount, do:
-               Footprints.PTHHeaderSupport.make_pad(params, pin, 1, pincount, 1)
+               Footprints.PTHHeaderSupport.make_pad(params, pin, 1, pincount, 1, "oval", maskmargin)
 
       # Add the header outline.
       frontSilkBorder = [Comps.box(ll: {-bodylen/2-bodyoffsetx/2,  bodywid/2-bodyoffsety},

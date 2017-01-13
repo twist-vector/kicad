@@ -25,6 +25,7 @@ defmodule Footprints.Passives do
     legland           = params[:legland]
     polarized         = params[:polarized]
     pastemargin       = params[:solderpastemarginratio]
+    maskmargin        = params[:soldermaskmargin]
 
     totaltol  = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -44,8 +45,8 @@ defmodule Footprints.Passives do
     crtydSizeX = 2*(max(padCenterX+padSizeX/2, bodylen/2) + courtyardmargin)
     crtydSizeY = 2*(max(padCenterY+padSizeY/2, bodywid/2) + courtyardmargin)
 
-    pads = [Comps.padSMD(name: "1", shape: "rect", at: {-padCenterX, padCenterY}, size: {padSizeX, padSizeY}, pastemargin: pastemargin),
-            Comps.padSMD(name: "2", shape: "rect", at: { padCenterX, padCenterY}, size: {padSizeX, padSizeY}, pastemargin: pastemargin)]
+    pads = [Comps.padSMD(name: "1", shape: "rect", at: {-padCenterX, padCenterY}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+            Comps.padSMD(name: "2", shape: "rect", at: { padCenterX, padCenterY}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
 
     silk = if polarized do
       [Comps.line(start: {-padCenterX-padSizeX/2, -padSizeY/2-2*silkoutlinewidth},

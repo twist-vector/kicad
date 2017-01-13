@@ -17,6 +17,7 @@ defaults:
    courtoutlinewidth:        0.075
    courtyardmargin:           0.50
    docoutlinewidth:           0.10
+   soldermaskmargin:          0.05
    solderpastemarginratio:    -0.05
    epadsolderpastemarginratio: -0.10
    fiduciallen:               0.75
