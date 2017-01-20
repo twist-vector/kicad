@@ -215,6 +215,9 @@ resc:
      heelfillet:      -0.05
      height:           0.8
      courtyardmargin:  0.35
+     silktextheight:   0.6
+     silktextwidth:    0.6
+     silktextthickness: 0.8
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -223,6 +226,9 @@ resc:
      height:           0.8
      toefillet:        0.3
      courtyardmargin:  0.35
+     silktextheight:   0.6
+     silktextwidth:    0.6
+     silktextthickness: 0.8
 
    - bodywid:          1.2
      legland:         0.50
@@ -341,6 +347,9 @@ capc:
      heelfillet:      -0.05
      height:           0.8
      courtyardmargin:  0.35
+     silktextheight:   0.6
+     silktextwidth:    0.6
+     silktextthickness: 0.8
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -349,6 +358,9 @@ capc:
      height:           0.8
      toefillet:        0.3
      courtyardmargin:  0.35
+     silktextheight:   0.75
+     silktextwidth:    0.75
+     silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50

@@ -49,11 +49,11 @@ defmodule Footprints.Components do
          layers: ["F.Cu", "F.Paste", "F.Mask"], pastemargin: pastemargin, maskmargin: maskmargin)
   end
 
-  def padPTH(name: name, shape: shape, at: {x,y}, size: {xs,ys}, drill: drill, maskmargin: maskmargin), do:
-     pad(name: name, type: "thru_hole", shape: shape, at: {x,y}, size: {xs,ys},
-         layers: ["*.Cu", "*.SilkS", "*.Mask"], pastemargin: 0, maskmargin: maskmargin)
-    #  "(pad #{name} thru_hole #{shape} (at #{p(x)} #{p(y)}) " <>
-    #  "(size #{p(xs)} #{p(ys)}) (drill #{drill}) (layers *.Cu *.Mask F.SilkS) #{maskmargintext})"
+  def padPTH(name: name, shape: shape, at: {x,y}, size: {xs,ys}, drill: drill, maskmargin: maskmargin) do
+     maskmargintext = if maskmargin != 0, do: "(solder_mask_margin #{maskmargin})", else: ""
+     "(pad #{name} thru_hole #{shape} (at #{p(x)} #{p(y)}) " <>
+     "(size #{p(xs)} #{p(ys)}) (drill #{drill}) (layers *.Cu *.Mask F.SilkS) #{maskmargintext})"
+  end
 
   def module(name: name,
              valuelocation: refAt = {_xr,_yr,_ar},

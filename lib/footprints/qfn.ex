@@ -48,7 +48,7 @@ defmodule Footprints.QFN do
     epad = if params[:epadwid] != nil do
       [Comps.padSMD(name: "EP", shape: "rect", at: {0,0},
               size: {params[:epadlen], params[:epadwid]},
-              pastemargin: epadpastemargin, maskmargin: maskmargin)]
+              pastemargin: epadpastemargin, maskmargin: 0)]
     else
       []
     end
