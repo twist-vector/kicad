@@ -1,0 +1,13 @@
+defaults:
+   pinpitch:                  1.25
+   rowpitch:                  1.25
+   padheight:                 1.80
+   padwidth:                  0.70
+   supppadheight:             2.20
+   supppadwidth:              1.60
+   pindia:                    0.50
+   silkoutlinewidth:          0.10
+   pinlength:                  3.8
+   bodyoffset:                 1.3
+   bodythick:                 1.27
+   bodywid:                   3.40
