@@ -68,6 +68,8 @@ sop:
      pinpitch:         0.5
      refsinside:     false
      sidefillet:     -0.05
+     silktextheight:   0.75
+     silktextwidth:    0.75
 
 
    - pinwidth:         0.2
@@ -102,6 +104,15 @@ sop:
      pinpitch:        1.27
      epadwid:          2.4
      epadlen:          3.2
+     refsinside:     false
+
+   - pinwidth:        0.42
+     legland:         0.65
+     totalwid:         6.0
+     bodylen:          5.0
+     pincount:           8
+     bodywid:          3.9
+     pinpitch:        1.27
      refsinside:     false
 
    - pinwidth:        0.42
@@ -231,3 +242,12 @@ sop:
      bodywid:          6.1
      pinpitch:        0.50
      sidefillet:       0.0
+
+   - pinwidth:        0.37
+     legland:         0.77
+     totalwid:        10.3
+     bodylen:         15.375
+     pincount:          36
+     bodywid:          7.5
+     pinpitch:        0.80
+     sidefillet:      0.05

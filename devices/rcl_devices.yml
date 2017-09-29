@@ -217,7 +217,7 @@ resc:
      courtyardmargin:  0.35
      silktextheight:   0.6
      silktextwidth:    0.6
-     silktextthickness: 0.8
+     silktextthickness: 0.1
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -228,7 +228,7 @@ resc:
      courtyardmargin:  0.35
      silktextheight:   0.6
      silktextwidth:    0.6
-     silktextthickness: 0.8
+     silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50
@@ -349,7 +349,7 @@ capc:
      courtyardmargin:  0.35
      silktextheight:   0.6
      silktextwidth:    0.6
-     silktextthickness: 0.8
+     silktextthickness: 0.1
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -360,12 +360,15 @@ capc:
      courtyardmargin:  0.35
      silktextheight:   0.75
      silktextwidth:    0.75
-     silktextthickness: 0.1
+     silktextthickness: 0.2
 
    - bodywid:          1.2
      legland:         0.50
      bodylen:          2.0
      height:           0.8
+     silktextheight:   0.75
+     silktextwidth:    0.75
+     silktextthickness: 0.2
 
    - bodywid:          2.0
      legland:         0.50

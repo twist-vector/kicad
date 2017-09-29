@@ -8,6 +8,7 @@ defmodule Footprints.Passives do
     #
     silktextheight    = params[:silktextheight]
     silktextwidth     = params[:silktextwidth]
+    silktextthickness = params[:silktextthickness]
     silkoutlinewidth  = params[:silkoutlinewidth]
     courtoutlinewidth = params[:courtoutlinewidth]
     docoutlinewidth   = params[:docoutlinewidth]
@@ -97,7 +98,7 @@ defmodule Footprints.Passives do
                      valuelocation: valloc,
                      referencelocation: refloc,
                      textsize: {silktextheight,silktextwidth},
-                     textwidth: silkoutlinewidth,
+                     textwidth: silktextthickness,
                      descr: descr,
                      tags: tags,
                      isSMD: false,
