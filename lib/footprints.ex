@@ -94,6 +94,7 @@ defmodule Footprints do
     Footprints.ECap.build("ECAP", "ecap_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
     Footprints.DF13HeaderSMD.build("SMD_Headers", "DF13SMDHeader_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
     Footprints.DF13HeaderRASMD.build("SMD_Headers", "DF13SMDHeader_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
+    Footprints.NanofitHeaderPTH.build("PTH_Headers", "PTHnanofitHeader_devices.yml", defaults, overrides, output_base_directory, config_base_directory)
   end
 
 
