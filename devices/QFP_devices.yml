@@ -140,6 +140,14 @@ qfp:
      bodywid:         14.0
 
    - pinpitch:         0.5
+     totallen:        23.2
+     pinwidth:        0.20
+     totalwid:        17.20
+     bodylen:         20.0
+     pincount:         128
+     bodywid:         14.0
+
+   - pinpitch:         0.5
      totallen:        22.0
      pinwidth:        0.20
      totalwid:        22.0

@@ -360,7 +360,7 @@ capc:
      courtyardmargin:  0.35
      silktextheight:   0.75
      silktextwidth:    0.75
-     silktextthickness: 0.2
+     silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50
@@ -368,7 +368,7 @@ capc:
      height:           0.8
      silktextheight:   0.75
      silktextwidth:    0.75
-     silktextthickness: 0.2
+     silktextthickness: 0.1
 
    - bodywid:          2.0
      legland:         0.50
