@@ -15,6 +15,9 @@ capcp:
      height:           0.8
      polarized:        true
      courtyardmargin:  0.35
+     silktextheight:   0.4
+     silktextwidth:    0.4
+     silktextthickness: 0.05
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -24,6 +27,9 @@ capcp:
      toefillet:        0.3
      courtyardmargin:  0.35
      polarized:        true
+     silktextheight:   0.6
+     silktextwidth:    0.6
+     silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50
@@ -215,9 +221,9 @@ resc:
      heelfillet:      -0.05
      height:           0.8
      courtyardmargin:  0.35
-     silktextheight:   0.6
-     silktextwidth:    0.6
-     silktextthickness: 0.1
+     silktextheight:   0.3
+     silktextwidth:    0.3
+     silktextthickness: 0.05
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -347,9 +353,9 @@ capc:
      heelfillet:      -0.05
      height:           0.8
      courtyardmargin:  0.35
-     silktextheight:   0.6
-     silktextwidth:    0.6
-     silktextthickness: 0.1
+     silktextheight:   0.4
+     silktextwidth:    0.4
+     silktextthickness: 0.05
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -358,8 +364,8 @@ capc:
      height:           0.8
      toefillet:        0.3
      courtyardmargin:  0.35
-     silktextheight:   0.75
-     silktextwidth:    0.75
+     silktextheight:   0.6
+     silktextwidth:    0.6
      silktextthickness: 0.1
 
    - bodywid:          1.2

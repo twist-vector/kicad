@@ -30,10 +30,10 @@ defmodule Footprints.Components do
     textGeneric(type: "user", value: value, at: at, layer: lay, size: s, width: wid)
 
   def textRef(at: at={_x,_y,_a}, size: s={_xs,_ys}, width: wid), do:
-    textGeneric(type: "reference", value: "REF**", at: at, layer: "Eco2.User", size: s, width: wid)
+    textGeneric(type: "reference", value: "REF**", at: at, layer: "F.SilkS", size: s, width: wid)
 
   def textVal(at: at={_x,_y,_a}, size: size={_xs,_ys}, width: wid), do:
-    textGeneric(type: "value", value: "VAL**", at: at, layer: "F.Fab", size: size, width: wid)
+    textGeneric(type: "value", value: "VAL**", at: at, layer: "F.SilkS", size: size, width: wid)
 
 
   def pad(name: name, type: type, shape: shape, at: {x,y},

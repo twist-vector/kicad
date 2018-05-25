@@ -1,4 +1,4 @@
 %{"exml": {:hex, :exml, "0.1.0"},
-  "exprintf": {:hex, :exprintf, "0.1.6"},
+  "exprintf": {:hex, :exprintf, "0.1.6", "b5b0a38bf78a357dbc61cdf7364fea004af6fdf5214be44021eb2ea7edf61f6e", [], [], "hexpm"},
   "yamerl": {:git, "https://github.com/yakaz/yamerl.git", "ae810a808817d9482b4628ae3e20d746e3729fe0", []},
-  "yaml_elixir": {:hex, :yaml_elixir, "1.0.0"}}
+  "yaml_elixir": {:hex, :yaml_elixir, "1.0.0", "a0b703148aa8926a08fc14619c83e9cdf7555ff7e8bb9e74c08aa716eaf8c609", [], [], "hexpm"}}
