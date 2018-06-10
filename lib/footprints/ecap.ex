@@ -85,13 +85,8 @@ defmodule Footprints.ECap do
                Comps.circle(center: {0,0}, radius: cyldiam/2, layer: "Eco1.User", width: silkoutlinewidth)]
 
 
-    # Center of mass fiducial
-    com = [Comps.circle(center: {0,0}, radius: fiducialradius, layer: "Eco1.User", width: silkoutlinewidth),
-           Comps.line(start: {-fiduciallen,0}, end: {fiduciallen,0}, layer: "Eco1.User", width: silkoutlinewidth),
-           Comps.line(start: {0,-fiduciallen}, end: {0,fiduciallen}, layer: "Eco1.User", width: silkoutlinewidth)]
-
     features = pads ++ [Enum.join(courtyard, "\n  ")] ++
-        [Enum.join(outline, "\n  ")] ++ silk ++ com
+        [Enum.join(outline, "\n  ")] ++ silk
 
     refloc      = {-crtydSizeX/2 - 0.75*silktextheight, 0, 90}
     valloc      = { crtydSizeX/2 + 0.75*silktextheight, 0, 90}

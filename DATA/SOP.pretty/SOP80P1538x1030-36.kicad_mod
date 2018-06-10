@@ -1,4 +1,4 @@
-(module SOP80P1538x1030-36 (layer F.Cu) (tedit 5B082AE9)
+(module SOP80P1538x1030-36 (layer F.Cu) (tedit 5B1D2CB6)
   (at 0 0)
   (descr "36 pin 0.8in pitch 15.375x10.3 SOP device")
   (tags "SMD SOP")
@@ -194,7 +194,4 @@
   (fp_line (start 7.688 -3.75) (end -7.688 -3.75) (layer F.SilkS) (width 0.1))
   (fp_line (start -7.688 -3.75) (end -7.688 3.75) (layer F.SilkS) (width 0.1))
   (fp_line (start -7.688 3.25) (end 7.688 3.25) (layer F.SilkS) (width 0.12))
-  (fp_circle (center 0.0 0.0) (end 0.5 0.0) (layer Eco1.User) (width 0.12))
-  (fp_line (start -0.75 0.0) (end 0.75 0.0) (layer Eco1.User) (width 0.12))
-  (fp_line (start 0.0 -0.75) (end 0.0 0.75) (layer Eco1.User) (width 0.12))
 )

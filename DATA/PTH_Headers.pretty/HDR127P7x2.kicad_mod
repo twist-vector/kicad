@@ -1,4 +1,4 @@
-(module Header_7x2 (layer F.Cu) (tedit 5B082AE7)
+(module Header_7x2 (layer F.Cu) (tedit 5B1D2CB3)
   (at 0 0)
   (descr "7x2 0.10in (2.54 mm) spacing unshrouded header")
   (tags "PTH unshrouded header")

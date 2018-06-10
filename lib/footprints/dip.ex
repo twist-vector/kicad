@@ -70,17 +70,8 @@ defmodule Footprints.DIP do
     ycc = totalwid/2
     c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
 
-
-    # Center of mass fiducial
-    com = [Footprints.Components.circle(center: {0,0}, radius: 0.5,
-                                        layer: "Eco1.User", width: silkoutlinewidth),
-           Footprints.Components.line(start: {-0.75,0}, end: {0.75,0},
-                                      layer: "Eco1.User", width: silkoutlinewidth),
-           Footprints.Components.line(start: {0,-0.75}, end: {0,0.75},
-                                      layer: "Eco1.User", width: silkoutlinewidth)]
-
     # Put all the module pieces together, create, and write the module
-    features = List.flatten(pads) ++ courtyard ++ [c] ++ outline ++ com ++ pins
+    features = List.flatten(pads) ++ courtyard ++ [c] ++ outline ++ pins
 
     refloc = if params[:refsinside], do:
                  {0, bodywid/4-silktextheight/2, 0},   #{0, 0.8*silktextheight, 0},

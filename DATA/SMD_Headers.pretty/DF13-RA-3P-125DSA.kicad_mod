@@ -1,4 +1,4 @@
-(module DF13-RA-3P-1.25DSA (layer F.Cu) (tedit 5B082AE9)
+(module DF13-RA-3P-1.25DSA (layer F.Cu) (tedit 5B1D2CB6)
   (at 0 0)
   (descr "Hirose DF13 surface mount right angle connector")
   (tags "SMD header shrouded right angle")

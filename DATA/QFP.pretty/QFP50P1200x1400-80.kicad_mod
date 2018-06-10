@@ -1,4 +1,4 @@
-(module QFP50P1200x1400-80 (layer F.Cu) (tedit 5B082AE9)
+(module QFP50P1200x1400-80 (layer F.Cu) (tedit 5B1D2CB6)
   (at 0 0)
   (descr "80 pin 0.5in pitch 12.0x14.0 QFP device")
   (tags "SMD QFP")
@@ -734,7 +734,4 @@
   (fp_line (start 6.0 -6.0) (end -6.0 -6.0) (layer F.SilkS) (width 0.12))
   (fp_line (start -6.0 -6.0) (end -6.0 6.0) (layer F.SilkS) (width 0.12))
   (fp_line (start -6.0 5.25) (end -5.25 6.0) (layer F.SilkS) (width 0.12))
-  (fp_circle (center 0.0 0.0) (end 0.5 0.0) (layer Eco1.User) (width 0.12))
-  (fp_line (start -0.75 0.0) (end 0.75 0.0) (layer Eco1.User) (width 0.12))
-  (fp_line (start 0.0 -0.75) (end 0.0 0.75) (layer Eco1.User) (width 0.12))
 )

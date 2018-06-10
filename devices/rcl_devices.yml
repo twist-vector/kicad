@@ -128,6 +128,9 @@ indc:
      heelfillet:      -0.05
      height:           0.8
      courtyardmargin:  0.35
+     silktextheight:   0.4
+     silktextwidth:    0.4
+     silktextthickness: 0.05
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -135,6 +138,9 @@ indc:
      bodylen:          1.6
      height:           0.8
      toefillet:        0.3
+     silktextheight:   0.6
+     silktextwidth:    0.6
+     silktextthickness: 0.1
      courtyardmargin:  0.35
 
    - bodywid:          1.2
@@ -221,8 +227,8 @@ resc:
      heelfillet:      -0.05
      height:           0.8
      courtyardmargin:  0.35
-     silktextheight:   0.3
-     silktextwidth:    0.3
+     silktextheight:   0.4
+     silktextwidth:    0.4
      silktextthickness: 0.05
      silkoutlinewidth: 0.05
 

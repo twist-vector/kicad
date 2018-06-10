@@ -11,6 +11,9 @@ diodec:
      bodywid:          0.5
      height:           0.8
      courtyardmargin:  0.4
+     silktextheight:   0.4
+     silktextwidth:    0.4
+     silktextthickness: 0.05
      silkoutlinewidth: 0.05
      toefillet:        0.15
      sidefillet:       0.0
@@ -21,6 +24,9 @@ diodec:
      height:           0.8
      toefillet:        0.3
      courtyardmargin:  0.4
+     silktextheight:   0.6
+     silktextwidth:    0.6
+     silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50

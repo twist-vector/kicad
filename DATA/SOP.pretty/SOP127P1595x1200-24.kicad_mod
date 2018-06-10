@@ -1,4 +1,4 @@
-(module SOP127P1595x1200-24 (layer F.Cu) (tedit 5B082AE9)
+(module SOP127P1595x1200-24 (layer F.Cu) (tedit 5B1D2CB5)
   (at 0 0)
   (descr "24 pin 1.27in pitch 15.95x12.0 SOP device")
   (tags "SMD SOP")
@@ -134,7 +134,4 @@
   (fp_line (start 7.975 -3.95) (end -7.975 -3.95) (layer F.SilkS) (width 0.1))
   (fp_line (start -7.975 -3.95) (end -7.975 3.95) (layer F.SilkS) (width 0.1))
   (fp_line (start -7.975 3.45) (end 7.975 3.45) (layer F.SilkS) (width 0.12))
-  (fp_circle (center 0.0 0.0) (end 0.5 0.0) (layer Eco1.User) (width 0.12))
-  (fp_line (start -0.75 0.0) (end 0.75 0.0) (layer Eco1.User) (width 0.12))
-  (fp_line (start 0.0 -0.75) (end 0.0 0.75) (layer Eco1.User) (width 0.12))
 )

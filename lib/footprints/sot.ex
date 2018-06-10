@@ -102,16 +102,7 @@ defmodule Footprints.SOT do
                                         layer: "F.SilkS", width: silkoutlinewidth)]
 
 
-   # Center of mass fiducial
-   com = [Footprints.Components.circle(center: {0,0}, radius: 0.3,
-                                       layer: "Eco1.User", width: silkoutlinewidth),
-          Footprints.Components.line(start: {-0.5,0}, end: {0.5,0},
-                                     layer: "Eco1.User", width: silkoutlinewidth),
-          Footprints.Components.line(start: {0,-0.5}, end: {0,0.5},
-                                     layer: "Eco1.User", width: silkoutlinewidth)]
-
-
-    features = pads ++ courtyard ++ pins ++ outline ++ [c] ++ com
+    features = pads ++ courtyard ++ pins ++ outline ++ [c]
 
     refloc = if params[:refsinside], do:
                  {0, bodywid/4-silktextheight/2, 0},   #{0, 0.8*silktextheight, 0},

@@ -1,4 +1,4 @@
-(module DRILL_16D (layer F.Cu) (tedit 5B082AE9)
+(module DRILL_16D (layer F.Cu) (tedit 5B1D2CB5)
   (at 0 0)
   (descr "Drill for an M1.6 size screw")
   (tags "PTH drill")

@@ -1,4 +1,4 @@
-(module 1005_chip_dev (layer F.Cu) (tedit 5B082AE9)
+(module 1005_chip_dev (layer F.Cu) (tedit 5B1D2CB5)
   (at 0 0)
   (descr "1005 (metric) chip device")
   (tags "SMD chip 1005")
@@ -24,7 +24,4 @@
   (fp_line (start 0.25 -0.25) (end 0.25 0.25) (layer Dwgs.User) (width 0.1))
   (fp_line (start -0.175 -0.518) (end 0.175 -0.518) (layer F.SilkS) (width 0.05))
   (fp_line (start -0.175 0.518) (end 0.175 0.518) (layer F.SilkS) (width 0.05))
-  (fp_circle (center 0.0 0.0) (end 0.5 0.0) (layer Eco1.User) (width 0.05))
-  (fp_line (start -0.75 0.0) (end 0.75 0.0) (layer Eco1.User) (width 0.05))
-  (fp_line (start 0.0 -0.75) (end 0.0 0.75) (layer Eco1.User) (width 0.05))
 )

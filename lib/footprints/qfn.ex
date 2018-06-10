@@ -98,14 +98,8 @@ defmodule Footprints.QFN do
     ycc = bodywid/2 + 3*silkoutlinewidth
     c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
 
-   # Center of mass fiducial
-   com = [Footprints.Components.circle(center: {0,0}, radius: 0.5, layer: "Eco1.User", width: silkoutlinewidth),
-          Footprints.Components.line(start: {-0.75,0}, end: {0.75,0}, layer: "Eco1.User", width: silkoutlinewidth),
-          Footprints.Components.line(start: {0,-0.75}, end: {0,0.75}, layer: "Eco1.User", width: silkoutlinewidth)]
-
-
     features = List.flatten(pads) ++ epad ++ courtyard ++ [c] ++
-               List.flatten(pins) ++ List.flatten(outline)++ com
+               List.flatten(pins) ++ List.flatten(outline)
 
     refloc = if params[:refsinside], do:
                  {0, bodywid/4-silktextheight/2, 0},   #{0, 0.8*silktextheight, 0},

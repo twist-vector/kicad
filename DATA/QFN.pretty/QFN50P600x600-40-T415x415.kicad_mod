@@ -1,4 +1,4 @@
-(module QFN50P600x600-40-T415x415 (layer F.Cu) (tedit 5B082AE9)
+(module QFN50P600x600-40-T415x415 (layer F.Cu) (tedit 5B1D2CB6)
   (at 0 0)
   (descr "40 pin 0.5in pitch 6.0x6.0 QFN device")
   (tags "SMD QFN")
@@ -379,7 +379,4 @@
   (fp_line (start 3.0 -3.0) (end 2.582 -3.0) (layer F.SilkS) (width 0.12))
   (fp_line (start 3.0 -3.0) (end 3.0 -2.582) (layer F.SilkS) (width 0.12))
   (fp_line (start -3.0 2.582) (end -2.582 3.0) (layer F.SilkS) (width 0.12))
-  (fp_circle (center 0.0 0.0) (end 0.5 0.0) (layer Eco1.User) (width 0.12))
-  (fp_line (start -0.75 0.0) (end 0.75 0.0) (layer Eco1.User) (width 0.12))
-  (fp_line (start 0.0 -0.75) (end 0.0 0.75) (layer Eco1.User) (width 0.12))
 )
