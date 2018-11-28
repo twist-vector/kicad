@@ -1,4 +1,4 @@
-(module SOP127P1595x1200-24 (layer F.Cu) (tedit 5B1D2CB5)
+(module SOP127P1595x1200-24 (layer F.Cu) (tedit 5BFEB86D)
   (at 0 0)
   (descr "24 pin 1.27in pitch 15.95x12.0 SOP device")
   (tags "SMD SOP")

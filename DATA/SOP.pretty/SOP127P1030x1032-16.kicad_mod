@@ -1,4 +1,4 @@
-(module SOP127P1030x1032-16 (layer F.Cu) (tedit 5B1D2CB5)
+(module SOP127P1030x1032-16 (layer F.Cu) (tedit 5BFEB86D)
   (at 0 0)
   (descr "16 pin 1.27in pitch 10.3x10.32 SOP device")
   (tags "SMD SOP")

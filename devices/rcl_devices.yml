@@ -327,8 +327,17 @@ resc:
      bodywid:          3.2
      height:           1.5
      sidefillet:       0.25
-     toefillet:       0.75
+     toefillet:        0.75
      heelfillet:       0.50
+
+   - inchcode:        2818
+     legland:         3.18
+     bodylen:         7.1
+     bodywid:         4.6
+     height:          1.5
+     sidefillet:      0.25
+     toefillet:       0.75
+     heelfillet:      0.5
 
    - bodywid:          4.0
      legland:         0.80

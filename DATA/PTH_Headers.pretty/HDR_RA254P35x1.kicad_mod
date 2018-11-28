@@ -1,4 +1,4 @@
-(module Header_35x1_RA (layer F.Cu) (tedit 5B1D2CB4)
+(module Header_35x1_RA (layer F.Cu) (tedit 5BFEB86C)
   (at 0 0)
   (descr "35x1 0.10in (2.54 mm) spacing right angle unshrouded header")
   (tags "PTH unshrouded header")

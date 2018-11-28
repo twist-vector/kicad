@@ -1,4 +1,4 @@
-(module 4512_chip_dev (layer F.Cu) (tedit 5B1D2CB5)
+(module 4512_chip_dev (layer F.Cu) (tedit 5BFEB86D)
   (at 0 0)
   (descr "4512 (metric) chip device")
   (tags "SMD chip 4512")

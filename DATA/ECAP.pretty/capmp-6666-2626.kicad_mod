@@ -1,4 +1,4 @@
-(module 6666_chip_dev (layer F.Cu) (tedit 5B1D2CB6)
+(module 6666_chip_dev (layer F.Cu) (tedit 5BFEB86D)
   (at 0 0)
   (descr "6666 (metric) chip device")
   (tags "SMD chip 6666")
