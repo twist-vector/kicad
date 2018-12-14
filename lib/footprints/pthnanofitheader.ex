@@ -11,9 +11,6 @@ defmodule Footprints.NanofitHeaderPTH do
       silkoutlinewidth  = params[:silkoutlinewidth]
       courtyardmargin   = params[:courtyardmargin]
       pinpitch          = params[:pinpitch]
-      #rowpitch          = params[:rowpitch]
-      #padwidth          = params[:padwidth]
-      padheight         = params[:padheight]
       maskmargin        = params[:soldermaskmargin]
 
       # All pins aligned at y=0

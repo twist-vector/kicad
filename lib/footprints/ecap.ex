@@ -26,8 +26,6 @@ defmodule Footprints.ECap do
     cyldiam           = params[:cyldiam]
     legland           = params[:legland]
     pastemargin       = params[:solderpastemarginratio]
-    fiduciallen       = params[:fiduciallen]
-    fiducialradius    = params[:fiducialradius]
     maskmargin        = params[:soldermaskmargin]
 
     totaltol  = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
@@ -115,7 +113,7 @@ defmodule Footprints.ECap do
     temp = YamlElixir.read_from_file("#{config_base_directory}/#{device_file_name}")
     defaults = FootprintSupport.make_params("#{config_base_directory}/#{device_file_name}", basedefaults, overrides)
 
-    for dev_name <- Dict.keys(temp) do
+    for dev_name <- Map.keys(temp) do
       if dev_name != "defaults" do
 
         # temp[dev_name] is a list of Dicts.  Each element is the parameters list

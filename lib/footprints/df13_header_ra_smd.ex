@@ -11,7 +11,6 @@ defmodule Footprints.DF13HeaderRASMD do
       pinpitch          = params[:pinpitch]
       padheight         = params[:padheight]
       pindia            = params[:pindia]
-      padwidth          = params[:padwidth]
       supppadheight     = params[:supppadheight]
       supppadwidth      = params[:supppadwidth]
       maskmargin        = params[:soldermaskmargin]
@@ -36,7 +35,6 @@ defmodule Footprints.DF13HeaderRASMD do
       pads = for pin <- 1..pincount, do:
         Footprints.SMDHeaderSupport.make_pad(params, pin, 1, pincount, 1, "rect", maskmargin, pastemargin)
 
-      pinYc = lower - 2.015
       pinmarks = for pin <- 1..pincount, do:
         Comps.box(ll: {-((pincount-1)/2*pinpitch) + (pin-1)*pinpitch - pindia/2, -padheight/2-silkoutlinewidth},
                   ur: {-((pincount-1)/2*pinpitch) + (pin-1)*pinpitch + pindia/2, -4},

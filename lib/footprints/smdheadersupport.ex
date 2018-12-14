@@ -2,15 +2,10 @@ defmodule Footprints.SMDHeaderSupport do
   alias Footprints.Components, as: Comps
 
 
-  def make_outline(params, pincount, rowcount, layer) do
-    pinpitch        = params[:pinpitch]
-    rowpitch        = params[:rowpitch]
+  def make_outline(_params, pincount, rowcount, _layer) do
 
-    row = 1
     bottom = for pin <- 1..pincount do
-      xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
-      yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
-      edges = if rowcount == 1  and pincount == 1 do
+      _edges = if rowcount == 1  and pincount == 1 do
                 0..7
               else
                 case pin do
@@ -21,11 +16,8 @@ defmodule Footprints.SMDHeaderSupport do
               end
     end
 
-    row = rowcount
     top = for pin <- 1..pincount do
-      xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
-      yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
-      edges = case pin do
+      _edges = case pin do
                    1 -> [2,3,4,5,6]
            ^pincount -> [0,4,5,6,7]
                    _ -> [4,5,6]
@@ -33,11 +25,9 @@ defmodule Footprints.SMDHeaderSupport do
     end
 
     rest = if rowcount > 1 do
-      for row <- 2..rowcount-1 do
+      for _row <- 2..rowcount-1 do
          for pin <- 1..pincount do
-            xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
-            yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
-            edges = case pin do
+            _edges = case pin do
                          1 -> [2,3,4]
                  ^pincount -> [0,6,7]
                          _ -> []

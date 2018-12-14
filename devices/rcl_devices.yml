@@ -335,9 +335,9 @@ resc:
      bodylen:         7.1
      bodywid:         4.6
      height:          1.5
-     sidefillet:      0.25
-     toefillet:       0.75
-     heelfillet:      0.5
+     sidefillet:      0.0
+     toefillet:       0.0
+     heelfillet:      0.0
 
    - bodywid:          4.0
      legland:         0.80

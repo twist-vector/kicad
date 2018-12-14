@@ -109,7 +109,7 @@ defmodule Footprints.Diodes do
     defaults = FootprintSupport.make_params("#{config_base_directory}/#{device_file_name}", basedefaults, overrides)
 
 
-    for dev_name <- Dict.keys(temp) do
+    for dev_name <- Map.keys(temp) do
       if dev_name != "defaults" do
 
         # temp[dev_name] is a list of Dicts.  Each element is the parameters list
