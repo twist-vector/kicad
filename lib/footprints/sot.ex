@@ -48,13 +48,21 @@ defmodule Footprints.SOT do
                    Comps.padSMD(name: "3", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
                    Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
                    Comps.padSMD(name: "5", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
+             6 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y},      size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "2", shape: "rect", at: { 0, y},             size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "3", shape: "rect", at: { pinpitch, y},      size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y},     size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "5", shape: "rect", at: {0, -y},             size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "6", shape: "rect", at: {-pinpitch, -y},     size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
 
-             6 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "2", shape: "rect", at: { 0, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "3", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "5", shape: "rect", at: {0, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "6", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
+             8 -> [Comps.padSMD(name: "1", shape: "rect", at: {-1.5*pinpitch, y},  size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "2", shape: "rect", at: {-0.5*pinpitch, y},  size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "3", shape: "rect", at: { 0.5*pinpitch, y},  size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "4", shape: "rect", at: { 1.5*pinpitch, y},  size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "5", shape: "rect", at: { 1.5*pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "6", shape: "rect", at: { 0.5*pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "7", shape: "rect", at: {-0.5*pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
+                   Comps.padSMD(name: "8", shape: "rect", at: {-1.5*pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
              _ -> []
            end
 
@@ -86,7 +94,7 @@ defmodule Footprints.SOT do
 
 
      # Pin 1 marker (circle)
-     xcc = -pinpitch - padSizeX/2 - 3*silkoutlinewidth
+     xcc = -pincount/2/2*pinpitch - padSizeX/2 - 3*silkoutlinewidth
      ycc = totalwid/2
      c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
 

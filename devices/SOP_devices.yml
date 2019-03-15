@@ -62,6 +62,35 @@ sop:
    - pinwidth:         0.2
      legland:         0.53
      totalwid:         4.9
+     bodylen:          4.04
+     pincount:          16
+     bodywid:          3.0
+     pinpitch:         0.5
+     refsinside:     false
+     sidefillet:     -0.05
+     silktextheight:   0.75
+     silktextwidth:    0.75
+
+
+   - pinwidth:         0.2
+     legland:         0.53
+     totalwid:         4.9
+     bodylen:          4.04
+     pincount:          16
+     bodywid:          3.0
+     pinpitch:         0.5
+     refsinside:     false
+     sidefillet:     -0.05
+     silktextheight:   0.75
+     silktextwidth:    0.75
+     epadwid:          1.65
+     epadlen:          2.845
+
+
+
+   - pinwidth:         0.2
+     legland:         0.53
+     totalwid:         4.9
      bodylen:          3.0
      pincount:          10
      bodywid:          3.0
@@ -260,3 +289,15 @@ sop:
      bodywid:          7.5
      pinpitch:        0.80
      sidefillet:      0.05
+
+   - pinwidth:         0.46
+     legland:          0.635
+     totalwid:         9.925
+     bodylen:          9.652
+     pincount:          8
+     bodywid:          6.35
+     pinpitch:         2.54
+     refsinside:     false
+     sidefillet:       0.0
+     silktextheight:   0.75
+     silktextwidth:    0.75

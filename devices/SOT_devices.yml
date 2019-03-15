@@ -47,6 +47,17 @@ sot23:
      silktextheight:   0.4
      silktextwidth:    0.4
 
+tsot23:
+   - pincount:         8
+     bodywid:          1.75
+     bodylen:          2.9
+     totalwid:         2.8
+     legland:          0.45
+     sidefillet:       0.0
+     pinpitch:         0.65
+     silktextheight:   0.4
+     silktextwidth:    0.4
+
 
 sot363:
    - bodywid:         1.25

@@ -249,4 +249,3 @@ defmodule Footprints do
     )
   end
 end
-
