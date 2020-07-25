@@ -73,7 +73,7 @@ defmodule Footprints.PTHHeaderSupport do
 
 
 
-  def make_pad(params, pin, row, pincount, rowcount, shape \\ "oval", maskmargin) do
+  def make_pad(params, pin, row, pincount, rowcount, shape, maskmargin) do
     pinpitch        = params[:pinpitch]
     rowpitch        = params[:rowpitch]
     padwidth        = params[:padwidth]

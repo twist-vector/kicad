@@ -22,11 +22,11 @@ defmodule Footprints.Combicon do
       # Bounding "courtyard" for the device
       crtydlength = bodylen + 2*courtyardmargin
       crtydwidth  = bodywid + 2*courtyardmargin
-      courtyard = Comps.box({-crtydlength/2-bodyoffsetx/2,  crtydwidth/2-bodyoffsety},
-                            { crtydlength/2-bodyoffsetx/2, -crtydwidth/2-bodyoffsety},
-                            "F.CrtYd", silkoutlinewidth)
+      ll = {-crtydlength/2-bodyoffsetx/2,  crtydwidth/2-bodyoffsety}
+      ur = { crtydlength/2-bodyoffsetx/2, -crtydwidth/2-bodyoffsety}
+      courtyard = Comps.box(ll, ur, "F.CrtYd", silkoutlinewidth)
 
-      # The grid of pads.  We'll call the common function from the PTHHeader
+      # The grid of pads/pins.  We'll call the common function from the PTHHeader
       # module for each pin location.
       pads = for pin <- 1..pincount, do:
                Footprints.PTHHeaderSupport.make_pad(params, pin, 1, pincount, 1, "oval", maskmargin)

@@ -54,20 +54,17 @@ defmodule Footprints.QFP do
 
     pins = for pinpair <- 1..stride do
       x = -span/2.0 + (pinpair-1)*pinpitch
-      topbot =
-      [Footprints.Components.box({x-pinwidth/2,  bodywid/2},  {x+pinwidth/2,  totalwid/2}, "Dwgs.User", docoutlinewidth),
-       Footprints.Components.box({x-pinwidth/2, -bodywid/2},  {x+pinwidth/2, -totalwid/2}, "Dwgs.User", docoutlinewidth)] ++
-      [Footprints.Components.box({x-pinwidth/2,  bodywid/2},  {x+pinwidth/2, (totalwid)/2-legland}, "Dwgs.User", docoutlinewidth),
-       Footprints.Components.box({x-pinwidth/2, -bodywid/2},  {x+pinwidth/2, -(totalwid)/2+legland}, "Dwgs.User", docoutlinewidth)]
-
       y = -span/2.0 + (pinpair-1)*pinpitch
-      leftright =
-      [Footprints.Components.box({-bodywid/2, y-pinwidth/2, },  {-totalwid/2, y+pinwidth/2}, "Dwgs.User", docoutlinewidth),
-       Footprints.Components.box({ bodywid/2, y-pinwidth/2, },  { totalwid/2, y+pinwidth/2}, "Dwgs.User", docoutlinewidth)] ++
-      [Footprints.Components.box({-bodywid/2, y-pinwidth/2},  {-(totalwid/2-legland), y+pinwidth/2}, "Dwgs.User", docoutlinewidth),
-       Footprints.Components.box({ bodywid/2, y-pinwidth/2},  { (totalwid/2-legland), y+pinwidth/2}, "Dwgs.User", docoutlinewidth)]
 
-      topbot ++ leftright
+      [Footprints.Components.box({x-pinwidth/2,  bodywid/2},  {x+pinwidth/2,  totalwid/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({x-pinwidth/2, -bodywid/2},  {x+pinwidth/2, -totalwid/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({x-pinwidth/2,  bodywid/2},  {x+pinwidth/2, (totalwid)/2-legland}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({x-pinwidth/2, -bodywid/2},  {x+pinwidth/2, -(totalwid)/2+legland}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({-bodywid/2, y-pinwidth/2, },  {-totalwid/2, y+pinwidth/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({ bodywid/2, y-pinwidth/2, },  { totalwid/2, y+pinwidth/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({-bodywid/2, y-pinwidth/2},  {-(totalwid/2-legland), y+pinwidth/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({ bodywid/2, y-pinwidth/2},  { (totalwid/2-legland), y+pinwidth/2}, "Dwgs.User", docoutlinewidth)
+      ]
     end
 
 
@@ -91,14 +88,10 @@ defmodule Footprints.QFP do
     features = List.flatten(pads) ++ epad ++ courtyard ++ [c] ++
                List.flatten(pins) ++ List.flatten(outline)
 
-    refloc = if params[:refsinside], do:
-                 {0, bodywid/4-silktextheight/2},
-             else:
-                 {-crtydSizeX/2 - 0.75*silktextheight, 0}
-    valloc = if params[:refsinside], do:
-                 {0, -bodywid/4+silktextheight/2},
-             else:
-                 { crtydSizeX/2 + 0.75*silktextheight, 0}
+    refloc = if params[:refsinside], do: {0, bodywid/4-silktextheight/2},
+             else: {-crtydSizeX/2 - 0.75*silktextheight, 0}
+    valloc = if params[:refsinside], do: {0, -bodywid/4+silktextheight/2},
+             else: { crtydSizeX/2 + 0.75*silktextheight, 0}
     textsize = {silktextheight,silktextwidth}
 
     m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)

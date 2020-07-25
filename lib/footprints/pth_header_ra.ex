@@ -53,7 +53,7 @@ defmodule Footprints.PTHHeaderRA do
      # module for each pin location.
      pads = for row <- 1..rowcount, do:
               for pin <- 1..pincount, do:
-                Footprints.PTHHeaderSupport.make_pad(params, pin, row, pincount, rowcount, maskmargin)
+                Footprints.PTHHeaderSupport.make_pad(params, pin, row, pincount, rowcount, "oval", maskmargin)
 
      # Pin 1 marker (circle)
      xcc = bodylen/2 + padwidth/4

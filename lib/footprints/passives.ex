@@ -51,41 +51,23 @@ defmodule Footprints.Passives do
 
 
     silk = if polarized do
-      [Comps.line({-padCenterX-padSizeX/2, -padSizeY/2-2*silkoutlinewidth},
-                  { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
-                  "F.SilkS",
-                  silkoutlinewidth)] ++
-        [Comps.line({-padCenterX-padSizeX/2, padSizeY/2+2*silkoutlinewidth},
-                    { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
-                    "F.SilkS",
-                    silkoutlinewidth)] ++
-        [Comps.circle({-padCenterX-padSizeX/2-0.25,0}, 0.05, "F.SilkS", silkoutlinewidth)]
+        [Comps.line({-padCenterX-padSizeX/2, -padSizeY/2-2*silkoutlinewidth}, { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth}, "F.SilkS", silkoutlinewidth),
+         Comps.line({-padCenterX-padSizeX/2, padSizeY/2+2*silkoutlinewidth}, { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth}, "F.SilkS", silkoutlinewidth),
+         Comps.circle({-padCenterX-padSizeX/2-0.25,0}, 0.05, "F.SilkS", silkoutlinewidth)
+        ]
     else
-      [Comps.line({-minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
-                           { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
-                         "F.SilkS",
-                         silkoutlinewidth)] ++
-             [Comps.line({-minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
-                           { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
-                         "F.SilkS",
-                         silkoutlinewidth)]
+        [Comps.line({-minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth}, { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth}, "F.SilkS", silkoutlinewidth),
+         Comps.line({-minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth}, { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth}, "F.SilkS", silkoutlinewidth)
+        ]
     end
-    courtyard = Footprints.Components.box({-crtydSizeX/2,crtydSizeY/2},
-                                          {crtydSizeX/2,-crtydSizeY/2},
-                                          "F.CrtYd", courtoutlinewidth)
 
-    outline = Footprints.Components.box({-bodylen/2,bodywid/2},
-                                        {bodylen/2,-bodywid/2},
-                                        "Dwgs.User", docoutlinewidth) ++
-              Footprints.Components.box({-bodylen/2,bodywid/2},
-                                        {-bodylen/2+legland,-bodywid/2},
-                                        "Dwgs.User", docoutlinewidth) ++
-              Footprints.Components.box({bodylen/2-legland,bodywid/2},
-                                        {bodylen/2,-bodywid/2},
-                                        "Dwgs.User", docoutlinewidth)
+    courtyard = Footprints.Components.box({-crtydSizeX/2,crtydSizeY/2}, {crtydSizeX/2,-crtydSizeY/2}, "F.CrtYd", courtoutlinewidth)
 
-    features = pads ++ [Enum.join(courtyard, "\n  ")] ++
-        [Enum.join(outline, "\n  ")] ++ silk
+    outline = Footprints.Components.box({-bodylen/2,bodywid/2}, {bodylen/2,-bodywid/2}, "Dwgs.User", docoutlinewidth) ++
+              Footprints.Components.box({-bodylen/2,bodywid/2}, {-bodylen/2+legland,-bodywid/2}, "Dwgs.User", docoutlinewidth) ++
+              Footprints.Components.box({bodylen/2-legland,bodywid/2}, {bodylen/2,-bodywid/2}, "Dwgs.User", docoutlinewidth)
+
+    features = pads ++ [Enum.join(courtyard, "\n  ")] ++ [Enum.join(outline, "\n  ")] ++ silk
 
     refloc   = {-crtydSizeX/2 - 0.75*silktextheight, 0}
     valloc   = { crtydSizeX/2 + 0.75*silktextheight, 0}
