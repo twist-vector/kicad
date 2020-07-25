@@ -66,17 +66,15 @@ defmodule Footprints.PTHHeaderRA do
                List.flatten(frontSilkPin)  ++ courtyard ++ [c]
 
     {:ok, file} = File.open filename, [:write]
-    refloc      = {-crtydlength - 0.75 * silktextheight, 0, 90}
-    valloc      = { crtydlength + 0.75 * silktextheight, 0, 90}
-    m = Comps.module(name: "Header_#{pincount}x#{rowcount}_RA",
-                     valuelocation: valloc,
-                     referencelocation: refloc,
-                     textsize: {silktextheight,silktextwidth},
-                     textwidth: silktextthickness,
-                     descr: "#{pincount}x#{rowcount} 0.10in (2.54 mm) spacing right angle unshrouded header",
-                     tags: ["PTH", "unshrouded", "header"],
-                     isSMD: false,
-                     features: features)
+    refloc      = {-crtydlength - 0.75 * silktextheight, 0}
+    valloc      = { crtydlength + 0.75 * silktextheight, 0}
+    m = Comps.module("Header_#{pincount}x#{rowcount}_RA",
+                     "#{pincount}x#{rowcount} 0.10in (2.54 mm) spacing right angle unshrouded header",
+                     features,
+                     refloc,
+                     valloc,
+                     {silktextheight,silktextwidth},
+                     silktextthickness)
     IO.binwrite file, "#{m}"
     File.close file
   end

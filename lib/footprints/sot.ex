@@ -4,6 +4,7 @@ defmodule Footprints.SOT do
   def create_mod(params, name, descr, tags, filename) do
     silktextheight    = params[:silktextheight]
     silktextwidth     = params[:silktextwidth]
+    silktextthickness = params[:silktextthickness]
     silkoutlinewidth  = params[:silkoutlinewidth]
     courtoutlinewidth = params[:courtoutlinewidth]
     docoutlinewidth   = params[:docoutlinewidth]
@@ -34,35 +35,37 @@ defmodule Footprints.SOT do
 
     y = (totalwid-legland)/2.0 + toefillet/2 - + heelfillet/2
     pads = case pincount do
-             3 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "2", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "3", shape: "rect", at: { 0, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
+             3 -> [Comps.pad(:smd, "1", "rect", {-pinpitch,y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", "rect", { pinpitch,y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", "rect", { 0,y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
 
-             4 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "2", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "3", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
+             4 -> [Comps.pad(:smd, "1", "rect", {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", "rect", { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", "rect", {-pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "4", "rect", { pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
 
-             5 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "2", shape: "rect", at: { 0, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "3", shape: "rect", at: { pinpitch, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "5", shape: "rect", at: {-pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
-             6 -> [Comps.padSMD(name: "1", shape: "rect", at: {-pinpitch, y},      size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "2", shape: "rect", at: { 0, y},             size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "3", shape: "rect", at: { pinpitch, y},      size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "4", shape: "rect", at: { pinpitch, -y},     size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "5", shape: "rect", at: {0, -y},             size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "6", shape: "rect", at: {-pinpitch, -y},     size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
+             5 -> [Comps.pad(:smd, "1", "rect", {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", "rect", { 0, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", "rect", { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "4", "rect", { pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "5", "rect", {-pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
+                
+             6 -> [Comps.pad(:smd, "1", "rect", {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", "rect", { 0, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", "rect", { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "4", "rect", { pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "5", "rect", {0,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "6", "rect", {-pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
 
-             8 -> [Comps.padSMD(name: "1", shape: "rect", at: {-1.5*pinpitch, y},  size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "2", shape: "rect", at: {-0.5*pinpitch, y},  size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "3", shape: "rect", at: { 0.5*pinpitch, y},  size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "4", shape: "rect", at: { 1.5*pinpitch, y},  size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "5", shape: "rect", at: { 1.5*pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "6", shape: "rect", at: { 0.5*pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "7", shape: "rect", at: {-0.5*pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-                   Comps.padSMD(name: "8", shape: "rect", at: {-1.5*pinpitch, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
+             8 -> [Comps.pad(:smd, "1", "rect", {-1.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", "rect", {-0.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", "rect", { 0.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "4", "rect", { 1.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "5", "rect", { 1.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "6", "rect", { 0.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "7", "rect", {-0.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "8", "rect", {-1.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
+
              _ -> []
            end
 
@@ -113,23 +116,17 @@ defmodule Footprints.SOT do
     features = pads ++ courtyard ++ pins ++ outline ++ [c]
 
     refloc = if params[:refsinside], do:
-                 {0, bodywid/4-silktextheight/2, 0},   #{0, 0.8*silktextheight, 0},
+                 {0, bodywid/4-silktextheight/2},
              else:
-                 {-crtydSizeX/2 - 0.75*silktextheight, 0, 90}
+                 {-crtydSizeX/2 - 0.75*silktextheight, 0}
     valloc = if params[:refsinside], do:
-                 {0, -bodywid/4+silktextheight/2, 0},   #{0, -0.8*silktextheight, 0},
+                 {0, -bodywid/4+silktextheight/2},
              else:
-                 { crtydSizeX/2 + 0.75*silktextheight, 0, 90}
+                 { crtydSizeX/2 + 0.75*silktextheight, 0}
+    textsize = {silktextheight,silktextwidth}
 
-    m = Comps.module(name: name,
-                     valuelocation: valloc,
-                     referencelocation: refloc,
-                     textsize: {silktextheight,silktextwidth},
-                     textwidth: silkoutlinewidth,
-                     descr: descr,
-                     tags: tags,
-                     isSMD: false,
-                     features: features)
+    m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)
+
     {:ok, file} = File.open filename, [:write]
     IO.binwrite file, "#{m}"
     File.close file

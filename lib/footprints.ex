@@ -7,28 +7,52 @@ defmodule Footprints do
   """
 
   @doc """
-    `Footprints.main/1` is the entry point for the KiCad PCB footprint generator.
+    The entry point for the KiCad PCB footprint generator.
 
     ## Examples
         iex> Footprints.main([])
-        Input config directory:   devices
-        Output library directory: DATA
         :ok
   """
   def main(args) do
-    args
-    |> parse_args
-    |> process
+    {options, _unpargs, _invalid} = OptionParser.parse(
+        args,
+        switches: [ dir: :string, cfg: :string, help: :boolean ],
+        aliases:  [ h: :help ],
+        allow_nonexistent_atoms: true
+    )
+
+    if options[:help] do
+        usage()
+        exit(:shutdown)
+    end
+
+    process options
   end
 
-  defp parse_args(args) do
-    {options, _, _} =
-      OptionParser.parse(args,
-        switches: [dir: :string, cfg: :string]
-      )
-
-    options
+  @doc """
+    Prints the command line usage to the screen and exits.  This is expected to
+    be called if the "--help" command line option is used.
+  """
+  def usage() do
+    IO.puts "usage: footprints [-h] [-dir DIRECTORY] [-cfg DIRECTORY]"
+    IO.puts ""
+    IO.puts "Generate all the KiCad footprints specified in the config directory.  KiCad library"
+    IO.puts "default values are specified in the cfg directory 'global_defaults.yml' YAML file."
+    IO.puts "Values from the default file can be overridden via command line.  For example"
+    IO.puts ""
+    IO.puts "            ./footprints --soldermaskmargin=1.23"
+    IO.puts ""
+    IO.puts "will override the default value read from global_defaults.yml (nominally 0.05)"
+    IO.puts "and instead use the value 1.23.  Any/all values can be overridden this way."
+    IO.puts ""
+    IO.puts "optional arguments:"
+    IO.puts "  -h, --help      Show this help message and exit"
+    IO.puts "  --verbose       Print progress data"
+    IO.puts "  --dir DIRECTORY Output top-level directory into which KiCad libraries are written"
+    IO.puts "  --cfg DIRECTORY Directory containing input YAML files specifying libraries/footprints to be made"
+    IO.puts "  --PARAM VALUE   Sets a specific library/footprint value named 'PARAM' to the specified VALUE"
   end
+
 
   @doc """
     Processes all library/Yaml files to create the KiCad modules.  Input Yaml
@@ -48,34 +72,38 @@ defmodule Footprints do
         do: "devices",
         else: options[:dir]
 
-    # Read the yaml file for default values.  This will bake a keyword list
-    # with the keyword "defaults" (others will be ignored) whos value is a
-    # keyword list (key,value pairs) for the parameter values to use.
+    # Read the yaml file for default values.  This will make a keyword list
+    # with the keyword "defaults" (others will be ignored) whose value is a
+    # keyword list (key,value pairs) for the parameter values to use.  Note that
+    # the returned map will have string keys.
     a = YamlElixir.read_from_file("#{config_base_directory}/global_defaults.yml")
 
-    # Pull out the key-value pairs from the 'defaults' key and map the keys to
-    # atoms.  The atoms will be used as the keys to the newly-created defaults
-    # keyword list.
-    defaults =
-      Enum.map(a["defaults"], fn {k, v} -> Map.put(%{}, String.to_atom(k), v) end)
-      |> Enum.reduce(fn data, acc -> Map.merge(data, acc) end)
+    # Pull out the key-value pairs from the 'defaults' key of the read-in configuration
+    # and map the keys to atoms.  The atoms will be used as the keys to the newly-created
+    # defaults keyword list.  That is, we'll turn the a["defaults"] map with string
+    # keys to a map with atoms as keys.
+    defaults = for {key, val} <- a["defaults"], into: %{}, do: {String.to_atom(key), val}
 
-    # Build the "overrides" keyword list.  The overrides list is a set of key-value
+    # Build the "overrides" keyword list.  The overrides list is a map of key-value
     # pairs that were passed in on the command line.  We'll hold these in the
     # overrides list and pass it to subsequent functions for overriding any settings.
     # This allows the command line parameters to have the highest precedence,
     # overriding the values from both the "global_defaults" and library-specific files.
-    overrides = if options != [],
-        do:
-          Enum.map(options, fn {k, v} -> Map.put(%{}, k, FootprintSupport.to_native(v)) end)
-          |> Enum.reduce(fn data, acc -> Map.merge(data, acc) end),
-        else: %{}
+    # Here 'options' is a list, we'll just turn it into a (possibly empty) map.
+    overrides = for {key, val} <- options, into: %{}, do: {key, val}
 
     # Build each KiCad module.  Each device type has its own module with a build
     # function to write out the devices.  They'll all need to defaults and overrides
     # lists to specify default values.  Device-specific parameters will be loaded
     # from file in the  'config_base_directory' directory.
-    Footprints.PTHHeader.build( "PTH_Headers", "PTH254Header_devices.yml", defaults, overrides, output_base_directory, config_base_directory )
+    Footprints.PTHHeader.build( 
+      "PTH_Headers", 
+      "PTH254Header_devices.yml", 
+      defaults, 
+      overrides, 
+      output_base_directory, 
+      config_base_directory
+    )
 
     Footprints.PTHHeader.build(
       "PTH_Headers",
@@ -247,5 +275,7 @@ defmodule Footprints do
       output_base_directory,
       config_base_directory
     )
+
+    :ok
   end
 end

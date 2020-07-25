@@ -53,9 +53,7 @@ defmodule Footprints.SMDHeaderSupport do
     yc = rowpitch*(rowcount-1)/2.0 - (row-1)*rowpitch
     pn = (pin-1)*rowcount + row
 
-    Comps.padSMD(name: "#{pn}", shape: shape, at: {xc,yc},
-                 size: {padwidth,padheight}, pastemargin: pastemargin,
-                 maskmargin: maskmargin)
+    Comps.pad(:smd, "#{pn}", shape, {xc,yc}, {padwidth,padheight}, pastemargin, maskmargin)
   end
 
 

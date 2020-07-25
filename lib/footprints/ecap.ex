@@ -8,6 +8,7 @@ defmodule Footprints.ECap do
     #
     silktextheight    = params[:silktextheight]
     silktextwidth     = params[:silktextwidth]
+    silktextthickness = params[:silktextthickness]
     silkoutlinewidth  = params[:silkoutlinewidth]
     courtoutlinewidth = params[:courtoutlinewidth]
     courtyardmargin   = params[:courtyardmargin]
@@ -39,9 +40,8 @@ defmodule Footprints.ECap do
     crtydSizeX = 2*(max(padCenterX+padSizeX/2, bodylen/2) + courtyardmargin)
     crtydSizeY = 2*(max(padCenterY+padSizeY/2, bodywid/2) + courtyardmargin)
 
-    pads = [Comps.padSMD(name: "1", shape: "rect", at: {-padCenterX, padCenterY}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-            Comps.padSMD(name: "2", shape: "rect", at: { padCenterX, padCenterY}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
-
+    pads = [Comps.pad(:smd, "1", "rect", {-padCenterX, padCenterY}, {padSizeX, padSizeY}, pastemargin, maskmargin),
+            Comps.pad(:smd, "2", "rect", { padCenterX, padCenterY}, {padSizeX, padSizeY}, pastemargin, maskmargin)]
 
     x1 =   bodylen/2
     x2 = - bodylen/2 + bodylen/5
@@ -86,17 +86,12 @@ defmodule Footprints.ECap do
     features = pads ++ [Enum.join(courtyard, "\n  ")] ++
         [Enum.join(outline, "\n  ")] ++ silk
 
-    refloc      = {-crtydSizeX/2 - 0.75*silktextheight, 0, 90}
-    valloc      = { crtydSizeX/2 + 0.75*silktextheight, 0, 90}
-    m = Comps.module(name: name,
-                     valuelocation: valloc,
-                     referencelocation: refloc,
-                     textsize: {silktextheight,silktextwidth},
-                     textwidth: silkoutlinewidth,
-                     descr: descr,
-                     tags: tags,
-                     isSMD: false,
-                     features: features)
+    refloc   = {-crtydSizeX/2 - 0.75*silktextheight, 0}
+    valloc   = { crtydSizeX/2 + 0.75*silktextheight, 0}
+    textsize = {silktextheight,silktextwidth}
+
+    m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)
+
     {:ok, file} = File.open filename, [:write]
     IO.binwrite file, "#{m}"
     File.close file

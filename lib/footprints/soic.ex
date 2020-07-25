@@ -8,6 +8,7 @@ defmodule Footprints.SOIC do
     #
     silktextheight    = params[:silktextheight]
     silktextwidth     = params[:silktextwidth]
+    silktextthickness = params[:silktextthickness]
     silkoutlinewidth  = params[:silkoutlinewidth]
     courtoutlinewidth = params[:courtoutlinewidth]
     docoutlinewidth   = params[:docoutlinewidth]
@@ -45,13 +46,12 @@ defmodule Footprints.SOIC do
     pads = for pinpair <- 1..stride do
       y = totalwid/2.0
       x = -span/2.0 + (pinpair-1)*pinpitch
-      [Comps.padSMD(name: "#{pinpair}", shape: "rect", at: {x, y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-       Comps.padSMD(name: "#{pincount-pinpair+1}", shape: "rect", at: {x, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin)]
+      [Comps.pad(:smd, "#{pinpair}", "rect", {x, y}, {padSizeX, padSizeY}, pastemargin, maskmargin),
+       Comps.pad(:smd, "#{pinpair-pinpair+1}", "rect", {x,-y}, {padSizeX, padSizeY}, pastemargin, maskmargin)]
     end
 
     epad = if params[:epadwid] != nil do
-      [Comps.padSMD(name: "EP", shape: "rect", at: {0,0},
-              size: {params[:epadlen], params[:epadwid]}, pastemargin: epadpastemargin, maskmargin: 0)]
+      [Comps.pad(:smd, "EP", "rect", {0,0}, {params[:epadlen], params[:epadwid]}, epadpastemargin, 0)]
     else
       []
     end
@@ -91,23 +91,17 @@ defmodule Footprints.SOIC do
                List.flatten(pins) ++ List.flatten(outline)
 
     refloc = if params[:refsinside], do:
-                 {0, bodywid/4-0.75*silktextheight/2, 0},   #{0, 0.8*silktextheight, 0},
+                 {0, bodywid/4-0.75*silktextheight/2},
              else:
-                 {-crtydSizeX/2 - 0.75*silktextheight, 0, 90}
+                 {-crtydSizeX/2 - 0.75*silktextheight, 0}
     valloc = if params[:refsinside], do:
-                 {0, -bodywid/4+0.75*silktextheight/2, 0},   #{0, -0.8*silktextheight, 0},
+                 {0, -bodywid/4+0.75*silktextheight/2},
              else:
-                 { crtydSizeX/2 + 0.75*silktextheight, 0, 90}
+                 { crtydSizeX/2 + 0.75*silktextheight, 0}
+    textsize = {silktextheight,silktextwidth}
 
-    m = Comps.module(name: name,
-                     valuelocation: valloc,
-                     referencelocation: refloc,
-                     textsize: {silktextheight,silktextwidth},
-                     textwidth: silkoutlinewidth,
-                     descr: descr,
-                     tags: tags,
-                     isSMD: false,
-                     features: features)
+    m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)
+             
     {:ok, file} = File.open filename, [:write]
     IO.binwrite file, "#{m}"
     File.close file

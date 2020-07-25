@@ -1,85 +1,274 @@
-
 defmodule Footprints.Components do
 
 
-  defp p(x), do: Float.round(x/1.0,3)
+    @doc """
+    Rounds a float to the specified number of digits.
 
-  def circle(center: {xc,yc}, radius: r, layer: lay, width: wid), do:
-    "(fp_circle (center #{p(xc)} #{p(yc)}) (end #{p(xc+r)} #{p(yc)}) (layer #{lay}) (width #{wid}))"
+    ## Parameters
+        - x:   Float value to be rounded
+        - dig: Number of digits (after the decimal) to round to
 
-  def line(start: {xs,ys}, end: {xe,ye}, layer: lay, width: wid), do:
-    "(fp_line (start #{p(xs)} #{p(ys)}) (end #{p(xe)} #{p(ye)}) (layer #{lay}) (width #{wid}))"
+    ## Yields
+        Float value of input x rounded to the specified digits
 
-  def box(ll: ll={llx,lly}, ur: ur={urx,ury}, layer: layer, width: thick) do
-    [line(start:         ll, end: {urx, lly}, layer: layer, width: thick),
-     line(start: {urx, lly}, end:         ur, layer: layer, width: thick),
-     line(start:         ur, end: {llx, ury}, layer: layer, width: thick),
-     line(start: {llx, ury}, end:         ll, layer: layer, width: thick)]
-  end
+    ## Examples
+        iex> Footprints.Components.p(1.234567890123)
+        1.235
 
-  def arc(start: {xs,ys}, end: {xe,ye}, angle: angle, layer: lay, width: wid), do:
-    "(fp_arc (start #{p(xs)} #{p(ys)}) (end #{p(xe)} #{p(ye)}) (angle #{p(angle)}) (layer #{lay}) (width #{wid}))"
+        iex> Footprints.Components.p(1.234567890123, 4)
+        1.2346
+    """
+    def p(x, dig \\ 3), do: Float.round(x / 1.0, dig)
 
 
-  def textGeneric(type: type, value: value, at: {x,y,a}, layer: lay, size: {xs,ys}, width: wid), do:
-    "(fp_text #{type} #{value} (at #{p(x)} #{p(y)} #{p(a)}) (layer #{lay}) " <>
-    "(effects (font (size #{p(xs)} #{p(ys)}) (thickness #{wid})))" <>
+    @doc """
+    Creates a KiCad footprint circle of the specified size at the given location.
+
+    ## Parameters
+        - center: Float location {xc, yc} of the circle center (x,y in KiCad units)
+        - radius: Float radius of the circle (in KiCad units)
+        - layer:  String describing the layer the circle is placed on (KiCad layer name)
+
+    ## Yields
+        String representation of KiCad footprint circle
+
+    ## Examples
+        iex> Footprints.Components.circle(center: {0,0}, radius: 1.1, layer: "B.SilkS", width: 0.1)
+        "(fp_circle (center 0.0 0.0) (end 1.1 0.0) (layer B.SilkS) (width 0.1))"
+
+        iex> Footprints.Components.circle(center: {-1.1,2.2}, radius: 3.3, layer: "F.SilkS", width: 0.05)
+        "(fp_circle (center -1.1 2.2) (end 2.2 2.2) (layer F.SilkS) (width 0.05))"
+    """
+    def circle(center: {xc, yc}, radius: r, layer: lay, width: wid) do
+        "(fp_circle" <>
+        " (center #{p(xc)} #{p(yc)})" <>
+        " (end #{p(xc + r)} #{p(yc)})" <>
+        " (layer #{lay}) (width #{wid})" <>
+        ")"
+    end
+
+
+    @doc """
+    Creates a KiCad footprint line at the specified start/end location.
+
+    ## Parameters
+        - start: Float start location {x, y} of the line (x,y in KiCad units)
+        - end:   Float ending location {x, y} of the line (x,y in KiCad units)
+        - layer: String describing the layer the circle is placed on (KiCad layer name)
+        - width: Float drawing width of the line (in KiCad units)
+
+    ## Yields
+        String representation of KiCad footprint line
+
+    ## Examples
+        iex> Footprints.Components.line(start: {0,0}, end: {1.1,1.1}, layer: "F.SilkS", width: 0.1)
+        "(fp_line (start 0.0 0.0) (end 1.1 1.1) (layer F.SilkS) (width 0.1))"
+    """
+    def line(start: {xs, ys}, end: {xe, ye}, layer: lay, width: wid) do
+        "(fp_line" <>
+        " (start #{p(xs)} #{p(ys)})" <>
+        " (end #{p(xe)} #{p(ye)})" <>
+        " (layer #{lay}) (width #{wid})" <>
+        ")"
+    end
+
+
+    @doc """
+    Creates a KiCad footprint rectangular box at the specified location.
+
+    ## Parameters
+        - ll:    Float location {x, y} of the lower-left corner (x,y in KiCad units)
+        - ur:    Float location {x, y} of the upper-right corner (x,y in KiCad units)
+        - layer: String describing the layer the circle is placed on (KiCad layer name)
+        - width: Float drawing width of the line (in KiCad units)
+
+    ## Yields
+        List of string representations of KiCad footprint lines forming the specified box
+
+    ## Examples
+        iex> Footprints.Components.box(ll: {0,0}, ur: {1.1,1.1}, layer: "B.SilkS", width: 0.1)
+        ["(fp_line (start 0.0 0.0) (end 1.1 0.0) (layer B.SilkS) (width 0.1))", "(fp_line (start 1.1 0.0) (end 1.1 1.1) (layer B.SilkS) (width 0.1))", "(fp_line (start 1.1 1.1) (end 0.0 1.1) (layer B.SilkS) (width 0.1))", "(fp_line (start 0.0 1.1) (end 0.0 0.0) (layer B.SilkS) (width 0.1))"]
+    """
+    def box(ll: ll = {llx, lly}, ur: ur = {urx, ury}, layer: layer, width: thick) do
+        [line(start: ll, end: {urx, lly}, layer: layer, width: thick),
+         line(start: {urx, lly}, end: ur, layer: layer, width: thick),
+         line(start: ur, end: {llx, ury}, layer: layer, width: thick),
+         line(start: {llx, ury}, end: ll, layer: layer, width: thick)]
+    end
+
+  @doc """
+    Creates a KiCad footprint arc at the specified location.
+
+    ## Parameters
+      - start: Float start location {x, y} of the arc (x,y in KiCad units)
+      - end:   Float ending location {x, y} of the arc (x,y in KiCad units)
+      - angle: Float angle subtended by the arc
+      - layer: String describing the layer the circle is placed on (KiCad layer name)
+      - width: Float drawing width of the arc (in KiCad units)
+
+    ## Yields
+      String representation of KiCad footprint line
+
+    ## Examples
+        iex> Footprints.Components.arc(start: {0,0}, end: {1.1,1.1}, angle: 90, layer: "F.SilkS", width: 0.1)
+        "(fp_arc  (start 0.0 0.0) (end 1.1 1.1) (angle 90.0) (layer F.SilkS) (width 0.1))"
+  """
+  def arc(start: {xs, ys}, end: {xe, ye}, angle: angle, layer: lay, width: wid) do
+    "(fp_arc " <>
+    " (start #{p(xs)} #{p(ys)})" <>
+    " (end #{p(xe)} #{p(ye)})" <>
+    " (angle #{p(angle)})" <>
+    " (layer #{lay})" <>
+    " (width #{wid})" <>
     ")"
-
-  def text(value, at: at={_x,_y,_a}, layer: lay, size: s={_xs,_ys}, width: wid), do:
-    textGeneric(type: "user", value: value, at: at, layer: lay, size: s, width: wid)
-
-  def textRef(at: at={_x,_y,_a}, size: s={_xs,_ys}, width: wid), do:
-    textGeneric(type: "reference", value: "REF**", at: at, layer: "F.SilkS", size: s, width: wid)
-
-  def textVal(at: at={_x,_y,_a}, size: size={_xs,_ys}, width: wid), do:
-    textGeneric(type: "value", value: "VAL**", at: at, layer: "F.SilkS", size: size, width: wid)
-
-
-  def pad(name: name, type: type, shape: shape, at: {x,y},
-          size: {xs,ys}, layers: layers, pastemargin: pastemargin,
-          maskmargin: maskmargin) do
-    pastemargintext = if pastemargin != 0, do: "(solder_paste_margin_ratio #{pastemargin})", else: ""
-    maskmargintext = if maskmargin != 0, do: "(solder_mask_margin #{maskmargin})", else: ""
-    "(pad #{name} #{type} #{shape} (at #{p(x)} #{p(y)}) (size #{p(xs)} #{p(ys)})" <>
-    "(clearance 0.1)" <>
-    " (layers " <>
-    Enum.join(layers, " ") <> ") #{pastemargintext} #{maskmargintext})"
   end
 
-  def padSMD(name: name, shape: shape, at: {x,y}, size: {xs,ys}, pastemargin: pastemargin, maskmargin: maskmargin) do
-     pad(name: name, type: "smd", shape: shape, at: {x,y}, size: {xs,ys},
-         layers: ["F.Cu", "F.Paste", "F.Mask"], pastemargin: pastemargin, maskmargin: maskmargin)
-  end
+  
+    defp textGeneric(type, value, {x, y}, angle, layer, {xs, ys}, wid) do
+        "(fp_text #{type} #{value}" <>
+        " (at #{p(x)} #{p(y)} #{p(angle)})" <>
+        " (layer #{layer}) " <>
+        " (effects (font (size #{p(xs)} #{p(ys)}) (thickness #{wid})))" <>
+        ")"
+    end
 
-  def padPTH(name: name, shape: shape, at: {x,y}, size: {xs,ys}, drill: drill, maskmargin: maskmargin) do
-     maskmargintext = if maskmargin != 0, do: "(solder_mask_margin #{maskmargin})", else: ""
-     "(pad #{name} thru_hole #{shape} (at #{p(x)} #{p(y)}) " <>
-     "(size #{p(xs)} #{p(ys)}) (drill #{drill}) (layers *.Cu *.Mask F.SilkS) #{maskmargintext})"
-  end
 
-  def module(name: name,
-             valuelocation: refAt = {_xr,_yr,_ar},
-             referencelocation: valAt = {_xv,_yv,_av},
-             textsize: size={_xs,_ys},
-             textwidth: wid,
-             descr: descr,
-             tags: tags,
-             isSMD: smd,
-             features: features) do
-    ref = textRef(at: refAt, size: size, width: wid)
-    val = textVal(at: valAt, size: size, width: wid)
-    edittime = Integer.to_string(:os.system_time(:seconds),16)
-    "(module #{name} (layer F.Cu) (tedit #{edittime})\n" <>
-    "  (at 0 0)\n" <>
-    "  (descr \"#{descr}\")\n" <>
-    "  (tags \"" <> Enum.join( Enum.map(tags, fn a -> "#{a}" end), " " ) <> "\")\n" <>
-    if smd, do: "  (attr smd)\n", else: "" <>
-    "  #{ref}\n" <>
-    "  #{val}\n" <>
-    "  " <> Enum.join( Enum.map(features, fn a -> "#{a}" end), "\n  " ) <> "\n" <>
-    ")"
-  end
+    @doc """
+    Creates KiCad footprint text at the specified location.
 
+    ## Parameters
+        - value: String to be printed/placed
+        - at:    Float location {x, y} of the text (x,y in KiCad units)
+        - angle: Float angle of the text, in degrees
+        - layer: String describing the layer the circle is placed on (KiCad layer name)
+        - size:  Float size {x,y} of a character of text in the x and y directions
+        - width: Float drawing width of the arc (in KiCad units)
+
+    ## Yields
+        String representation of KiCad footprint text
+
+    ## Examples
+        iex> Footprints.Components.text("Junk", {0,0}, 90, "F.SilkS", {1,1}, 0.1)
+        "(fp_text user Junk (at 0.0 0.0 90.0) (layer F.SilkS)  (effects (font (size 1.0 1.0) (thickness 0.1))))"
+    """
+    def text(value, at, angle, layer, size, width) do
+        textGeneric("user", value, at, angle, layer, size, width)
+    end
+
+
+    @doc """
+    Creates KiCad footprint component reference text at the specified location.
+
+    ## Parameters
+    - at:    Float location {x, y} of the text (x,y in KiCad units)
+    - angle: Float angle of the text, in degrees
+    - size:  Float size {x,y} of a character of text in the x and y directions
+    - width: Float drawing width of the arc (in KiCad units)
+
+    ## Yields
+    String representation of KiCad footprint text
+
+    ## Examples
+        iex> Footprints.Components.textRef({0,0}, 90, {1,1}, 0.1)
+        "(fp_text reference REF** (at 0.0 0.0 90.0) (layer F.SilkS)  (effects (font (size 1.0 1.0) (thickness 0.1))))"
+    """
+    def textRef(at, angle, size, width) do
+        textGeneric("reference", "REF**", at, angle, "F.SilkS", size, width)
+    end
+
+
+    @doc """
+    Creates KiCad footprint component value text at the specified location.
+
+    ## Parameters
+        - at:    Float location {x, y} of the text (x,y in KiCad units)
+        - angle: Float angle of the text, in degrees
+        - size:  Float size {x,y} of a character of text in the x and y directions
+        - width: Float drawing width of the arc (in KiCad units)
+
+    ## Yields
+        String representation of KiCad footprint text
+
+    ## Examples
+        iex> Footprints.Components.textVal({0,0}, 90, {1,1}, 0.1)
+        "(fp_text value VAL** (at 0.0 0.0 90.0) (layer F.Fab)  (effects (font (size 1.0 1.0) (thickness 0.1))))"
+    """
+    def textVal(at, angle, size, width) do
+        textGeneric("value", "VAL**", at, angle, "F.Fab", size, width)
+    end
+
+
+    @doc """
+    Creates KiCad footprint pad at the specified location.
+
+    ## Parameters
+        - name:        String description/name for the pad
+        - shape:       String describing the shape of the pad (rect, roundrect, circle)
+        - at:          Float location {x, y} of the text (x,y in KiCad units)
+        - size:        Float size {x,y} of a character of text in the x and y directions
+        - pastemargin: The value to use for the pad solder_paste_margin_ratio value
+        - maskmargin:  The value to use for the pad solder_mask_margin value
+
+    ## Yields
+        String representation of KiCad footprint pad
+
+    ## Examples
+        iex> Footprints.Components.pad(:smd, "A", "rect", {0,0}, {1,1}, 0, 0)
+        "(pad A smd rect (at 0.0 0.0) (size 1.0 1.0) (clearance 0.1) (layers F.Cu) (solder_paste_margin_ratio 0) (solder_mask_margin 0))"
+
+        iex> Footprints.Components.pad(:pth, "A", "circle", {0,0}, {1,1}, 0, 0)
+        "(pad A thru_hole circle (at 0.0 0.0) (size 1.0 1.0) (drill 0.57) (layers *.Cu) (solder_mask_margin 0))"
+    """
+    def pad(type, name, shape, at, size, pastemargin \\ 0, maskmargin \\ 0)
+    def pad(:smd, name, shape, {x, y}, {xs, ys}, pastemargin, maskmargin) do
+        "(pad #{name} smd #{shape}" <>
+        " (at #{p(x)} #{p(y)})" <>
+        " (size #{p(xs)} #{p(ys)})" <>
+        " (clearance 0.1)" <>
+        " (layers F.Cu)" <>
+        " (solder_paste_margin_ratio #{pastemargin})" <>
+        " (solder_mask_margin #{maskmargin})" <>
+        ")"
+    end
+    def pad(:pth, name, shape, {x, y}, {xs, ys}, drilldia, maskmargin) do
+        "(pad #{name} thru_hole #{shape}" <>
+        " (at #{p(x)} #{p(y)})" <>
+        " (size #{p(xs)} #{p(ys)})" <>
+        " (drill #{drilldia})" <>
+        " (layers *.Cu)" <>
+        " (solder_mask_margin #{maskmargin})" <>
+        ")"
+    end
+
+
+    @doc """
+    Creates a KiCad footprint modules with the provided parameters and features.
+
+    ## Parameters
+        - name:      String description/name for the module
+        - descr:     String (text) description of the module
+        - features:  List of "features" (Footprints.Components as Strings)
+        - refAt:     Float location {x, y} of the reference text (x,y in KiCad units)
+        - valAt:     Float location {x,y} of a value text (x,y in KiCad units)
+        - tags:      List of Strings for module tags
+        - isSMD:     Boolean identifying the module as surface mount
+
+    ## Yields
+        String representation of KiCad footprint module
+    """
+    def module(name, descr, features, refAt, valAt, textsize, textwidth, tags \\ []) do
+        ref = textRef(refAt, 90, textsize, textwidth)
+        val = textVal(valAt, 90, textsize, textwidth)
+        edittime = Integer.to_string(:os.system_time(:seconds), 16)
+
+        "(module #{name} (layer F.Cu) (tedit #{edittime})\n" <>
+        "  (at 0 0)\n" <>
+        "  (descr \"#{descr}\")\n" <>
+        "  (tags \"" <> Enum.join(Enum.map(tags, fn a -> "#{a}" end), " ") <> "\")\n" <>
+        "  #{ref}\n" <>
+        "  #{val}\n" <>
+        Enum.join(Enum.map(features, fn a -> "#{a}" end), "\n  ") <>
+        ")"
+    end
 
 end

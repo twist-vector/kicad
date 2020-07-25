@@ -47,29 +47,17 @@ defmodule Footprints.DF13HeaderRA do
       # Put all the module pieces together, create, and write the module
       features = List.flatten(pads) ++ courtyard ++ outline
 
-      refloc      = if pincount > 3, do:
-                         {0, (lower+upper)/2, 0},
-                    else:
-                         {-crtydlength/2 - 0.75*silktextheight, (lower+upper)/2, 90}
-      valloc      = if pincount > 3, do:
-                         {0, (lower+upper)/2-1.5*silktextheight, 0},
-                    else:
-                         { crtydlength/2 + 0.75*silktextheight, (lower+upper)/2, 90}
-
+      refloc = if pincount > 3, do: {0, (lower+upper)/2},
+               else: {-crtydlength/2 - 0.75*silktextheight, (lower+upper)/2}
+      valloc = if pincount > 3, do: {0, (lower+upper)/2-1.5*silktextheight},
+               else: { crtydlength/2 + 0.75*silktextheight, (lower+upper)/2}
 
       descr = "Hirose DF13 right angle through hole connector";
       tags = ["PTH", "header", "shrouded"]
       name = "DF13-#{pincount}P-1.25DS"
+      textsize = {silktextheight,silktextwidth}
+      m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)
       {:ok, file} = File.open filename, [:write]
-      m = Comps.module(name: name,
-                       valuelocation: valloc,
-                       referencelocation: refloc,
-                       textsize: {silktextheight,silktextwidth},
-                       textwidth: silktextthickness,
-                       descr: descr,
-                       tags: tags,
-                       isSMD: false,
-                       features: features)
       IO.binwrite file, "#{m}"
       File.close file
     end

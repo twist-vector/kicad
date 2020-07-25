@@ -42,14 +42,8 @@ defmodule Footprints.DF13HeaderRASMD do
 
       sx = (bodylen + padheight)/2
       sy = -3.3
-      supportPads = [Comps.padSMD(name: "S", shape: "rect", at: {-sx,sy},
-                                  size: {supppadwidth,supppadheight},
-                                  pastemargin: pastemargin,
-                                  maskmargin: maskmargin),
-                     Comps.padSMD(name: "S", shape: "rect", at: {sx,sy},
-                                  size: {supppadwidth,supppadheight},
-                                  pastemargin: pastemargin,
-                                  maskmargin: maskmargin)]
+      supportPads = [Comps.pad(:smd, "S", "rect", {-sx,sy}, {supppadwidth,supppadheight}, pastemargin, maskmargin),
+                     Comps.pad(:smd, "S", "rect", { sx,sy}, {supppadwidth,supppadheight}, pastemargin, maskmargin)]
 
       # Outline
       left = -bodylen/2 + 0.9*silkoutlinewidth
@@ -81,21 +75,16 @@ defmodule Footprints.DF13HeaderRASMD do
       # Put all the module pieces together, create, and write the module
       features = List.flatten(pads) ++ courtyard ++ outline ++ supportPads ++ pinmarks
 
-      refloc = {-crtydlength/2 - 0.75*silktextheight, (lower+upper)/2, 90}
-      valloc = { crtydlength/2 + 0.75*silktextheight, (lower+upper)/2, 90}
-      descr = "Hirose DF13 surface mount right angle connector";
-      tags = ["SMD", "header", "shrouded", "right angle"]
-      name = "DF13-RA-#{pincount}P-1.25DSA"
+      refloc   = {-crtydlength/2 - 0.75*silktextheight, (lower+upper)/2}
+      valloc   = { crtydlength/2 + 0.75*silktextheight, (lower+upper)/2}
+      descr    = "Hirose DF13 surface mount right angle connector";
+      tags     = ["SMD", "header", "shrouded", "right angle"]
+      name     = "DF13-RA-#{pincount}P-1.25DSA"
+      textsize = {silktextheight,silktextwidth}
+
+      m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)
+
       {:ok, file} = File.open filename, [:write]
-      m = Comps.module(name: name,
-                       valuelocation: valloc,
-                       referencelocation: refloc,
-                       textsize: {silktextheight,silktextwidth},
-                       textwidth: silktextthickness,
-                       descr: descr,
-                       tags: tags,
-                       isSMD: false,
-                       features: features)
       IO.binwrite file, "#{m}"
       File.close file
     end

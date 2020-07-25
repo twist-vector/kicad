@@ -25,13 +25,13 @@ defmodule Footprints.PTHHeader do
                             ur: { crtydlength/2, -crtydwidth/2},
                             layer: "F.CrtYd", width: silkoutlinewidth)
 
-      # The grid of pads.  We'll call the common function from the PTHHeader
+      # The grid of pads.  We'll call the common function from the PTHHeaderSupport
       # module for each pin location.
       pads = for row <- 1..rowcount, do:
                for pin <- 1..pincount, do:
                  Footprints.PTHHeaderSupport.make_pad(params, pin, row, pincount, rowcount, maskmargin)
 
-      # Add the header outline.  The PTHHeader function draws the outside boundary
+      # Add the header outline.  The PTHHeaderSupport function draws the outside boundary
       # rather than the outline of each individual pin.
       frontSilkBorder = Footprints.PTHHeaderSupport.make_outline(params, pincount, rowcount, "F.SilkS")
       backSilkBorder = Footprints.PTHHeaderSupport.make_outline(params, pincount, rowcount, "B.SilkS")
@@ -46,18 +46,17 @@ defmodule Footprints.PTHHeader do
       # Put all the module pieces together, create, and write the module
       features = List.flatten(pads) ++ courtyard ++ frontSilkBorder ++ backSilkBorder ++ [cFront]
 
-      refloc      = {-crtydlength/2 - 0.75*silktextheight, 0, 90}
-      valloc      = { crtydlength/2 + 0.75*silktextheight, 0, 90}
+      refloc      = {-crtydlength/2 - 0.75*silktextheight, 0}
+      valloc      = { crtydlength/2 + 0.75*silktextheight, 0}
+      m = Comps.module("Header_#{pincount}x#{rowcount}",
+                       "#{pincount}x#{rowcount} 0.10in (2.54 mm) spacing unshrouded header",
+                       features,
+                       refloc,
+                       valloc,
+                       {silktextheight,silktextwidth},
+                       silktextthickness)
+
       {:ok, file} = File.open filename, [:write]
-      m = Comps.module(name: "Header_#{pincount}x#{rowcount}",
-                       valuelocation: valloc,
-                       referencelocation: refloc,
-                       textsize: {silktextheight,silktextwidth},
-                       textwidth: silktextthickness,
-                       descr: "#{pincount}x#{rowcount} 0.10in (2.54 mm) spacing unshrouded header",
-                       tags: ["PTH", "unshrouded", "header"],
-                       isSMD: false,
-                       features: features)
       IO.binwrite file, "#{m}"
       File.close file
     end

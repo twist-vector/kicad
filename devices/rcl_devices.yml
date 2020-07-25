@@ -359,6 +359,11 @@ resc:
      bodylen:          9.1
      height:           2.5
 
+   - bodywid:         3.2
+     legland:         0.90
+     bodylen:          6.35
+     height:           1.8
+     inchcode:        2512
 
 capc:
    - legland:         0.25

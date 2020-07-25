@@ -4,6 +4,7 @@ defmodule Footprints.QFN do
   def create_mod(params, name, descr, tags, filename) do
     silktextheight    = params[:silktextheight]
     silktextwidth     = params[:silktextwidth]
+    silktextthickness = params[:silktextthickness]
     silkoutlinewidth  = params[:silkoutlinewidth]
     courtoutlinewidth = params[:courtoutlinewidth]
     docoutlinewidth   = params[:docoutlinewidth]
@@ -39,16 +40,14 @@ defmodule Footprints.QFN do
       x = -span/2.0 + (pinpair-1)*pinpitch
       y = (bodywid-legland)/2.0 + toefillet/2 - + heelfillet/2
 
-      [Comps.padSMD(name: "#{pinpair}",            shape: "rect", at: { x,  y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-       Comps.padSMD(name: "#{3*stride-pinpair+1}", shape: "rect", at: { x, -y}, size: {padSizeX, padSizeY}, pastemargin: pastemargin, maskmargin: maskmargin),
-       Comps.padSMD(name: "#{4*stride-pinpair+1}", shape: "rect", at: {-y, -x}, size: {padSizeY, padSizeX}, pastemargin: pastemargin, maskmargin: maskmargin),
-       Comps.padSMD(name: "#{2*stride-pinpair+1}", shape: "rect", at: { y,  x}, size: {padSizeY, padSizeX}, pastemargin: pastemargin, maskmargin: maskmargin)]
+      [Comps.pad(:smd, "#{pinpair}", "rect", {x,y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+      Comps.pad(:smd, "#{3*stride-pinpair+1}", "rect", {x,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+      Comps.pad(:smd, "#{4*stride-pinpair+1}", "rect", {-y,-x}, {padSizeY,padSizeX}, pastemargin, maskmargin),
+      Comps.pad(:smd, "#{2*stride-pinpair+1}", "rect", {y,x}, {padSizeY,padSizeX}, pastemargin, maskmargin)]
     end
 
     epad = if params[:epadwid] != nil do
-      [Comps.padSMD(name: "EP", shape: "rect", at: {0,0},
-              size: {params[:epadlen], params[:epadwid]},
-              pastemargin: epadpastemargin, maskmargin: 0)]
+      [Comps.pad(:smd, "EP", "rect", {0,0}, {params[:epadlen], params[:epadwid]}, epadpastemargin, 0)]
     else
       []
     end
@@ -102,23 +101,17 @@ defmodule Footprints.QFN do
                List.flatten(pins) ++ List.flatten(outline)
 
     refloc = if params[:refsinside], do:
-                 {0, bodywid/4-silktextheight/2, 0},   #{0, 0.8*silktextheight, 0},
+                 {0, bodywid/4-silktextheight/2},
              else:
-                 {-crtydSizeX/2 - 0.75*silktextheight, 0, 90}
+                 {-crtydSizeX/2 - 0.75*silktextheight, 0}
     valloc = if params[:refsinside], do:
-                 {0, -bodywid/4+silktextheight/2, 0},   #{0, -0.8*silktextheight, 0},
+                 {0, -bodywid/4+silktextheight/2},
              else:
-                 { crtydSizeX/2 + 0.75*silktextheight, 0, 90}
+                 { crtydSizeX/2 + 0.75*silktextheight, 0}
+    textsize = {silktextheight,silktextwidth}
 
-    m = Comps.module(name: name,
-                     valuelocation: valloc,
-                     referencelocation: refloc,
-                     textsize: {silktextheight,silktextwidth},
-                     textwidth: silkoutlinewidth,
-                     descr: descr,
-                     tags: tags,
-                     isSMD: false,
-                     features: features)
+    m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)
+             
     {:ok, file} = File.open filename, [:write]
     IO.binwrite file, "#{m}"
     File.close file

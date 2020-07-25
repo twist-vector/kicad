@@ -39,8 +39,7 @@ defmodule Footprints.NanofitHeaderPTH do
           else -1.25
           end
       y = 1.34
-      align = [Comps.padPTH(name: "tab", shape: "oval",
-             at: {x,y}, size: {1.29,1.29}, drill: 1.3, maskmargin: 0)]
+      align = [Comps.pad(:pth, "tab", "oval", {x, y}, {1.29,1.29}, 1.3, 0)]
 
       # Outline
       outline = [Comps.line(start: {-bodylen/2,lower}, end: {bodylen/2,lower}, layer: "F.SilkS", width: silkoutlinewidth),
@@ -58,18 +57,16 @@ defmodule Footprints.NanofitHeaderPTH do
       # Put all the module pieces together, create, and write the module
       features = List.flatten(pads) ++ courtyard ++ outline ++ align
 
-      refloc      = {-crtydlength/2 - 0.75*silktextheight, 0, 90}
-      valloc      = { crtydlength/2 + 0.75*silktextheight, 0, 90}
+      refloc   = {-crtydlength/2 - 0.75*silktextheight, 0}
+      valloc   = { crtydlength/2 + 0.75*silktextheight, 0}
+      name     = "NanofitHeader_#{pincount}x#{rowcount}"
+      descr    = "#{pincount}x#{rowcount} 0.10in (2.54 mm) spacing Molex Nanofit header"
+      tags     = ["Molex", "PTH", "shrouded", "header"]
+      textsize = {silktextheight,silktextwidth}
+
+      m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)
+
       {:ok, file} = File.open filename, [:write]
-      m = Comps.module(name: "NanofitHeader_#{pincount}x#{rowcount}",
-                       valuelocation: valloc,
-                       referencelocation: refloc,
-                       textsize: {silktextheight,silktextwidth},
-                       textwidth: silktextthickness,
-                       descr: "#{pincount}x#{rowcount} 0.10in (2.54 mm) spacing Molex Nanofit header",
-                       tags: ["Molex", "PTH", "shrouded", "header"],
-                       isSMD: false,
-                       features: features)
       IO.binwrite file, "#{m}"
       File.close file
     end

@@ -71,18 +71,15 @@ defmodule Footprints.Combicon do
       features = List.flatten(pads) ++ courtyard ++ frontSilkBorder ++
                        wireEntryMarks ++ releaseMarks ++ releaseArrows
 
-      refloc      = {-crtydlength/2-bodyoffsetx/2 - 0.75*silktextheight, 0, 90}
-      valloc      = { crtydlength/2-bodyoffsetx/2 + 0.75*silktextheight, 0, 90}
+      refloc   = {-crtydlength/2-bodyoffsetx/2 - 0.75*silktextheight, 0}
+      valloc   = { crtydlength/2-bodyoffsetx/2 + 0.75*silktextheight, 0}
+      textsize = {silktextheight,silktextwidth}
+      name     = "Combicon_Header_#{pincount}"
+      descr    = "#{pincount} Spring-Cage PCB Wire-to-Board Termination Blocks"
+      tags     = ["PTH", "wire2board", "header", "COMBICON", "PTSA"]
+      m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)
+
       {:ok, file} = File.open filename, [:write]
-      m = Comps.module(name: "Combicon_Header_#{pincount}",
-                       valuelocation: valloc,
-                       referencelocation: refloc,
-                       textsize: {silktextheight,silktextwidth},
-                       textwidth: silktextthickness,
-                       descr: "#{pincount} Spring-Cage PCB Wire-to-Board Termination Blocks",
-                       tags: ["PTH", "wire2board", "header", "COMBICON", "PTSA"],
-                       isSMD: false,
-                       features: features)
       IO.binwrite file, "#{m}"
       File.close file
     end
