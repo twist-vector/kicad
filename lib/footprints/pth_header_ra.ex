@@ -28,7 +28,7 @@ defmodule Footprints.PTHHeaderRA do
            pinpitch*(rowcount-1)/2 + padheight + courtyardmargin}
     ur = { crtydlength,
           -pinpitch*(rowcount-1)/2 - bodyoffset - bodythick - pinlength - courtyardmargin/2}
-    courtyard = Comps.box(ll: ll, ur: ur, layer: "F.CrtYd",  width: silkoutlinewidth)
+    courtyard = Comps.box(ll, ur, "F.CrtYd", silkoutlinewidth)
 
     # The silkscreen outline...
 
@@ -37,7 +37,7 @@ defmodule Footprints.PTHHeaderRA do
           -pinpitch*(rowcount-1)/2 - bodyoffset}
     ur = { pinpitch*(pincount-1)/2+pinpitch/2,
           -pinpitch*(rowcount-1)/2 - bodyoffset - bodythick}
-    frontSilkBorder = Comps.box(ll: ll, ur: ur, layer: "F.SilkS", width: silkoutlinewidth)
+    frontSilkBorder = Comps.box(ll, ur, "F.SilkS", silkoutlinewidth)
 
     # outline of the pins
     frontSilkPin = for pin <- 1..pincount do
@@ -45,7 +45,7 @@ defmodule Footprints.PTHHeaderRA do
                 -pinpitch*(rowcount-1)/2 - bodyoffset - bodythick}
           ur = {-pinpitch*(pincount-1)/2 + (pin-1)*pinpitch + pindia/2,
                 -pinpitch*(rowcount-1)/2 - bodyoffset - bodythick - pinlength}
-           Comps.box(ll: ll, ur: ur, layer: "F.SilkS",  width: silkoutlinewidth)
+           Comps.box(ll, ur, "F.SilkS", silkoutlinewidth)
       end
 
 
@@ -58,8 +58,7 @@ defmodule Footprints.PTHHeaderRA do
      # Pin 1 marker (circle)
      xcc = bodylen/2 + padwidth/4
      ycc = bodywid/2 + padheight/4
-     c = Comps.circle(center: {-xcc,ycc}, radius: 0.1, layer: "F.SilkS",
-                      width: silkoutlinewidth)
+     c = Comps.circle({-xcc,ycc}, 0.1, "F.SilkS", silkoutlinewidth)
 
     # Put all the module pieces together, create, and write the module
     features = List.flatten(pads) ++ frontSilkBorder ++

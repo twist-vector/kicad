@@ -44,32 +44,32 @@ defmodule Footprints.DIP do
     # Bounding "courtyard" for the device
     crtydSizeX = bodylen + 2*courtyardmargin
     crtydSizeY = (totalwid + padheight) + 2*courtyardmargin
-    courtyard = Comps.box(ll: {-crtydSizeX/2,  crtydSizeY/2},
-                          ur: { crtydSizeX/2, -crtydSizeY/2},
-                          layer: "F.CrtYd", width: silkoutlinewidth)
+    courtyard = Comps.box({-crtydSizeX/2,  crtydSizeY/2},
+                          { crtydSizeX/2, -crtydSizeY/2},
+                          "F.CrtYd", silkoutlinewidth)
 
 
-    outline = [Footprints.Components.box(ll: {-bodylen/2,bodywid/2},
-                                         ur: {bodylen/2,-bodywid/2},
-                                      layer: "F.SilkS", width: docoutlinewidth),
-               Footprints.Components.line(start: {-bodylen/2,bodywid/2-pinonesidelineoffset},
-                                            end: {bodylen/2,bodywid/2-pinonesidelineoffset},
-                                          layer: "F.SilkS", width: silkoutlinewidth)]
+    outline = [Footprints.Components.box({-bodylen/2,bodywid/2},
+                                         {bodylen/2,-bodywid/2},
+                                         "F.SilkS", docoutlinewidth),
+               Footprints.Components.line({-bodylen/2,bodywid/2-pinonesidelineoffset},
+                                          {bodylen/2,bodywid/2-pinonesidelineoffset},
+                                          "F.SilkS", silkoutlinewidth)]
 
     pins = for pinpair <- 1..stride do
       x = -span/2.0 + (pinpair-1)*pinpitch
-      [Footprints.Components.box(ll: {x-pinrad/2, bodywid/2},
-                                 ur: {x+pinrad/2, totalwid/2},
-                                 layer: "Dwgs.User", width: courtoutlinewidth),
-       Footprints.Components.box(ll: {x-pinrad/2, -bodywid/2},
-                                 ur: {x+pinrad/2, -totalwid/2},
-                                 layer: "Dwgs.User", width: courtoutlinewidth)]
+      [Footprints.Components.box({x-pinrad/2, bodywid/2},
+                                 {x+pinrad/2, totalwid/2},
+                                 "Dwgs.User", courtoutlinewidth),
+       Footprints.Components.box({x-pinrad/2, -bodywid/2},
+                                 {x+pinrad/2, -totalwid/2},
+                                 "Dwgs.User", courtoutlinewidth)]
     end
 
     # Pin 1 marker (circle)
     xcc = -span/2.0 - padwidth/2 - 3*silkoutlinewidth
     ycc = totalwid/2
-    c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
+    c = Comps.circle({xcc,ycc}, silkoutlinewidth, "F.SilkS", silkoutlinewidth)
 
     # Put all the module pieces together, create, and write the module
     features = List.flatten(pads) ++ courtyard ++ [c] ++ outline ++ pins

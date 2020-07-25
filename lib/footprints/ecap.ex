@@ -56,31 +56,31 @@ defmodule Footprints.ECap do
     theta = :math.asin(yt/cyldiam)
     ang = 180 - 4*(theta*180/:math.pi)
 
-    silk = [Comps.line(start: {x1, y1}, end: {x2, y1}, layer: "F.SilkS", width: silkoutlinewidth),
-            Comps.line(start: {x2, y1}, end: {x3, y2}, layer: "F.SilkS", width: silkoutlinewidth),
-            Comps.line(start: {x3, y2}, end: {x3, yt}, layer: "F.SilkS", width: silkoutlinewidth),
-            Comps.line(start: {x3,-yt}, end: {x3,-y2}, layer: "F.SilkS", width: silkoutlinewidth),
-            Comps.line(start: {x3,-y2}, end: {x2,-y1}, layer: "F.SilkS", width: silkoutlinewidth),
-            Comps.line(start: {x2,-y1}, end: {x1,-y1}, layer: "F.SilkS", width: silkoutlinewidth),
-            Comps.line(start: {x1,-y1}, end: {x1,-yt}, layer: "F.SilkS", width: silkoutlinewidth),
-            Comps.line(start: {x1, yt}, end: {x1, y1}, layer: "F.SilkS", width: silkoutlinewidth),
-            Comps.circle(center: {0,0}, radius: cyldiam/2, layer: "Eco1.User", width: silkoutlinewidth),
+    silk = [Comps.line({x1, y1}, {x2, y1}, "F.SilkS", silkoutlinewidth),
+            Comps.line({x2, y1}, {x3, y2}, "F.SilkS", silkoutlinewidth),
+            Comps.line({x3, y2}, {x3, yt}, "F.SilkS", silkoutlinewidth),
+            Comps.line({x3,-yt}, {x3,-y2}, "F.SilkS", silkoutlinewidth),
+            Comps.line({x3,-y2}, {x2,-y1}, "F.SilkS", silkoutlinewidth),
+            Comps.line({x2,-y1}, {x1,-y1}, "F.SilkS", silkoutlinewidth),
+            Comps.line({x1,-y1}, {x1,-yt}, "F.SilkS", silkoutlinewidth),
+            Comps.line({x1, yt}, {x1, y1}, "F.SilkS", silkoutlinewidth),
+            Comps.circle({0,0}, cyldiam/2, "Eco1.User", silkoutlinewidth),
             Comps.arc(start: {0,0}, end: {xt,yt}, angle: ang, layer: "F.SilkS", width: silkoutlinewidth),
             Comps.arc(start: {0,0}, end: {xt,-yt}, angle: -ang, layer: "F.SilkS", width: silkoutlinewidth)]
 
 
-    courtyard = Comps.box(ll: {-crtydSizeX/2,crtydSizeY/2},
-                          ur: {crtydSizeX/2,-crtydSizeY/2},
-                          layer: "F.CrtYd", width: courtoutlinewidth)
+    courtyard = Comps.box({-crtydSizeX/2,crtydSizeY/2},
+                          {crtydSizeX/2,-crtydSizeY/2},
+                          "F.CrtYd", courtoutlinewidth)
 
-    outline = [Comps.line(start: {x1, y1}, end: {x2, y1}, layer: "Eco1.User", width: silkoutlinewidth),
-               Comps.line(start: {x2, y1}, end: {x3, y2}, layer: "Eco1.User", width: silkoutlinewidth),
-               Comps.line(start: {x3, y2}, end: {x3, -y2}, layer: "Eco1.User", width: silkoutlinewidth),
-               Comps.line(start: {x3,-y2}, end: {x2,-y1}, layer: "Eco1.User", width: silkoutlinewidth),
-               Comps.line(start: {x2,-y1}, end: {x1,-y1}, layer: "Eco1.User", width: silkoutlinewidth),
-               Comps.line(start: {x1,-y1}, end: {x1,y1}, layer: "Eco1.User", width: silkoutlinewidth),
-               Comps.line(start: {xn,-yn}, end: {xn,yn}, layer: "Eco1.User", width: silkoutlinewidth),
-               Comps.circle(center: {0,0}, radius: cyldiam/2, layer: "Eco1.User", width: silkoutlinewidth)]
+    outline = [Comps.line({x1, y1}, {x2, y1}, "Eco1.User", silkoutlinewidth),
+               Comps.line({x2, y1}, {x3, y2}, "Eco1.User", silkoutlinewidth),
+               Comps.line({x3, y2}, {x3, -y2}, "Eco1.User", silkoutlinewidth),
+               Comps.line({x3,-y2}, {x2,-y1}, "Eco1.User", silkoutlinewidth),
+               Comps.line({x2,-y1}, {x1,-y1}, "Eco1.User", silkoutlinewidth),
+               Comps.line({x1,-y1}, {x1,y1}, "Eco1.User", silkoutlinewidth),
+               Comps.line({xn,-yn}, {xn,yn}, "Eco1.User", silkoutlinewidth),
+               Comps.circle({0,0}, cyldiam/2, "Eco1.User", silkoutlinewidth)]
 
 
     features = pads ++ [Enum.join(courtyard, "\n  ")] ++

@@ -17,18 +17,12 @@ defmodule Footprints.Drills do
 
     # Bounding "courtyard" for the device
     crtydsize = padsize + 2*courtyardmargin
-    courtyard = Comps.box(ll: {-crtydsize/2,  crtydsize/2},
-                          ur: { crtydsize/2, -crtydsize/2},
-                          layer: "F.CrtYd", width: courtoutlinewidth)
+    courtyard = Comps.box({-crtydsize/2,  crtydsize/2},
+                          { crtydsize/2, -crtydsize/2},
+                          "F.CrtYd", courtoutlinewidth)
 
-    outline = [Comps.circle(center: {0,0}, 
-                            radius: padsize/2+2*silkoutlinewidth, 
-                            layer: "F.SilkS", 
-                            width: silkoutlinewidth),
-               Comps.circle(center: {0,0}, 
-                            radius: padsize/2+2*silkoutlinewidth, 
-                            layer: "B.SilkS", 
-                            width: silkoutlinewidth)]
+    outline = [Comps.circle({0,0}, padsize/2+2*silkoutlinewidth, "F.SilkS", silkoutlinewidth),
+               Comps.circle({0,0}, padsize/2+2*silkoutlinewidth, "B.SilkS", silkoutlinewidth)]
 
     # Put all the module pieces together, create, and write the module
     features = [pad, courtyard] ++ outline

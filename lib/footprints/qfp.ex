@@ -55,17 +55,17 @@ defmodule Footprints.QFP do
     pins = for pinpair <- 1..stride do
       x = -span/2.0 + (pinpair-1)*pinpitch
       topbot =
-      [Footprints.Components.box(ll: {x-pinwidth/2,  bodywid/2}, ur: {x+pinwidth/2,  totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-       Footprints.Components.box(ll: {x-pinwidth/2, -bodywid/2}, ur: {x+pinwidth/2, -totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth)] ++
-      [Footprints.Components.box(ll: {x-pinwidth/2,  bodywid/2}, ur: {x+pinwidth/2, (totalwid)/2-legland}, layer: "Dwgs.User", width: docoutlinewidth),
-       Footprints.Components.box(ll: {x-pinwidth/2, -bodywid/2}, ur: {x+pinwidth/2, -(totalwid)/2+legland}, layer: "Dwgs.User", width: docoutlinewidth)]
+      [Footprints.Components.box({x-pinwidth/2,  bodywid/2},  {x+pinwidth/2,  totalwid/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({x-pinwidth/2, -bodywid/2},  {x+pinwidth/2, -totalwid/2}, "Dwgs.User", docoutlinewidth)] ++
+      [Footprints.Components.box({x-pinwidth/2,  bodywid/2},  {x+pinwidth/2, (totalwid)/2-legland}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({x-pinwidth/2, -bodywid/2},  {x+pinwidth/2, -(totalwid)/2+legland}, "Dwgs.User", docoutlinewidth)]
 
       y = -span/2.0 + (pinpair-1)*pinpitch
       leftright =
-      [Footprints.Components.box(ll: {-bodywid/2, y-pinwidth/2, }, ur: {-totalwid/2, y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth),
-       Footprints.Components.box(ll: { bodywid/2, y-pinwidth/2, }, ur: { totalwid/2, y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth)] ++
-      [Footprints.Components.box(ll: {-bodywid/2, y-pinwidth/2}, ur: {-(totalwid/2-legland), y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth),
-       Footprints.Components.box(ll: { bodywid/2, y-pinwidth/2}, ur: { (totalwid/2-legland), y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth)]
+      [Footprints.Components.box({-bodywid/2, y-pinwidth/2, },  {-totalwid/2, y+pinwidth/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({ bodywid/2, y-pinwidth/2, },  { totalwid/2, y+pinwidth/2}, "Dwgs.User", docoutlinewidth)] ++
+      [Footprints.Components.box({-bodywid/2, y-pinwidth/2},  {-(totalwid/2-legland), y+pinwidth/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({ bodywid/2, y-pinwidth/2},  { (totalwid/2-legland), y+pinwidth/2}, "Dwgs.User", docoutlinewidth)]
 
       topbot ++ leftright
     end
@@ -73,18 +73,20 @@ defmodule Footprints.QFP do
 
     crtydSizeX = maxOutsideLength + 2*toefillet + 2*courtyardmargin
     crtydSizeY = crtydSizeX
-    courtyard = Footprints.Components.box(ll: {-crtydSizeX/2, crtydSizeY/2},
-                                          ur: { crtydSizeX/2,-crtydSizeY/2},
-                                          layer: "F.CrtYd", width: courtoutlinewidth)
+    courtyard = Footprints.Components.box({-crtydSizeX/2, crtydSizeY/2},
+                                          { crtydSizeX/2,-crtydSizeY/2},
+                                          "F.CrtYd", courtoutlinewidth)
 
 
-    outline = [Footprints.Components.box(ll: {-bodylen/2, bodywid/2}, ur: { bodylen/2,-bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
-               Footprints.Components.line(start: {-bodylen/2,bodywid/2-0.75}, end: {-bodylen/2+0.75,bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth)]
+    outline = [Footprints.Components.box({-bodylen/2, bodywid/2},  { bodylen/2,-bodywid/2}, "F.SilkS", silkoutlinewidth),
+               Footprints.Components.line({-bodylen/2,bodywid/2-0.75}, 
+                                          {-bodylen/2+0.75,bodywid/2}, 
+                                          "F.SilkS", silkoutlinewidth)]
 
     # Pin 1 marker (circle)
     xcc = -span/2 - padSizeX/2 - 3*silkoutlinewidth
     ycc = totalwid/2
-    c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
+    c = Comps.circle({xcc,ycc}, silkoutlinewidth, "F.SilkS", silkoutlinewidth)
 
     features = List.flatten(pads) ++ epad ++ courtyard ++ [c] ++
                List.flatten(pins) ++ List.flatten(outline)

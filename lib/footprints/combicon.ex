@@ -22,9 +22,9 @@ defmodule Footprints.Combicon do
       # Bounding "courtyard" for the device
       crtydlength = bodylen + 2*courtyardmargin
       crtydwidth  = bodywid + 2*courtyardmargin
-      courtyard = Comps.box(ll: {-crtydlength/2-bodyoffsetx/2,  crtydwidth/2-bodyoffsety},
-                            ur: { crtydlength/2-bodyoffsetx/2, -crtydwidth/2-bodyoffsety},
-                            layer: "F.CrtYd", width: silkoutlinewidth)
+      courtyard = Comps.box({-crtydlength/2-bodyoffsetx/2,  crtydwidth/2-bodyoffsety},
+                            { crtydlength/2-bodyoffsetx/2, -crtydwidth/2-bodyoffsety},
+                            "F.CrtYd", silkoutlinewidth)
 
       # The grid of pads.  We'll call the common function from the PTHHeader
       # module for each pin location.
@@ -32,38 +32,38 @@ defmodule Footprints.Combicon do
                Footprints.PTHHeaderSupport.make_pad(params, pin, 1, pincount, 1, "oval", maskmargin)
 
       # Add the header outline.
-      frontSilkBorder = [Comps.box(ll: {-bodylen/2-bodyoffsetx/2,  bodywid/2-bodyoffsety},
-                                   ur: { bodylen/2-bodyoffsetx/2, -bodywid/2-bodyoffsety},
-                                   layer: "F.SilkS", width: silkoutlinewidth),
-                         Comps.line(start: {-bodylen/2-bodyoffsetx/2+bodyoffsetx, bodywid/2-bodyoffsety},
-                                   end: {-bodylen/2-bodyoffsetx/2+bodyoffsetx,-bodywid/2-bodyoffsety},
-                                   layer: "F.SilkS", width: silkoutlinewidth),
-                         Comps.line(start: {-bodylen/2-bodyoffsetx/2+bodyoffsetx, bodyoffsety+1.5*drilldia},
-                                    end: {bodylen/2-bodyoffsetx/2, bodyoffsety+1.5*drilldia},
-                                    layer: "F.SilkS", width: silkoutlinewidth),
-                         Comps.line(start: {-bodylen/2-bodyoffsetx/2+bodyoffsetx, -2*drilldia},
-                                    end: {bodylen/2-bodyoffsetx/2, -2*drilldia},
-                                    layer: "F.SilkS", width: silkoutlinewidth)]
+      frontSilkBorder = [Comps.box({-bodylen/2-bodyoffsetx/2,  bodywid/2-bodyoffsety},
+                                   { bodylen/2-bodyoffsetx/2, -bodywid/2-bodyoffsety},
+                                   "F.SilkS", silkoutlinewidth),
+                         Comps.line({-bodylen/2-bodyoffsetx/2+bodyoffsetx, bodywid/2-bodyoffsety},
+                                   {-bodylen/2-bodyoffsetx/2+bodyoffsetx,-bodywid/2-bodyoffsety},
+                                   "F.SilkS", silkoutlinewidth),
+                         Comps.line({-bodylen/2-bodyoffsetx/2+bodyoffsetx, bodyoffsety+1.5*drilldia},
+                                    {bodylen/2-bodyoffsetx/2, bodyoffsety+1.5*drilldia},
+                                    "F.SilkS", silkoutlinewidth),
+                         Comps.line({-bodylen/2-bodyoffsetx/2+bodyoffsetx, -2*drilldia},
+                                    {bodylen/2-bodyoffsetx/2, -2*drilldia},
+                                    "F.SilkS", silkoutlinewidth)]
       wireEntryMarks = for pin <- 1..pincount do
                          xc = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
                          yc = bodyoffsety + drilldia/2
-                         Comps.circle(center: {xc,yc}, radius: drilldia/2, layer: "F.SilkS", width: silkoutlinewidth)
+                         Comps.circle({xc,yc}, drilldia/2, "F.SilkS", silkoutlinewidth)
                        end
       releaseMarks = for pin <- 1..pincount do
                        llx = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch - drilldia/2
                        lly = -2.5*drilldia
                        urx = llx + drilldia
                        ury = -bodywid/2-bodyoffsety + drilldia
-                       Comps.box(ll: {llx,lly}, ur: {urx,ury}, layer: "F.SilkS", width: silkoutlinewidth)
+                       Comps.box({llx,lly}, {urx,ury}, "F.SilkS", silkoutlinewidth)
                      end
       releaseArrows = for pin <- 1..pincount do
                         lx = -((pincount-1)/2*pinpitch) + (pin-1)*pinpitch
                         ly = bodyoffsety + drilldia/2 + 2.25*drilldia
                         ux = lx
                         uy = bodyoffsety + drilldia/2 + 1.5*drilldia
-                        [Comps.line(start: {lx, ly}, end: {ux,uy}, layer: "Dwgs.User", width: silkoutlinewidth),
-                         Comps.line(start: {ux-0.25, uy+0.25}, end: {ux,uy}, layer: "Dwgs.User", width: silkoutlinewidth),
-                         Comps.line(start: {ux+0.25, uy+0.25}, end: {ux,uy}, layer: "Dwgs.User", width: silkoutlinewidth)]
+                        [Comps.line({lx, ly}, {ux,uy}, "Dwgs.User", silkoutlinewidth),
+                         Comps.line({ux-0.25, uy+0.25}, {ux,uy}, "Dwgs.User", silkoutlinewidth),
+                         Comps.line({ux+0.25, uy+0.25}, {ux,uy}, "Dwgs.User", silkoutlinewidth)]
                       end
 
 

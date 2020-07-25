@@ -12,9 +12,9 @@ defmodule Footprints.PTHHeaderSupport do
     dyStart    = bodyrad * :math.sin(thetaStart)
     dxEnd      = bodyrad * :math.cos(thetaEnd)
     dyEnd      = bodyrad * :math.sin(thetaEnd)
-    Comps.line(start: {xc+dxStart,yc+dyStart},
-               end: {xc+dxEnd,yc+dyEnd},
-               layer: layer, width: 0.1)
+    Comps.line({xc+dxStart,yc+dyStart},
+               {xc+dxEnd,yc+dyEnd},
+               layer, 0.1)
   end
 
 

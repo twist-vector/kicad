@@ -21,9 +21,9 @@ defmodule Footprints.PTHHeader do
       # Bounding "courtyard" for the device
       crtydlength = (bodylen + padheight) + courtyardmargin
       crtydwidth  = (bodywid + padwidth) + courtyardmargin
-      courtyard = Comps.box(ll: {-crtydlength/2,  crtydwidth/2},
-                            ur: { crtydlength/2, -crtydwidth/2},
-                            layer: "F.CrtYd", width: silkoutlinewidth)
+      courtyard = Comps.box({-crtydlength/2,  crtydwidth/2},
+                            { crtydlength/2, -crtydwidth/2},
+                            "F.CrtYd", silkoutlinewidth)
 
       # The grid of pads.  We'll call the common function from the PTHHeaderSupport
       # module for each pin location.
@@ -39,8 +39,7 @@ defmodule Footprints.PTHHeader do
       # Pin 1 marker (circle)
       xcc = bodylen/2 + padwidth/4
       ycc = bodywid/2 + padheight/4
-      cFront = Comps.circle(center: {-xcc,ycc}, radius: silkoutlinewidth,
-                            layer: "F.SilkS", width: silkoutlinewidth)
+      cFront = Comps.circle({-xcc,ycc}, silkoutlinewidth, "F.SilkS", silkoutlinewidth)
 
 
       # Put all the module pieces together, create, and write the module

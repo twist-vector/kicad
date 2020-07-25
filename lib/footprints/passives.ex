@@ -51,39 +51,38 @@ defmodule Footprints.Passives do
 
 
     silk = if polarized do
-      [Comps.line(start: {-padCenterX-padSizeX/2, -padSizeY/2-2*silkoutlinewidth},
-                  end: { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
-                  layer: "F.SilkS",
-                  width: silkoutlinewidth)] ++
-             [Comps.line(start: {-padCenterX-padSizeX/2, padSizeY/2+2*silkoutlinewidth},
-                         end: { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
-                         layer: "F.SilkS",
-                         width: silkoutlinewidth)] ++
-              [Comps.circle(center: {-padCenterX-padSizeX/2-0.25,0}, radius: 0.05,
-                            layer: "F.SilkS", width: silkoutlinewidth)]
+      [Comps.line({-padCenterX-padSizeX/2, -padSizeY/2-2*silkoutlinewidth},
+                  { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
+                  "F.SilkS",
+                  silkoutlinewidth)] ++
+        [Comps.line({-padCenterX-padSizeX/2, padSizeY/2+2*silkoutlinewidth},
+                    { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
+                    "F.SilkS",
+                    silkoutlinewidth)] ++
+        [Comps.circle({-padCenterX-padSizeX/2-0.25,0}, 0.05, "F.SilkS", silkoutlinewidth)]
     else
-      [Comps.line(start: {-minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
-                           end: { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
-                         layer: "F.SilkS",
-                         width: silkoutlinewidth)] ++
-             [Comps.line(start: {-minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
-                           end: { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
-                         layer: "F.SilkS",
-                         width: silkoutlinewidth)]
+      [Comps.line({-minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
+                           { minInsideLengthX/2, -padSizeY/2-2*silkoutlinewidth},
+                         "F.SilkS",
+                         silkoutlinewidth)] ++
+             [Comps.line({-minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
+                           { minInsideLengthX/2, padSizeY/2+2*silkoutlinewidth},
+                         "F.SilkS",
+                         silkoutlinewidth)]
     end
-    courtyard = Footprints.Components.box(ll: {-crtydSizeX/2,crtydSizeY/2},
-                                          ur: {crtydSizeX/2,-crtydSizeY/2},
-                                          layer: "F.CrtYd", width: courtoutlinewidth)
+    courtyard = Footprints.Components.box({-crtydSizeX/2,crtydSizeY/2},
+                                          {crtydSizeX/2,-crtydSizeY/2},
+                                          "F.CrtYd", courtoutlinewidth)
 
-    outline = Footprints.Components.box(ll: {-bodylen/2,bodywid/2},
-                                        ur: {bodylen/2,-bodywid/2},
-                                        layer: "Dwgs.User", width: docoutlinewidth) ++
-              Footprints.Components.box(ll: {-bodylen/2,bodywid/2},
-                                        ur: {-bodylen/2+legland,-bodywid/2},
-                                        layer: "Dwgs.User", width: docoutlinewidth) ++
-              Footprints.Components.box(ll: {bodylen/2-legland,bodywid/2},
-                                        ur: {bodylen/2,-bodywid/2},
-                                        layer: "Dwgs.User", width: docoutlinewidth)
+    outline = Footprints.Components.box({-bodylen/2,bodywid/2},
+                                        {bodylen/2,-bodywid/2},
+                                        "Dwgs.User", docoutlinewidth) ++
+              Footprints.Components.box({-bodylen/2,bodywid/2},
+                                        {-bodylen/2+legland,-bodywid/2},
+                                        "Dwgs.User", docoutlinewidth) ++
+              Footprints.Components.box({bodylen/2-legland,bodywid/2},
+                                        {bodylen/2,-bodywid/2},
+                                        "Dwgs.User", docoutlinewidth)
 
     features = pads ++ [Enum.join(courtyard, "\n  ")] ++
         [Enum.join(outline, "\n  ")] ++ silk

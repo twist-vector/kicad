@@ -71,27 +71,27 @@ defmodule Footprints.SOT do
 
 
     pins = case pincount do
-             3 -> [Comps.box(ll: {-(pinpitch+pinwidth/2), totalwid/2},         ur: {-(pinpitch-pinwidth/2),bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { (pinpitch+pinwidth/2), totalwid/2},         ur: { (pinpitch-pinwidth/2),bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { -pinwidth/2, -bodywid/2}, ur: { pinwidth/2, -totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth)]
+             3 -> [Comps.box({-(pinpitch+pinwidth/2), totalwid/2}, {-(pinpitch-pinwidth/2),bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ (pinpitch+pinwidth/2), totalwid/2}, { (pinpitch-pinwidth/2),bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ -pinwidth/2, -bodywid/2}, { pinwidth/2, -totalwid/2}, "Dwgs.User", docoutlinewidth)]
 
-             4 -> [Comps.box(ll: {-(pinpitch+pinwidth/2), totalwid/2},         ur: {-(pinpitch-pinwidth/2),bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { (pinpitch+pinwidth/2), totalwid/2},         ur: { (pinpitch-pinwidth/2),bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: {-(pinpitch+pinwidth/2), -bodywid/2}, ur: {-(pinpitch-pinwidth/2), -totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { (pinpitch-pinwidth/2), -bodywid/2}, ur: { (pinpitch+pinwidth/2), -totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth)]
+             4 -> [Comps.box({-(pinpitch+pinwidth/2), totalwid/2}, {-(pinpitch-pinwidth/2),bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ (pinpitch+pinwidth/2), totalwid/2}, { (pinpitch-pinwidth/2),bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({-(pinpitch+pinwidth/2), -bodywid/2}, {-(pinpitch-pinwidth/2), -totalwid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ (pinpitch-pinwidth/2), -bodywid/2}, { (pinpitch+pinwidth/2), -totalwid/2}, "Dwgs.User", docoutlinewidth)]
 
-             5 -> [Comps.box(ll: {-(pinpitch+pinwidth/2), totalwid/2},         ur: {-(pinpitch-pinwidth/2),bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { -pinwidth/2, totalwid/2},         ur: { pinwidth/2,bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { pinpitch-pinwidth/2, totalwid/2}, ur: { pinpitch+pinwidth/2, bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { (pinpitch-pinwidth/2), -bodywid/2}, ur: { (pinpitch+pinwidth/2), -totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: {-(pinpitch+pinwidth/2), -bodywid/2}, ur: {-(pinpitch-pinwidth/2), -totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth)]
+             5 -> [Comps.box({-(pinpitch+pinwidth/2), totalwid/2}, {-(pinpitch-pinwidth/2),bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ -pinwidth/2, totalwid/2}, { pinwidth/2,bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ pinpitch-pinwidth/2, totalwid/2}, { pinpitch+pinwidth/2, bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ (pinpitch-pinwidth/2), -bodywid/2}, { (pinpitch+pinwidth/2), -totalwid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({-(pinpitch+pinwidth/2), -bodywid/2}, {-(pinpitch-pinwidth/2), -totalwid/2}, "Dwgs.User", docoutlinewidth)]
 
-             6 -> [Comps.box(ll: {-(pinpitch+pinwidth/2), totalwid/2},         ur: {-(pinpitch-pinwidth/2),bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { -pinwidth/2, totalwid/2},         ur: { pinwidth/2,bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { pinpitch-pinwidth/2, totalwid/2}, ur: { pinpitch+pinwidth/2, bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { (pinpitch-pinwidth/2), -bodywid/2}, ur: { (pinpitch+pinwidth/2), -totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: { -pinwidth/2, -bodywid/2},         ur: { pinwidth/2,-totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-                   Comps.box(ll: {-(pinpitch+pinwidth/2), -bodywid/2}, ur: {-(pinpitch-pinwidth/2), -totalwid/2}, layer: "Dwgs.User", width: docoutlinewidth)]
+             6 -> [Comps.box({-(pinpitch+pinwidth/2), totalwid/2}, {-(pinpitch-pinwidth/2),bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ -pinwidth/2, totalwid/2}, { pinwidth/2,bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ pinpitch-pinwidth/2, totalwid/2}, { pinpitch+pinwidth/2, bodywid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ (pinpitch-pinwidth/2), -bodywid/2}, { (pinpitch+pinwidth/2), -totalwid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({ -pinwidth/2, -bodywid/2}, { pinwidth/2,-totalwid/2}, "Dwgs.User", docoutlinewidth),
+                   Comps.box({-(pinpitch+pinwidth/2), -bodywid/2}, {-(pinpitch-pinwidth/2), -totalwid/2}, "Dwgs.User", docoutlinewidth)]
              _ -> []
            end
 
@@ -99,18 +99,18 @@ defmodule Footprints.SOT do
      # Pin 1 marker (circle)
      xcc = -pincount/2/2*pinpitch - padSizeX/2 - 3*silkoutlinewidth
      ycc = totalwid/2
-     c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
+     c = Comps.circle({xcc,ycc}, silkoutlinewidth, "F.SilkS", silkoutlinewidth)
 
     crtydSizeX = bodylen + 2*courtyardmargin
     crtydSizeY = maxOutsideWidth + 2*toefillet + 2*courtyardmargin
-    courtyard = Footprints.Components.box(ll: {-crtydSizeX/2,crtydSizeY/2},
-                                          ur: {crtydSizeX/2,-crtydSizeY/2},
-                                          layer: "F.CrtYd", width: courtoutlinewidth)
+    courtyard = Footprints.Components.box({-crtydSizeX/2,crtydSizeY/2},
+                                          {crtydSizeX/2,-crtydSizeY/2},
+                                          "F.CrtYd", courtoutlinewidth)
 
 
-    outline = [Footprints.Components.box(ll: {-bodylen/2,bodywid/2},
-                                        ur: {bodylen/2,-bodywid/2},
-                                        layer: "F.SilkS", width: silkoutlinewidth)]
+    outline = [Footprints.Components.box({-bodylen/2,bodywid/2},
+                                         {bodylen/2,-bodywid/2},
+                                         "F.SilkS", silkoutlinewidth)]
 
 
     features = pads ++ courtyard ++ pins ++ outline ++ [c]

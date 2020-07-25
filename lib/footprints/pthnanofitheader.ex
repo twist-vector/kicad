@@ -25,9 +25,9 @@ defmodule Footprints.NanofitHeaderPTH do
 
       # Bounding "courtyard" for the device
       crtydlength = bodylen + 2*courtyardmargin
-      courtyard = Comps.box(ll: {-crtydlength/2, upper-courtyardmargin},
-                            ur: { crtydlength/2, tabLower+courtyardmargin},
-                            layer: "F.CrtYd", width: silkoutlinewidth)
+      courtyard = Comps.box({-crtydlength/2, upper-courtyardmargin},
+                            { crtydlength/2, tabLower+courtyardmargin},
+                            "F.CrtYd", silkoutlinewidth)
 
       # The grid of pads.  We'll call the common function from the PTHHeader
       # module for each pin location.
@@ -42,15 +42,15 @@ defmodule Footprints.NanofitHeaderPTH do
       align = [Comps.pad(:pth, "tab", "oval", {x, y}, {1.29,1.29}, 1.3, 0)]
 
       # Outline
-      outline = [Comps.line(start: {-bodylen/2,lower}, end: {bodylen/2,lower}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {-bodylen/2,upper}, end: {bodylen/2,upper}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {-bodylen/2,upper}, end: {-bodylen/2,lower}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {bodylen/2,upper}, end: {bodylen/2,lower}, layer: "F.SilkS", width: silkoutlinewidth),
+      outline = [Comps.line({-bodylen/2,lower}, {bodylen/2,lower}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({-bodylen/2,upper}, {bodylen/2,upper}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({-bodylen/2,upper}, {-bodylen/2,lower}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({bodylen/2,upper}, {bodylen/2,lower}, "F.SilkS", silkoutlinewidth),
                  # The latch outline
-                 Comps.line(start: {-tabWidth/2,tabLower}, end: {tabWidth/2,tabLower}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {-tabWidth/2,lower}, end: {-tabWidth/2,tabLower}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {tabWidth/2,lower}, end: {tabWidth/2,tabLower}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {-tabWidth/6,lower+silkoutlinewidth}, end: {tabWidth/6,lower+silkoutlinewidth}, layer: "F.SilkS", width: silkoutlinewidth),
+                 Comps.line({-tabWidth/2,tabLower}, {tabWidth/2,tabLower}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({-tabWidth/2,lower}, {-tabWidth/2,tabLower}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({tabWidth/2,lower}, {tabWidth/2,tabLower}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({-tabWidth/6,lower+silkoutlinewidth}, {tabWidth/6,lower+silkoutlinewidth}, "F.SilkS", silkoutlinewidth),
                 ]
 
 

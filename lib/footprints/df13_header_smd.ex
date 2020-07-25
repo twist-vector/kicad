@@ -25,9 +25,9 @@ defmodule Footprints.DF13HeaderSMD do
 
       # Bounding "courtyard" for the device
       crtydlength = bodylen + 2*(supppadwidth + courtyardmargin)
-      courtyard = Comps.box(ll: {-crtydlength/2, padheight/2+courtyardmargin},
-                            ur: { crtydlength/2, upper-courtyardmargin},
-                            layer: "F.CrtYd", width: silkoutlinewidth)
+      courtyard = Comps.box({-crtydlength/2, padheight/2+courtyardmargin},
+                            { crtydlength/2, upper-courtyardmargin},
+                            "F.CrtYd", silkoutlinewidth)
 
       # The grid of pads.  We'll call the common function from the PTHHeader
       # module for each pin location.
@@ -36,8 +36,7 @@ defmodule Footprints.DF13HeaderSMD do
 
       pinYc = lower - 2.015
       pinmarks = for pin <- 1..pincount, do:
-        Comps.circle(center: {-((pincount-1)/2*pinpitch) + (pin-1)*pinpitch, pinYc}, 
-                     radius: 0.3,layer: "F.SilkS", width: silkoutlinewidth)
+        Comps.circle({-((pincount-1)/2*pinpitch) + (pin-1)*pinpitch, pinYc}, 0.3, "F.SilkS", silkoutlinewidth)
 
       sx = (bodylen + padheight)/2
       sy = -2.1
@@ -56,18 +55,18 @@ defmodule Footprints.DF13HeaderSMD do
       x4 = right - 0.5
       y1 = top + 0.5
       y2 = y1 + gap
-      outline = [Comps.line(start: {-bodylen/2,lower}, end: {bodylen/2,lower}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {-bodylen/2,upper}, end: {bodylen/2,upper}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {-bodylen/2,upper}, end: {-bodylen/2,lower}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {bodylen/2,upper}, end: {bodylen/2,lower}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {left, top}, end: {x1,top}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {x2, top}, end: {x3,top}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {x4, top}, end: {right,top}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {left, top}, end: {left,y1}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {left, y2}, end: {left,bottom},layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {right, top}, end: {right,y1}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {right, y2}, end: {right,bottom}, layer: "F.SilkS", width: silkoutlinewidth),
-                 Comps.line(start: {left, bottom}, end: {right,bottom}, layer: "F.SilkS", width: silkoutlinewidth)]
+      outline = [Comps.line({-bodylen/2,lower}, {bodylen/2,lower}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({-bodylen/2,upper}, {bodylen/2,upper}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({-bodylen/2,upper}, {-bodylen/2,lower}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({bodylen/2,upper}, {bodylen/2,lower}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({left, top}, {x1,top}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({x2, top}, {x3,top}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({x4, top}, {right,top}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({left, top}, {left,y1}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({left, y2}, {left,bottom},"F.SilkS", silkoutlinewidth),
+                 Comps.line({right, top}, {right,y1}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({right, y2}, {right,bottom}, "F.SilkS", silkoutlinewidth),
+                 Comps.line({left, bottom}, {right,bottom}, "F.SilkS", silkoutlinewidth)]
 
 
 

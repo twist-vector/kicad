@@ -62,12 +62,12 @@ defmodule Footprints do
   """
   def process(options) do
     # Set input and output directories (defaults if not given on the command line)
-    output_base_directory =
+    out_dir =
       if !options[:dir],
         do: "DATA",
         else: options[:dir]
 
-    config_base_directory =
+    conf_dir =
       if !options[:cfg],
         do: "devices",
         else: options[:dir]
@@ -76,7 +76,7 @@ defmodule Footprints do
     # with the keyword "defaults" (others will be ignored) whose value is a
     # keyword list (key,value pairs) for the parameter values to use.  Note that
     # the returned map will have string keys.
-    a = YamlElixir.read_from_file("#{config_base_directory}/global_defaults.yml")
+    a = YamlElixir.read_from_file("#{conf_dir}/global_defaults.yml")
 
     # Pull out the key-value pairs from the 'defaults' key of the read-in configuration
     # and map the keys to atoms.  The atoms will be used as the keys to the newly-created
@@ -95,186 +95,27 @@ defmodule Footprints do
     # Build each KiCad module.  Each device type has its own module with a build
     # function to write out the devices.  They'll all need to defaults and overrides
     # lists to specify default values.  Device-specific parameters will be loaded
-    # from file in the  'config_base_directory' directory.
-    Footprints.PTHHeader.build( 
-      "PTH_Headers", 
-      "PTH254Header_devices.yml", 
-      defaults, 
-      overrides, 
-      output_base_directory, 
-      config_base_directory
-    )
-
-    Footprints.PTHHeader.build(
-      "PTH_Headers",
-      "PTH127Header_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.PTHHeaderRA.build(
-      "PTH_Headers",
-      "PTH254Header_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.PTHHeaderRA.build(
-      "PTH_Headers",
-      "PTH127Header_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.DF13Header.build(
-      "PTH_Headers",
-      "DF13Header_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.DF13HeaderRA.build(
-      "PTH_Headers",
-      "DF13Header_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.Combicon.build(
-      "PTH_Headers",
-      "combicon_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.Drills.build(
-      "Drills",
-      "drills.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.Passives.build(
-      "SMD_Passives",
-      "rcl_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.Diodes.build(
-      "SMD_Passives",
-      "smd_diode_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.DIP.build(
-      "DIP",
-      "DIP_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.SOIC.build(
-      "SOP",
-      "SOP_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.QFP.build(
-      "QFP",
-      "QFP_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.QFN.build(
-      "QFN",
-      "QFN_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.SOT.build(
-      "SOT",
-      "SOT_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.DPak.build(
-      "TO",
-      "TO_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.ECap.build(
-      "ECAP",
-      "ecap_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.DF13HeaderSMD.build(
-      "SMD_Headers",
-      "DF13SMDHeader_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.DF13HeaderRASMD.build(
-      "SMD_Headers",
-      "DF13SMDHeader_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
-
-    Footprints.NanofitHeaderPTH.build(
-      "PTH_Headers",
-      "PTHnanofitHeader_devices.yml",
-      defaults,
-      overrides,
-      output_base_directory,
-      config_base_directory
-    )
+    # from file in the  'conf_dir' directory.
+    Footprints.PTHHeader.build("PTH_Headers", "PTH254Header_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.PTHHeader.build("PTH_Headers", "PTH127Header_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.PTHHeaderRA.build("PTH_Headers", "PTH254Header_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.PTHHeaderRA.build("PTH_Headers", "PTH127Header_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.DF13Header.build("PTH_Headers", "DF13Header_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.DF13HeaderRA.build("PTH_Headers", "DF13Header_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.Combicon.build("PTH_Headers", "combicon_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.Drills.build("Drills", "drills.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.Passives.build("SMD_Passives", "rcl_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.Diodes.build("SMD_Passives", "smd_diode_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.DIP.build("DIP", "DIP_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.SOIC.build("SOP", "SOP_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.QFP.build("QFP", "QFP_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.QFN.build("QFN", "QFN_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.SOT.build("SOT", "SOT_devices.yml", defaults, overrides, out_dir,conf_dir)
+    Footprints.DPak.build("TO", "TO_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.ECap.build("ECAP", "ecap_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.DF13HeaderSMD.build("SMD_Headers", "DF13SMDHeader_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.DF13HeaderRASMD.build("SMD_Headers", "DF13SMDHeader_devices.yml", defaults, overrides, out_dir, conf_dir)
+    Footprints.NanofitHeaderPTH.build("PTH_Headers", "PTHnanofitHeader_devices.yml", defaults, overrides, out_dir, conf_dir)
 
     :ok
   end

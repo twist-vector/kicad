@@ -59,28 +59,28 @@ defmodule Footprints.DPak do
 
     pins = for pin <- 1..pincount do
       x = -pinpitch + (pin-1) * (2*pinpitch)/(pincount-1)
-      [Footprints.Components.box(ll: {x-pinwidth/2, totalwid-bodywid/2},
-                                 ur: {x+pinwidth/2, bodywid/2},
-                                 layer: "Dwgs.User", width: courtoutlinewidth),
-       Footprints.Components.box(ll: {x-pinwidth/2, totalwid-bodywid/2-legland},
-                                  ur: {x+pinwidth/2, bodywid/2},
-                                  layer: "Dwgs.User", width: courtoutlinewidth)]
+      [Footprints.Components.box({x-pinwidth/2, totalwid-bodywid/2},
+                                 {x+pinwidth/2, bodywid/2},
+                                 "Dwgs.User", courtoutlinewidth),
+       Footprints.Components.box({x-pinwidth/2, totalwid-bodywid/2-legland},
+                                 {x+pinwidth/2, bodywid/2},
+                                 "Dwgs.User", courtoutlinewidth)]
     end
 
 
 
     crtydSizeX = bodylen + 2*courtyardmargin
-    courtyard = Footprints.Components.box(ll: {-crtydSizeX/2, totalwid-bodywid/2 + toefillet + courtyardmargin},
-                                          ur: { crtydSizeX/2, -bodywid/2 - courtyardmargin - epadohang/2},
-                                          layer: "F.CrtYd", width: courtoutlinewidth)
+    courtyard = Footprints.Components.box({-crtydSizeX/2, totalwid-bodywid/2 + toefillet + courtyardmargin},
+                                          { crtydSizeX/2, -bodywid/2 - courtyardmargin - epadohang/2},
+                                          "F.CrtYd", courtoutlinewidth)
 
 
-    outline = [Footprints.Components.box(ll: {-bodylen/2, bodywid/2}, ur: { bodylen/2,-bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth)]
+    outline = [Footprints.Components.box({-bodylen/2, bodywid/2}, { bodylen/2,-bodywid/2}, "F.SilkS", silkoutlinewidth)]
 
     # Pin 1 marker (circle)
     xcc = -pinpitch*(pincount)/2 - padSizeX/2 - 4*silkoutlinewidth
     ycc = totalwid-bodywid/2
-    c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
+    c = Comps.circle({xcc,ycc}, silkoutlinewidth, "F.SilkS", silkoutlinewidth)
 
 
     features = List.flatten(pads) ++ epad ++ courtyard ++ [c] ++

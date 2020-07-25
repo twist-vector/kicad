@@ -55,17 +55,17 @@ defmodule Footprints.QFN do
     pins = for pinpair <- 1..stride do
       x = -span/2.0 + (pinpair-1)*pinpitch
       topbot =
-      [Footprints.Components.box(ll: {x-pinwidth/2,  bodywid/2}, ur: {x+pinwidth/2,  bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth),
-       Footprints.Components.box(ll: {x-pinwidth/2, -bodywid/2}, ur: {x+pinwidth/2, -bodywid/2}, layer: "Dwgs.User", width: docoutlinewidth)] ++
-      [Footprints.Components.box(ll: {x-pinwidth/2,  bodywid/2}, ur: {x+pinwidth/2, (bodywid)/2-legland}, layer: "Dwgs.User", width: docoutlinewidth),
-       Footprints.Components.box(ll: {x-pinwidth/2, -bodywid/2}, ur: {x+pinwidth/2, -(bodywid)/2+legland}, layer: "Dwgs.User", width: docoutlinewidth)]
+      [Footprints.Components.box({x-pinwidth/2,  bodywid/2},  {x+pinwidth/2,  bodywid/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({x-pinwidth/2, -bodywid/2},  {x+pinwidth/2, -bodywid/2}, "Dwgs.User", docoutlinewidth)] ++
+      [Footprints.Components.box({x-pinwidth/2,  bodywid/2},  {x+pinwidth/2, (bodywid)/2-legland}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({x-pinwidth/2, -bodywid/2},  {x+pinwidth/2, -(bodywid)/2+legland}, "Dwgs.User", docoutlinewidth)]
 
       y = -span/2.0 + (pinpair-1)*pinpitch
       leftright =
-      [Footprints.Components.box(ll: {-bodywid/2, y-pinwidth/2, }, ur: {-bodywid/2, y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth),
-       Footprints.Components.box(ll: { bodywid/2, y-pinwidth/2, }, ur: { bodywid/2, y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth)] ++
-      [Footprints.Components.box(ll: {-bodywid/2, y-pinwidth/2}, ur: {-(bodywid/2-legland), y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth),
-       Footprints.Components.box(ll: { bodywid/2, y-pinwidth/2}, ur: { (bodywid/2-legland), y+pinwidth/2}, layer: "Dwgs.User", width: docoutlinewidth)]
+      [Footprints.Components.box({-bodywid/2, y-pinwidth/2, },  {-bodywid/2, y+pinwidth/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({ bodywid/2, y-pinwidth/2, },  { bodywid/2, y+pinwidth/2}, "Dwgs.User", docoutlinewidth)] ++
+      [Footprints.Components.box({-bodywid/2, y-pinwidth/2},  {-(bodywid/2-legland), y+pinwidth/2}, "Dwgs.User", docoutlinewidth),
+       Footprints.Components.box({ bodywid/2, y-pinwidth/2},  { (bodywid/2-legland), y+pinwidth/2}, "Dwgs.User", docoutlinewidth)]
 
       topbot ++ leftright
     end
@@ -73,29 +73,28 @@ defmodule Footprints.QFN do
 
     crtydSizeX = maxOutsideLength + 2*toefillet + 2*courtyardmargin
     crtydSizeY = crtydSizeX
-    courtyard = Footprints.Components.box(ll: {-crtydSizeX/2, crtydSizeY/2},
-                                          ur: { crtydSizeX/2,-crtydSizeY/2},
-                                          layer: "F.CrtYd", width: courtoutlinewidth)
+    courtyard = Footprints.Components.box({-crtydSizeX/2, crtydSizeY/2},
+                                          { crtydSizeX/2,-crtydSizeY/2},
+                                          "F.CrtYd", courtoutlinewidth)
 
 
     x = (pincount/4-1)*pinpitch/2 + padSizeX/2 + silkoutlinewidth + placetickmargin
     y = (pincount/4-1)*pinpitch/2 + padSizeX/2 + silkoutlinewidth + placetickmargin
-    outline = [Footprints.Components.line(start: {-bodylen/2, bodywid/2}, end: {-x, bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
-               Footprints.Components.line(start: {-bodylen/2, bodywid/2}, end: {-bodylen/2, y}, layer: "F.SilkS", width: silkoutlinewidth),
-               Footprints.Components.line(start: { bodylen/2, bodywid/2}, end: { x, bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
-               Footprints.Components.line(start: { bodylen/2, bodywid/2}, end: { bodylen/2, y}, layer: "F.SilkS", width: silkoutlinewidth),
-               Footprints.Components.line(start: {-bodylen/2,-bodywid/2}, end: {-x,-bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
-               Footprints.Components.line(start: {-bodylen/2,-bodywid/2}, end: {-bodylen/2,-y}, layer: "F.SilkS", width: silkoutlinewidth),
-               Footprints.Components.line(start: { bodylen/2,-bodywid/2}, end: { x,-bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth),
-               Footprints.Components.line(start: { bodylen/2,-bodywid/2}, end: { bodylen/2,-y}, layer: "F.SilkS", width: silkoutlinewidth),
-
-               Footprints.Components.line(start: {-bodylen/2, y}, end: {-x, bodywid/2}, layer: "F.SilkS", width: silkoutlinewidth)
+    outline = [Footprints.Components.line({-bodylen/2, bodywid/2}, {-x, bodywid/2}, "F.SilkS", silkoutlinewidth),
+               Footprints.Components.line({-bodylen/2, bodywid/2}, {-bodylen/2, y}, "F.SilkS", silkoutlinewidth),
+               Footprints.Components.line({ bodylen/2, bodywid/2}, { x, bodywid/2}, "F.SilkS", silkoutlinewidth),
+               Footprints.Components.line({ bodylen/2, bodywid/2}, { bodylen/2, y}, "F.SilkS", silkoutlinewidth),
+               Footprints.Components.line({-bodylen/2,-bodywid/2}, {-x,-bodywid/2}, "F.SilkS", silkoutlinewidth),
+               Footprints.Components.line({-bodylen/2,-bodywid/2}, {-bodylen/2,-y}, "F.SilkS", silkoutlinewidth),
+               Footprints.Components.line({ bodylen/2,-bodywid/2}, { x,-bodywid/2}, "F.SilkS", silkoutlinewidth),
+               Footprints.Components.line({ bodylen/2,-bodywid/2}, { bodylen/2,-y}, "F.SilkS", silkoutlinewidth),
+               Footprints.Components.line({-bodylen/2, y}, {-x, bodywid/2}, "F.SilkS", silkoutlinewidth)
               ]
 
     # Pin 1 marker (circle)
     xcc = -span/2 - padSizeX/2 - 3*silkoutlinewidth
     ycc = bodywid/2 + 3*silkoutlinewidth
-    c = Comps.circle(center: {xcc,ycc}, radius: silkoutlinewidth, layer: "F.SilkS", width: silkoutlinewidth)
+    c = Comps.circle({xcc,ycc}, silkoutlinewidth, "F.SilkS", silkoutlinewidth)
 
     features = List.flatten(pads) ++ epad ++ courtyard ++ [c] ++
                List.flatten(pins) ++ List.flatten(outline)

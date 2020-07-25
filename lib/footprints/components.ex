@@ -33,17 +33,17 @@ defmodule Footprints.Components do
         String representation of KiCad footprint circle
 
     ## Examples
-        iex> Footprints.Components.circle(center: {0,0}, radius: 1.1, layer: "B.SilkS", width: 0.1)
+        iex> Footprints.Components.circle({0,0}, 1.1, "B.SilkS", 0.1)
         "(fp_circle (center 0.0 0.0) (end 1.1 0.0) (layer B.SilkS) (width 0.1))"
 
-        iex> Footprints.Components.circle(center: {-1.1,2.2}, radius: 3.3, layer: "F.SilkS", width: 0.05)
+        iex> Footprints.Components.circle({-1.1,2.2}, 3.3, "F.SilkS", 0.05)
         "(fp_circle (center -1.1 2.2) (end 2.2 2.2) (layer F.SilkS) (width 0.05))"
     """
-    def circle(center: {xc, yc}, radius: r, layer: lay, width: wid) do
+    def circle({xc, yc}, r, layer, width) do
         "(fp_circle" <>
         " (center #{p(xc)} #{p(yc)})" <>
         " (end #{p(xc + r)} #{p(yc)})" <>
-        " (layer #{lay}) (width #{wid})" <>
+        " (layer #{layer}) (width #{width})" <>
         ")"
     end
 
@@ -61,10 +61,10 @@ defmodule Footprints.Components do
         String representation of KiCad footprint line
 
     ## Examples
-        iex> Footprints.Components.line(start: {0,0}, end: {1.1,1.1}, layer: "F.SilkS", width: 0.1)
+        iex> Footprints.Components.line({0,0}, {1.1,1.1}, "F.SilkS", 0.1)
         "(fp_line (start 0.0 0.0) (end 1.1 1.1) (layer F.SilkS) (width 0.1))"
     """
-    def line(start: {xs, ys}, end: {xe, ye}, layer: lay, width: wid) do
+    def line({xs, ys}, {xe, ye}, lay, wid) do
         "(fp_line" <>
         " (start #{p(xs)} #{p(ys)})" <>
         " (end #{p(xe)} #{p(ye)})" <>
@@ -86,14 +86,14 @@ defmodule Footprints.Components do
         List of string representations of KiCad footprint lines forming the specified box
 
     ## Examples
-        iex> Footprints.Components.box(ll: {0,0}, ur: {1.1,1.1}, layer: "B.SilkS", width: 0.1)
+        iex> Footprints.Components.box({0,0}, {1.1,1.1}, "B.SilkS", 0.1)
         ["(fp_line (start 0.0 0.0) (end 1.1 0.0) (layer B.SilkS) (width 0.1))", "(fp_line (start 1.1 0.0) (end 1.1 1.1) (layer B.SilkS) (width 0.1))", "(fp_line (start 1.1 1.1) (end 0.0 1.1) (layer B.SilkS) (width 0.1))", "(fp_line (start 0.0 1.1) (end 0.0 0.0) (layer B.SilkS) (width 0.1))"]
     """
-    def box(ll: ll = {llx, lly}, ur: ur = {urx, ury}, layer: layer, width: thick) do
-        [line(start: ll, end: {urx, lly}, layer: layer, width: thick),
-         line(start: {urx, lly}, end: ur, layer: layer, width: thick),
-         line(start: ur, end: {llx, ury}, layer: layer, width: thick),
-         line(start: {llx, ury}, end: ll, layer: layer, width: thick)]
+    def box({llx, lly}, {urx, ury}, layer, width) do
+        [line({llx, lly}, {urx, lly}, layer, width),
+         line({urx, lly}, {urx, ury}, layer, width),
+         line({urx, ury}, {llx, ury}, layer, width),
+         line({llx, ury}, {llx, lly}, layer, width)]
     end
 
   @doc """
@@ -217,7 +217,7 @@ defmodule Footprints.Components do
         "(pad A smd rect (at 0.0 0.0) (size 1.0 1.0) (clearance 0.1) (layers F.Cu) (solder_paste_margin_ratio 0) (solder_mask_margin 0))"
 
         iex> Footprints.Components.pad(:pth, "A", "circle", {0,0}, {1,1}, 0, 0)
-        "(pad A thru_hole circle (at 0.0 0.0) (size 1.0 1.0) (drill 0.57) (layers *.Cu) (solder_mask_margin 0))"
+        "(pad A thru_hole circle (at 0.0 0.0) (size 1.0 1.0) (drill 0) (layers *.Cu) (solder_mask_margin 0))"
     """
     def pad(type, name, shape, at, size, pastemargin \\ 0, maskmargin \\ 0)
     def pad(:smd, name, shape, {x, y}, {xs, ys}, pastemargin, maskmargin) do
