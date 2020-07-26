@@ -31,6 +31,8 @@ defmodule Footprints.SOIC do
     pastemargin       = params[:solderpastemarginratio]
     epadpastemargin   = params[:epadsolderpastemarginratio]
     maskmargin        = params[:soldermaskmargin]
+    shape             = params[:padshape]
+
 
     totaltol = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -46,12 +48,12 @@ defmodule Footprints.SOIC do
     pads = for pinpair <- 1..stride do
       y = totalwid/2.0
       x = -span/2.0 + (pinpair-1)*pinpitch
-      [Comps.pad(:smd, "#{pinpair}", "rect", {x, y}, {padSizeX, padSizeY}, pastemargin, maskmargin),
-       Comps.pad(:smd, "#{pinpair-pinpair+1}", "rect", {x,-y}, {padSizeX, padSizeY}, pastemargin, maskmargin)]
+      [Comps.pad(:smd, "#{pinpair}", shape, {x, y}, {padSizeX, padSizeY}, pastemargin, maskmargin),
+       Comps.pad(:smd, "#{pinpair-pinpair+1}", shape, {x,-y}, {padSizeX, padSizeY}, pastemargin, maskmargin)]
     end
 
     epad = if params[:epadwid] != nil do
-      [Comps.pad(:smd, "EP", "rect", {0,0}, {params[:epadlen], params[:epadwid]}, epadpastemargin, 0)]
+      [Comps.pad(:smd, "EP", shape, {0,0}, {params[:epadlen], params[:epadwid]}, epadpastemargin, 0)]
     else
       []
     end

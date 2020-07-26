@@ -28,6 +28,8 @@ defmodule Footprints.ECap do
     legland           = params[:legland]
     pastemargin       = params[:solderpastemarginratio]
     maskmargin        = params[:soldermaskmargin]
+    shape             = params[:padshape]
+
 
     totaltol  = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -40,8 +42,8 @@ defmodule Footprints.ECap do
     crtydSizeX = 2*(max(padCenterX+padSizeX/2, bodylen/2) + courtyardmargin)
     crtydSizeY = 2*(max(padCenterY+padSizeY/2, bodywid/2) + courtyardmargin)
 
-    pads = [Comps.pad(:smd, "1", "rect", {-padCenterX, padCenterY}, {padSizeX, padSizeY}, pastemargin, maskmargin),
-            Comps.pad(:smd, "2", "rect", { padCenterX, padCenterY}, {padSizeX, padSizeY}, pastemargin, maskmargin)]
+    pads = [Comps.pad(:smd, "1", shape, {-padCenterX, padCenterY}, {padSizeX, padSizeY}, pastemargin, maskmargin),
+            Comps.pad(:smd, "2", shape, { padCenterX, padCenterY}, {padSizeX, padSizeY}, pastemargin, maskmargin)]
 
     x1 =   bodylen/2
     x2 = - bodylen/2 + bodylen/5

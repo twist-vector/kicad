@@ -225,7 +225,7 @@ defmodule Footprints.Components do
         " (at #{p(x)} #{p(y)})" <>
         " (size #{p(xs)} #{p(ys)})" <>
         " (clearance 0.1)" <>
-        " (layers F.Cu)" <>
+        " (layers F.Cu F.Mask F.Paste)" <>
         " (solder_paste_margin_ratio #{pastemargin})" <>
         " (solder_mask_margin #{maskmargin})" <>
         ")"
@@ -235,7 +235,7 @@ defmodule Footprints.Components do
         " (at #{p(x)} #{p(y)})" <>
         " (size #{p(xs)} #{p(ys)})" <>
         " (drill #{drilldia})" <>
-        " (layers *.Cu)" <>
+        " (layers *.Cu F.Mask B.Mask)" <>
         " (solder_mask_margin #{maskmargin})" <>
         ")"
     end

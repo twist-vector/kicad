@@ -15,7 +15,9 @@ defmodule Footprints.DF13HeaderRASMD do
       supppadwidth      = params[:supppadwidth]
       maskmargin        = params[:soldermaskmargin]
       pastemargin       = params[:solderpastemarginratio]
+      shape             = params[:padshape]
 
+      
       # All pins aligned at y=0
       #  lower face at y=1.21
       #  upper face at y=2.19
@@ -33,7 +35,7 @@ defmodule Footprints.DF13HeaderRASMD do
       # The grid of pads.  We'll call the common function from the PTHHeader
       # module for each pin location.
       pads = for pin <- 1..pincount, do:
-        Footprints.SMDHeaderSupport.make_pad(params, pin, 1, pincount, 1, "rect", maskmargin, pastemargin)
+        Footprints.SMDHeaderSupport.make_pad(params, pin, 1, pincount, 1, shape, maskmargin, pastemargin)
 
       pinmarks = for pin <- 1..pincount, do:
         Comps.box({-((pincount-1)/2*pinpitch) + (pin-1)*pinpitch - pindia/2, -padheight/2-silkoutlinewidth},
@@ -42,8 +44,8 @@ defmodule Footprints.DF13HeaderRASMD do
 
       sx = (bodylen + padheight)/2
       sy = -3.3
-      supportPads = [Comps.pad(:smd, "S", "rect", {-sx,sy}, {supppadwidth,supppadheight}, pastemargin, maskmargin),
-                     Comps.pad(:smd, "S", "rect", { sx,sy}, {supppadwidth,supppadheight}, pastemargin, maskmargin)]
+      supportPads = [Comps.pad(:smd, "S", shape, {-sx,sy}, {supppadwidth,supppadheight}, pastemargin, maskmargin),
+                     Comps.pad(:smd, "S", shape, { sx,sy}, {supppadwidth,supppadheight}, pastemargin, maskmargin)]
 
       # Outline
       left = -bodylen/2 + 0.9*silkoutlinewidth

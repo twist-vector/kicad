@@ -33,6 +33,8 @@ defmodule Footprints.DPak do
     epadspanx         = params[:epadspanx]
     epadspany         = params[:epadspany]
     maskmargin        = params[:soldermaskmargin]
+    shape             = params[:padshape]
+
 
     totaltol = 0#:math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -52,10 +54,10 @@ defmodule Footprints.DPak do
     pads = for pin <- 1..pincount do
       ###x = -pinpitch*(pincount)/2 + 2*(pin-1)*pinpitch
       x = -pinpitch + (pin-1) * (2*pinpitch)/(pincount-1)
-      Comps.pad(:smd, "#{pin}", "rect", {x,y}, {padSizeX, padSizeY}, pastemargin, maskmargin)
+      Comps.pad(:smd, "#{pin}", shape, {x,y}, {padSizeX, padSizeY}, pastemargin, maskmargin)
     end
 
-    epad = [Comps.pad(:smd, "#{pincount+1}", "rect", {0,-epadohang}, {epadspanx+2*sidefillet, epadspany+2*sidefillet}, pastemargin, maskmargin)]
+    epad = [Comps.pad(:smd, "#{pincount+1}", shape, {0,-epadohang}, {epadspanx+2*sidefillet, epadspany+2*sidefillet}, pastemargin, maskmargin)]
 
     pins = for pin <- 1..pincount do
       x = -pinpitch + (pin-1) * (2*pinpitch)/(pincount-1)

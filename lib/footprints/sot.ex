@@ -25,6 +25,8 @@ defmodule Footprints.SOT do
     totalwid          = params[:totalwid]
     pastemargin       = params[:solderpastemarginratio]
     maskmargin        = params[:soldermaskmargin]
+    shape             = params[:padshape]
+
 
     totaltol = :math.sqrt(:math.pow(pinlentol, 2)+:math.pow(fabtol, 2)+:math.pow(placetol, 2))
 
@@ -35,36 +37,36 @@ defmodule Footprints.SOT do
 
     y = (totalwid-legland)/2.0 + toefillet/2 - + heelfillet/2
     pads = case pincount do
-             3 -> [Comps.pad(:smd, "1", "rect", {-pinpitch,y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "2", "rect", { pinpitch,y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "3", "rect", { 0,y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
+             3 -> [Comps.pad(:smd, "1", shape, {-pinpitch,y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", shape, { pinpitch,y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", shape, { 0,y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
 
-             4 -> [Comps.pad(:smd, "1", "rect", {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "2", "rect", { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "3", "rect", {-pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "4", "rect", { pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
+             4 -> [Comps.pad(:smd, "1", shape, {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", shape, { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", shape, {-pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "4", shape, { pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
 
-             5 -> [Comps.pad(:smd, "1", "rect", {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "2", "rect", { 0, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "3", "rect", { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "4", "rect", { pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "5", "rect", {-pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
+             5 -> [Comps.pad(:smd, "1", shape, {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", shape, { 0, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", shape, { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "4", shape, { pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "5", shape, {-pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
                 
-             6 -> [Comps.pad(:smd, "1", "rect", {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "2", "rect", { 0, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "3", "rect", { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "4", "rect", { pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "5", "rect", {0,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "6", "rect", {-pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
+             6 -> [Comps.pad(:smd, "1", shape, {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", shape, { 0, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", shape, { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "4", shape, { pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "5", shape, {0,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "6", shape, {-pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
 
-             8 -> [Comps.pad(:smd, "1", "rect", {-1.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "2", "rect", {-0.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "3", "rect", { 0.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "4", "rect", { 1.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "5", "rect", { 1.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "6", "rect", { 0.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "7", "rect", {-0.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "8", "rect", {-1.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
+             8 -> [Comps.pad(:smd, "1", shape, {-1.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "2", shape, {-0.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "3", shape, { 0.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "4", shape, { 1.5*pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "5", shape, { 1.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "6", shape, { 0.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "7", shape, {-0.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
+                   Comps.pad(:smd, "8", shape, {-1.5*pinpitch,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
 
              _ -> []
            end
