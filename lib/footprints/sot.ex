@@ -39,7 +39,7 @@ defmodule Footprints.SOT do
     pads = case pincount do
              3 -> [Comps.pad(:smd, "1", shape, {-pinpitch,y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
                    Comps.pad(:smd, "2", shape, { pinpitch,y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
-                   Comps.pad(:smd, "3", shape, { 0,y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
+                   Comps.pad(:smd, "3", shape, { 0,-y}, {padSizeX,padSizeY}, pastemargin, maskmargin)]
 
              4 -> [Comps.pad(:smd, "1", shape, {-pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
                    Comps.pad(:smd, "2", shape, { pinpitch, y}, {padSizeX,padSizeY}, pastemargin, maskmargin),
@@ -99,7 +99,7 @@ defmodule Footprints.SOT do
 
 
      # Pin 1 marker (circle)
-     xcc = -pincount/2/2*pinpitch - padSizeX/2 - 3*silkoutlinewidth
+     xcc = -pincount/2*pinpitch - padSizeX/2 - silkoutlinewidth
      ycc = totalwid/2
      c = Comps.circle({xcc,ycc}, silkoutlinewidth, "F.SilkS", silkoutlinewidth)
 
