@@ -49,7 +49,7 @@ defmodule Footprints.SOIC do
       y = totalwid/2.0
       x = -span/2.0 + (pinpair-1)*pinpitch
       [Comps.pad(:smd, "#{pinpair}", shape, {x, y}, {padSizeX, padSizeY}, pastemargin, maskmargin),
-       Comps.pad(:smd, "#{pinpair-pinpair+1}", shape, {x,-y}, {padSizeX, padSizeY}, pastemargin, maskmargin)]
+       Comps.pad(:smd, "#{pincount-pinpair+1}", shape, {x,-y}, {padSizeX, padSizeY}, pastemargin, maskmargin)]
     end
 
     epad = if params[:epadwid] != nil do
