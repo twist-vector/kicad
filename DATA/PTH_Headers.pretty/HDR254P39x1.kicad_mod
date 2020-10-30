@@ -1,4 +1,4 @@
-(module Header_39x1 (layer F.Cu) (tedit 5F94A1AC)
+(module Header_39x1 (layer F.Cu) (tedit 5F9C6709)
   (at 0 0)
   (descr "39x1 0.10in (2.54 mm) spacing unshrouded header")
   (tags "")

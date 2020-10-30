@@ -90,10 +90,10 @@ defmodule Footprints.QFP do
     features = List.flatten(pads) ++ epad ++ courtyard ++ [c] ++
                List.flatten(pins) ++ List.flatten(outline)
 
-    refloc = if params[:refsinside], do: {0, bodywid/4-silktextheight/2},
-             else: {-crtydSizeX/2 - 0.75*silktextheight, 0}
-    valloc = if params[:refsinside], do: {0, -bodywid/4+silktextheight/2},
-             else: { crtydSizeX/2 + 0.75*silktextheight, 0}
+    refloc = if params[:refsinside], do: {-bodylen/4, bodywid/4-silktextheight/2},
+             else:                       {-crtydSizeX/2 - 0.75*silktextheight, 0}
+    valloc = if params[:refsinside], do: { bodylen/4, bodywid/4-silktextheight/2},
+             else:                       { crtydSizeX/2 + 0.75*silktextheight, 0}
     textsize = {silktextheight,silktextwidth}
 
     m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)

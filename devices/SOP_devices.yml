@@ -10,7 +10,7 @@ defaults:
    bodywid:                    7.5
    totalwid:                  10.3
    pinonesidelineoffset:       0.5
-   refsinside:                true
+   refsinside:                false
 
 
 soic:
@@ -28,7 +28,6 @@ soic:
      bodywid:         3.90
      epadwid:         2.41
      epadlen:          3.3
-     refsinside:     false
 
    - pincount:          14
      bodylen:          9.0
@@ -55,7 +54,6 @@ soic:
      bodylen:         9.95
      pincount:          16
      bodywid:         3.90
-     refsinside:     false
 
 
 sop:
@@ -66,7 +64,6 @@ sop:
      pincount:          16
      bodywid:          3.0
      pinpitch:         0.5
-     refsinside:     false
      sidefillet:     -0.05
      silktextheight:   0.75
      silktextwidth:    0.75
@@ -79,7 +76,6 @@ sop:
      pincount:          16
      bodywid:          3.0
      pinpitch:         0.5
-     refsinside:     false
      sidefillet:     -0.05
      silktextheight:   0.75
      silktextwidth:    0.75
@@ -108,7 +104,6 @@ sop:
      pincount:           8
      bodywid:          2.3
      pinpitch:         0.5
-     refsinside:     false
      sidefillet:     -0.05
 
 
@@ -119,7 +114,6 @@ sop:
      pincount:           8
      bodywid:          3.0
      pinpitch:        0.65
-     refsinside:     false
      sidefillet:     -0.02
 
 
@@ -130,7 +124,6 @@ sop:
      pincount:           8
      bodywid:          4.4
      pinpitch:        0.65
-     refsinside:     false
      sidefillet:     -0.02
 
    - pinwidth:        0.42
@@ -142,7 +135,6 @@ sop:
      pinpitch:        1.27
      epadwid:          2.4
      epadlen:          3.2
-     refsinside:     false
 
    - pinwidth:        0.42
      legland:         0.65
@@ -151,7 +143,6 @@ sop:
      pincount:           8
      bodywid:          3.9
      pinpitch:        1.27
-     refsinside:     false
 
    - pinwidth:        0.42
      legland:         0.88
@@ -297,7 +288,6 @@ sop:
      pincount:          8
      bodywid:          6.35
      pinpitch:         2.54
-     refsinside:     false
      sidefillet:       0.0
      silktextheight:   0.75
      silktextwidth:    0.75
