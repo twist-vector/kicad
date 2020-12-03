@@ -1,4 +1,4 @@
-(module 7343_chip_diode (layer F.Cu) (tedit 5F9C670C)
+(module 7343_chip_diode (layer F.Cu) (tedit 5FC8C123)
   (at 0 0)
   (descr "7343 (metric) chip diode")
   (tags "SMD chip 7343")

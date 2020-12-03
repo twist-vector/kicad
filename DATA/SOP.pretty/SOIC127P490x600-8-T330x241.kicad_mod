@@ -1,4 +1,4 @@
-(module SOIC127P490x600-8-T330x241 (layer F.Cu) (tedit 5F9C670C)
+(module SOIC127P490x600-8-T330x241 (layer F.Cu) (tedit 5FC8C123)
   (at 0 0)
   (descr "8 pin 1.27in pitch 4.9x6.0 SOIC device")
   (tags "SMD SOIC")

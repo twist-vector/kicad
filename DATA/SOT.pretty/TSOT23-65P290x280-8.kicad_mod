@@ -1,4 +1,4 @@
-(module TSOT23-65P290x280-8 (layer F.Cu) (tedit 5F9C670D)
+(module TSOT23-65P290x280-8 (layer F.Cu) (tedit 5FC8C124)
   (at 0 0)
   (descr "8 pin 0.65in pitch 2.9x2.8 TSOT23 device")
   (tags "SMD TSOT23")

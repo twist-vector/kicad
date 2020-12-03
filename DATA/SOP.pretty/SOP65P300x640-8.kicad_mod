@@ -1,4 +1,4 @@
-(module SOP65P300x640-8 (layer F.Cu) (tedit 5F9C670C)
+(module SOP65P300x640-8 (layer F.Cu) (tedit 5FC8C123)
   (at 0 0)
   (descr "8 pin 0.65in pitch 3.0x6.4 SOP device")
   (tags "SMD SOP")

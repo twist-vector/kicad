@@ -1,4 +1,4 @@
-(module 2012_chip_dev (layer F.Cu) (tedit 5F9C670C)
+(module 2012_chip_dev (layer F.Cu) (tedit 5FC8C123)
   (at 0 0)
   (descr "2012 (metric) chip device")
   (tags "SMD chip 2012")

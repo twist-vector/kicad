@@ -1,4 +1,4 @@
-(module DRILL_100D (layer F.Cu) (tedit 5F9C670C)
+(module DRILL_100D (layer F.Cu) (tedit 5FC8C123)
   (at 0 0)
   (descr "Standard clearance drill for an M10 size screw")
   (tags "PTH drill")

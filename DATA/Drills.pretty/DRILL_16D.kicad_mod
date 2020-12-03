@@ -1,4 +1,4 @@
-(module DRILL_16D (layer F.Cu) (tedit 5F9C670C)
+(module DRILL_16D (layer F.Cu) (tedit 5FC8C123)
   (at 0 0)
   (descr "Standard clearance drill for an M1.6 size screw")
   (tags "PTH drill")

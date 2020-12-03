@@ -1,4 +1,4 @@
-(module SOT-223-230P650x525-3-T300x170 (layer F.Cu) (tedit 5F9C670D)
+(module SOT-223-230P650x525-3-T300x170 (layer F.Cu) (tedit 5FC8C124)
   (at 0 0)
   (descr "4 pin 2.3in pitch x SOT-223 device")
   (tags "SMD SOT-223")

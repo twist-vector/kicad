@@ -1,4 +1,4 @@
-(module DF13-14P-1.25DSA (layer F.Cu) (tedit 5F9C670D)
+(module DF13-14P-1.25DSA (layer F.Cu) (tedit 5FC8C124)
   (at 0 0)
   (descr "Hirose DF13 surface mount connector")
   (tags "SMD header shrouded")

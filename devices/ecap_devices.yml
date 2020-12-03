@@ -63,3 +63,27 @@ capmp:
     pinwidthmax:      1.0
     legland:          3.5
     pinsep:           4.6
+
+  - bodylen:         13.6
+    bodywid:         13.6
+    cyldiam:         12.5
+    pinwidthmin:      1.0
+    pinwidthmax:      1.4
+    legland:          4.8
+    pinsep:           4.0
+
+  - bodylen:         17.1
+    bodywid:         17.1
+    cyldiam:         16.0
+    pinwidthmin:      1.0
+    pinwidthmax:      1.4
+    legland:          5.4
+    pinsep:           6.3
+
+  - bodylen:         19.1
+    bodywid:         19.1
+    cyldiam:         18.0
+    pinwidthmin:      1.0
+    pinwidthmax:      1.4
+    legland:          6.4
+    pinsep:           6.3

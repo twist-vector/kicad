@@ -1,4 +1,4 @@
-(module SOP100P1595x1200-32 (layer F.Cu) (tedit 5F9C670C)
+(module SOP100P1595x1200-32 (layer F.Cu) (tedit 5FC8C123)
   (at 0 0)
   (descr "32 pin 1.0in pitch 15.95x12.0 SOP device")
   (tags "SMD SOP")

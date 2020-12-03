@@ -1,4 +1,4 @@
-(module TO-252-228P658x884-2-T432x521 (layer F.Cu) (tedit 5F9C670D)
+(module TO-252-228P658x884-2-T432x521 (layer F.Cu) (tedit 5FC8C124)
   (at 0 0)
   (descr "3 pin 2.28in pitch x TO-252 device")
   (tags "SMD TO-252 DPAK")
