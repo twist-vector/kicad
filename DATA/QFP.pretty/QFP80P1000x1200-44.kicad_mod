@@ -1,4 +1,4 @@
-(module QFP80P1000x1200-44 (layer F.Cu) (tedit 5FC8C123)
+(module QFP80P1000x1200-44 (layer F.Cu) (tedit 5FC8DB82)
   (at 0 0)
   (descr "44 pin 0.8in pitch 10.0x12.0 QFP device")
   (tags "SMD QFP")

@@ -1,4 +1,4 @@
-(module SOP254P965x993-8 (layer F.Cu) (tedit 5FC8C123)
+(module SOP254P965x993-8 (layer F.Cu) (tedit 5FC8DB82)
   (at 0 0)
   (descr "8 pin 2.54in pitch 9.652x9.925 SOP device")
   (tags "SMD SOP")

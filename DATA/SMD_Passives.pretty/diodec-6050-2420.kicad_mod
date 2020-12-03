@@ -1,4 +1,4 @@
-(module 6050_chip_diode (layer F.Cu) (tedit 5FC8C123)
+(module 6050_chip_diode (layer F.Cu) (tedit 5FC8DB82)
   (at 0 0)
   (descr "6050 (metric) chip diode")
   (tags "SMD chip 6050")

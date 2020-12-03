@@ -1,4 +1,4 @@
-(module DF13-30P-1.25DS (layer F.Cu) (tedit 5FC8C123)
+(module DF13-30P-1.25DS (layer F.Cu) (tedit 5FC8DB82)
   (at 0 0)
   (descr "Hirose DF13 right angle through hole connector")
   (tags "PTH header shrouded")
