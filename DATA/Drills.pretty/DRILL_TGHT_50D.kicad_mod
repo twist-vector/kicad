@@ -1,4 +1,4 @@
-(module DRILL_TGHT_50D (layer F.Cu) (tedit 5FC8DB82)
+(module DRILL_TGHT_50D (layer F.Cu) (tedit 5FD51ACC)
   (at 0 0)
   (descr "Tight clearance drill for an M5 size screw")
   (tags "PTH drill")

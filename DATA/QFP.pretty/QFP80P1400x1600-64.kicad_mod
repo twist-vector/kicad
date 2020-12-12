@@ -1,4 +1,4 @@
-(module QFP80P1400x1600-64 (layer F.Cu) (tedit 5FC8DB82)
+(module QFP80P1400x1600-64 (layer F.Cu) (tedit 5FD51ACD)
   (at 0 0)
   (descr "64 pin 0.8in pitch 14.0x16.0 QFP device")
   (tags "SMD QFP")

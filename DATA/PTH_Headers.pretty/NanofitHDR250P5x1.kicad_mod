@@ -1,4 +1,4 @@
-(module NanofitHeader_5x1 (layer F.Cu) (tedit 5FC8DB82)
+(module NanofitHeader_5x1 (layer F.Cu) (tedit 5FD51ACD)
   (at 0 0)
   (descr "5x1 0.10in (2.54 mm) spacing Molex Nanofit header")
   (tags "Molex PTH shrouded header")

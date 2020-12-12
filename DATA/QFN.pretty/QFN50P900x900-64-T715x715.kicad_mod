@@ -1,4 +1,4 @@
-(module QFN50P900x900-64-T715x715 (layer F.Cu) (tedit 5FC8DB82)
+(module QFN50P900x900-64-T715x715 (layer F.Cu) (tedit 5FD51ACD)
   (at 0 0)
   (descr "64 pin 0.5in pitch 9.0x9.0 QFN device")
   (tags "SMD QFN")

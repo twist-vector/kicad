@@ -1,4 +1,4 @@
-(module 171171_chip_dev (layer F.Cu) (tedit 5FC8DB82)
+(module 171171_chip_dev (layer F.Cu) (tedit 5FD51ACD)
   (at 0 0)
   (descr "171171 (metric) chip device")
   (tags "SMD chip 171171")

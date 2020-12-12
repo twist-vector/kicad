@@ -22,6 +22,15 @@ soic:
      silktextwidth:    0.8
      pinpitch:         2.54
 
+   - pincount:           4
+     bodywid:          6.5
+     bodylen:          4.6
+     totalwid:         9.6
+     silktextheight:   0.8
+     silktextwidth:    0.8
+     pinpitch:         2.54
+     pinwidth:         0.9
+
    - pincount:           8
      bodywid:          3.9
      bodylen:          4.9
