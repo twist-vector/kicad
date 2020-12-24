@@ -173,7 +173,8 @@ defmodule Footprints.Components do
         "(fp_text reference REF** (at 0.0 0.0 90.0) (layer F.SilkS)  (effects (font (size 1.0 1.0) (thickness 0.1))))"
     """
     def textRef(at, angle, size, width) do
-        textGeneric("reference", "REF**", at, angle, "F.SilkS", size, width)
+        # textGeneric("reference", "REF**", at, angle, "F.SilkS", size, width)
+        textGeneric("reference", "REF**", at, angle, "User.1", size, width)
     end
 
 
