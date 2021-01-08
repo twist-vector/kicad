@@ -1,4 +1,4 @@
-(module Header_24x1 (layer F.Cu) (tedit 5FE22D94)
+(module Header_24x1 (layer F.Cu) (tedit 5FF8A8CA)
   (at 0 0)
   (descr "24x1 0.10in (2.54 mm) spacing unshrouded header")
   (tags "")

@@ -1,4 +1,4 @@
-(module 9045_chip_dev (layer F.Cu) (tedit 5FE22D97)
+(module 9045_chip_dev (layer F.Cu) (tedit 5FF8A8CE)
   (at 0 0)
   (descr "9045 (metric) chip device")
   (tags "SMD chip 9045")

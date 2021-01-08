@@ -1,4 +1,4 @@
-(module 5353_chip_dev (layer F.Cu) (tedit 5FE22D98)
+(module 5353_chip_dev (layer F.Cu) (tedit 5FF8A8CF)
   (at 0 0)
   (descr "5353 (metric) chip device")
   (tags "SMD chip 5353")

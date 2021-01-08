@@ -1,4 +1,4 @@
-(module 3225_chip_diode (layer F.Cu) (tedit 5FE22D97)
+(module 3225_chip_diode (layer F.Cu) (tedit 5FF8A8CE)
   (at 0 0)
   (descr "3225 (metric) chip diode")
   (tags "SMD chip 3225")

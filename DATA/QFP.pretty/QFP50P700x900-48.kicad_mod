@@ -1,4 +1,4 @@
-(module QFP50P700x900-48 (layer F.Cu) (tedit 5FE22D98)
+(module QFP50P700x900-48 (layer F.Cu) (tedit 5FF8A8CE)
   (at 0 0)
   (descr "48 pin 0.5in pitch 7.0x9.0 QFP device")
   (tags "SMD QFP")

@@ -1,4 +1,4 @@
-(module Combicon_Header_17 (layer F.Cu) (tedit 5FE22D97)
+(module Combicon_Header_17 (layer F.Cu) (tedit 5FF8A8CE)
   (at 0 0)
   (descr "17 Spring-Cage PCB Wire-to-Board Termination Blocks")
   (tags "PTH wire2board header COMBICON PTSA")

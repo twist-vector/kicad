@@ -1,4 +1,4 @@
-(module DRILL_TGHT_60D (layer F.Cu) (tedit 5FE22D97)
+(module DRILL_TGHT_60D (layer F.Cu) (tedit 5FF8A8CE)
   (at 0 0)
   (descr "Tight clearance drill for an M6 size screw")
   (tags "PTH drill")

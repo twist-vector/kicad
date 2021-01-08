@@ -1,4 +1,4 @@
-(module 7140_chip_dev (layer F.Cu) (tedit 5FE22D97)
+(module 7140_chip_dev (layer F.Cu) (tedit 5FF8A8CE)
   (at 0 0)
   (descr "7140 (metric) chip device")
   (tags "SMD chip 7140")

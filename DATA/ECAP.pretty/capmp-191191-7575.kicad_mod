@@ -1,4 +1,4 @@
-(module 191191_chip_dev (layer F.Cu) (tedit 5FE22D98)
+(module 191191_chip_dev (layer F.Cu) (tedit 5FF8A8CF)
   (at 0 0)
   (descr "191191 (metric) chip device")
   (tags "SMD chip 191191")

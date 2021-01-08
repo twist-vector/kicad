@@ -1,4 +1,4 @@
-(module QFN40P800x800-64-T570x570 (layer F.Cu) (tedit 5FE22D98)
+(module QFN40P800x800-64-T570x570 (layer F.Cu) (tedit 5FF8A8CF)
   (at 0 0)
   (descr "64 pin 0.4in pitch 8.0x8.0 QFN device")
   (tags "SMD QFN")

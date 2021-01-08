@@ -1,4 +1,4 @@
-(module Header_14x1_RA (layer F.Cu) (tedit 5FE22D97)
+(module Header_14x1_RA (layer F.Cu) (tedit 5FF8A8CD)
   (at 0 0)
   (descr "14x1 0.10in (2.54 mm) spacing right angle unshrouded header")
   (tags "")

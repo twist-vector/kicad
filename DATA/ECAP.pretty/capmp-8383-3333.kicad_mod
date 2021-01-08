@@ -1,4 +1,4 @@
-(module 8383_chip_dev (layer F.Cu) (tedit 5FE22D98)
+(module 8383_chip_dev (layer F.Cu) (tedit 5FF8A8CF)
   (at 0 0)
   (descr "8383 (metric) chip device")
   (tags "SMD chip 8383")

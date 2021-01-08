@@ -1,4 +1,4 @@
-(module SOIC254P460x960-4 (layer F.Cu) (tedit 5FE22D97)
+(module SOIC254P460x960-4 (layer F.Cu) (tedit 5FF8A8CE)
   (at 0 0)
   (descr "4 pin 2.54in pitch 4.6x9.6 SOIC device")
   (tags "SMD SOIC")

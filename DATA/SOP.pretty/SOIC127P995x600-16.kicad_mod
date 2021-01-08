@@ -1,4 +1,4 @@
-(module SOIC127P995x600-16 (layer F.Cu) (tedit 5FE22D98)
+(module SOIC127P995x600-16 (layer F.Cu) (tedit 5FF8A8CE)
   (at 0 0)
   (descr "16 pin 1.27in pitch 9.95x6.0 SOIC device")
   (tags "SMD SOIC")

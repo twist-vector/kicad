@@ -1,4 +1,4 @@
-(module TO-263-254P1016x1524-2-T723x675 (layer F.Cu) (tedit 5FE22D98)
+(module TO-263-254P1016x1524-2-T723x675 (layer F.Cu) (tedit 5FF8A8CF)
   (at 0 0)
   (descr "3 pin 2.54in pitch x TO-263 device")
   (tags "SMD TO-263 D2PAK TO263AB")
