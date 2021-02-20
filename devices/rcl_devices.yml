@@ -232,14 +232,18 @@ resc:
      bodylen:          1.6
      height:           0.8
      toefillet:        0.3
-     silktextheight:   0.6
-     silktextwidth:    0.6
+     silktextheight:   0.5
+     silktextwidth:    0.5
      silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50
      bodylen:          2.0
      height:           0.8
+     silktextheight:   0.5
+     silktextwidth:    0.5
+     silktextthickness: 0.1
+
 
    - bodywid:          2.0
      legland:         0.50
@@ -360,7 +364,7 @@ resc:
      inchcode:        2512
 
 capc:
-   - legland:         0.25
+   - legland:          0.25
      toefillet:        0.15
      bodylen:          1.0
      bodywid:          0.5
@@ -376,16 +380,16 @@ capc:
      bodylen:          1.6
      height:           0.8
      toefillet:        0.3
-     silktextheight:   0.6
-     silktextwidth:    0.6
+     silktextheight:   0.5
+     silktextwidth:    0.5
      silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50
      bodylen:          2.0
      height:           0.8
-     silktextheight:   0.75
-     silktextwidth:    0.75
+     silktextheight:   0.5
+     silktextwidth:    0.5
      silktextthickness: 0.1
 
    - bodywid:          2.0
