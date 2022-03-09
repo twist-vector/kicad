@@ -11,6 +11,9 @@ defaults:
    totalwid:                  10.3
    pinonesidelineoffset:       0.5
    refsinside:                false
+   silktextheight:             0.8
+   silktextwidth:              0.8
+   silktextthickness:          0.1
 
 
 soic:
@@ -18,16 +21,12 @@ soic:
      bodywid:          6.5
      bodylen:          4.6
      totalwid:         7.0
-     silktextheight:   0.8
-     silktextwidth:    0.8
      pinpitch:         2.54
 
    - pincount:           4
      bodywid:          6.5
      bodylen:          4.6
      totalwid:         9.6
-     silktextheight:   0.8
-     silktextwidth:    0.8
      pinpitch:         2.54
      pinwidth:         0.9
 
@@ -35,8 +34,6 @@ soic:
      bodywid:          6.5
      bodylen:          7.12
      totalwid:         10.3
-     silktextheight:   0.8
-     silktextwidth:    0.8
      pinpitch:         2.54
      pinwidth:         1.3
 
@@ -45,8 +42,6 @@ soic:
      bodywid:          3.9
      bodylen:          4.9
      totalwid:         6.0
-     silktextheight:   0.8
-     silktextwidth:    0.8
 
    - pinwidth:        0.41
      totalwid:         6.0
@@ -92,8 +87,6 @@ sop:
      bodywid:          3.0
      pinpitch:         0.5
      sidefillet:     -0.05
-     silktextheight:   0.75
-     silktextwidth:    0.75
 
 
    - pinwidth:         0.2
@@ -104,8 +97,6 @@ sop:
      bodywid:          3.0
      pinpitch:         0.5
      sidefillet:     -0.05
-     silktextheight:   0.75
-     silktextwidth:    0.75
      epadwid:          1.65
      epadlen:          2.845
 
@@ -120,8 +111,6 @@ sop:
      pinpitch:         0.5
      refsinside:     false
      sidefillet:     -0.05
-     silktextheight:   0.75
-     silktextwidth:    0.75
 
 
    - pinwidth:         0.2
@@ -316,5 +305,3 @@ sop:
      bodywid:          6.35
      pinpitch:         2.54
      sidefillet:       0.0
-     silktextheight:   0.75
-     silktextwidth:    0.75

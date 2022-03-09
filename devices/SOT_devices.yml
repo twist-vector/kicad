@@ -8,8 +8,19 @@ defaults:
    placetickmargin:           0.20
    courtoutlinewidth:         0.075
    docoutlinewidth:           0.02
-   silkoutlinewidth:          0.075
+   silktextheight:            0.8
+   silktextwidth:             0.8
+   silktextthickness:         0.1
 
+
+
+sot25:
+   - pincount:           5
+     bodywid:          1.6
+     bodylen:          2.9
+     totalwid:         2.8
+     sidefillet:       0.0
+     pinpitch:         0.95
 
 
 sot23:
@@ -18,16 +29,12 @@ sot23:
      bodylen:          2.9
      totalwid:        2.64
      pinpitch:        0.96
-     silktextheight:   0.4
-     silktextwidth:    0.4
 
    - pincount:           4
      bodywid:          1.3
      bodylen:          2.9
      totalwid:        2.37
      pinpitch:        0.96
-     silktextheight:   0.4
-     silktextwidth:    0.4
 
    - pincount:           5
      bodywid:          1.3
@@ -35,8 +42,6 @@ sot23:
      totalwid:        2.37
      sidefillet:      0.0
      pinpitch:        0.96
-     silktextheight:   0.4
-     silktextwidth:    0.4
 
    - pincount:           6
      bodywid:          1.3
@@ -44,8 +49,6 @@ sot23:
      totalwid:        2.37
      sidefillet:      0.0
      pinpitch:        0.96
-     silktextheight:   0.4
-     silktextwidth:    0.4
 
 tsot23:
    - pincount:         8
@@ -55,8 +58,6 @@ tsot23:
      legland:          0.45
      sidefillet:       0.0
      pinpitch:         0.65
-     silktextheight:   0.4
-     silktextwidth:    0.4
 
 
 sot363:

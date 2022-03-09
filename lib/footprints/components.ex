@@ -123,7 +123,7 @@ defmodule Footprints.Components do
     ")"
   end
 
-  
+
     defp textGeneric(type, value, {x, y}, angle, layer, {xs, ys}, wid) do
         "(fp_text #{type} #{value}" <>
         " (at #{p(x)} #{p(y)} #{p(angle)})" <>
@@ -173,8 +173,8 @@ defmodule Footprints.Components do
         "(fp_text reference REF** (at 0.0 0.0 90.0) (layer F.SilkS)  (effects (font (size 1.0 1.0) (thickness 0.1))))"
     """
     def textRef(at, angle, size, width) do
-        textGeneric("reference", "REF**", at, angle, "F.SilkS", size, width)
-        #textGeneric("reference", "REF**", at, angle, "User.1", size, width)
+        #textGeneric("reference", "REF**", at, angle, "F.SilkS", size, width)
+        textGeneric("reference", "REF**", at, angle, "User.1", size, width)
     end
 
 
@@ -195,8 +195,8 @@ defmodule Footprints.Components do
         "(fp_text value VAL** (at 0.0 0.0 90.0) (layer F.Fab)  (effects (font (size 1.0 1.0) (thickness 0.1))))"
     """
     def textVal(at, angle, size, width) do
-        #textGeneric("value", "VAL**", at, angle, "F.Fab", size, width)
-        textGeneric("value", "VAL**", at, angle, "F.SilkS", size, width)
+        #textGeneric("value", "VAL**", at, angle, "F.SilkS", size, width)
+        textGeneric("value", "VAL**", at, angle, "User.2", size, width)
     end
 
 

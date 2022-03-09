@@ -2,8 +2,11 @@ defaults:
    toefillet:                  0.5
    heelfillet:                 0.1
    sidefillet:                 0.1
-   placetickmargin:           0.20
-   polarized:                 false
+   placetickmargin:            0.20
+   polarized:                  false
+   silktextheight:             0.8
+   silktextwidth:              0.8
+   silktextthickness:          0.1
 
 
 capcp:
@@ -14,9 +17,6 @@ capcp:
      heelfillet:      -0.05
      height:           0.8
      polarized:        true
-     silktextheight:   0.4
-     silktextwidth:    0.4
-     silktextthickness: 0.05
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -25,9 +25,6 @@ capcp:
      height:           0.8
      toefillet:        0.3
      polarized:        true
-     silktextheight:   0.6
-     silktextwidth:    0.6
-     silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50
@@ -125,9 +122,6 @@ indc:
      bodywid:          0.5
      heelfillet:      -0.05
      height:           0.8
-     silktextheight:   0.4
-     silktextwidth:    0.4
-     silktextthickness: 0.05
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -135,9 +129,6 @@ indc:
      bodylen:          1.6
      height:           0.8
      toefillet:        0.3
-     silktextheight:   0.6
-     silktextwidth:    0.6
-     silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50
@@ -222,9 +213,6 @@ resc:
      bodywid:          0.5
      heelfillet:      -0.05
      height:           0.8
-     silktextheight:   0.4
-     silktextwidth:    0.4
-     silktextthickness: 0.05
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -232,17 +220,11 @@ resc:
      bodylen:          1.6
      height:           0.8
      toefillet:        0.3
-     silktextheight:   0.5
-     silktextwidth:    0.5
-     silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50
      bodylen:          2.0
      height:           0.8
-     silktextheight:   0.5
-     silktextwidth:    0.5
-     silktextthickness: 0.1
 
 
    - bodywid:          2.0
@@ -370,9 +352,6 @@ capc:
      bodywid:          0.5
      heelfillet:      -0.05
      height:           0.8
-     silktextheight:   0.4
-     silktextwidth:    0.4
-     silktextthickness: 0.05
      silkoutlinewidth: 0.05
 
    - bodywid:          0.8
@@ -380,17 +359,11 @@ capc:
      bodylen:          1.6
      height:           0.8
      toefillet:        0.3
-     silktextheight:   0.5
-     silktextwidth:    0.5
-     silktextthickness: 0.1
 
    - bodywid:          1.2
      legland:         0.50
      bodylen:          2.0
      height:           0.8
-     silktextheight:   0.5
-     silktextwidth:    0.5
-     silktextthickness: 0.1
 
    - bodywid:          2.0
      legland:         0.50
