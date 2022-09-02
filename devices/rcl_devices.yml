@@ -6,8 +6,8 @@ defaults:
    polarized:                  false
    silktextheight:             0.8
    silktextwidth:              0.8
-   silktextthickness:          0.127
-   silkoutlinewidth:           0.127
+   silktextthickness:          0.1
+   silkoutlinewidth:           0.1
 
 
 capcp:

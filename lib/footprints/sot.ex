@@ -117,14 +117,14 @@ defmodule Footprints.SOT do
 
     features = pads ++ courtyard ++ pins ++ outline ++ [c]
 
-    refloc = if params[:refsinside], do:
-                 {0, bodywid/4-silktextheight/2},
-             else:
-                 {-crtydSizeX/2 - 0.75*silktextheight, 0}
-    valloc = if params[:refsinside], do:
-                 {0, -bodywid/4+silktextheight/2},
-             else:
-                 { crtydSizeX/2 + 0.75*silktextheight, 0}
+    refloc = {0,0}   #if params[:refsinside], do:
+                     #   {0, bodywid/4-silktextheight/2},
+                     #else:
+                     #   {-crtydSizeX/2 - 0.75*silktextheight, 0}
+    valloc =  {0,0}  #if params[:refsinside], do:
+                     #   {0, -bodywid/4+silktextheight/2},
+                     #else:
+                     #   { crtydSizeX/2 + 0.75*silktextheight, 0}
     textsize = {silktextheight,silktextwidth}
 
     m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)

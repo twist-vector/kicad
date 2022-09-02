@@ -70,8 +70,8 @@ defmodule Footprints.Passives do
 
     features = pads ++ [Enum.join(courtyard, "\n  ")] ++ [Enum.join(outline, "\n  ")] ++ silk
 
-    refloc   = {-crtydSizeX/2 - 0.75*silktextheight, 0}
-    valloc   = { crtydSizeX/2 + 0.75*silktextheight, 0}
+    refloc   = {0,0}   #{-crtydSizeX/2 - 0.75*silktextheight, 0}
+    valloc   = {0,0}   #{ crtydSizeX/2 + 0.75*silktextheight, 0}
     textsize = {silktextheight,silktextwidth}
 
     m = Comps.module(name, descr, features, refloc, valloc, textsize, silktextthickness, tags)

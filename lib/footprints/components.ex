@@ -259,8 +259,8 @@ defmodule Footprints.Components do
         String representation of KiCad footprint module
     """
     def module(name, descr, features, refAt, valAt, textsize, textwidth, tags \\ []) do
-        ref = textRef(refAt, 90, textsize, textwidth)
-        val = textVal(valAt, 90, textsize, textwidth)
+        ref = textRef(refAt, 0, textsize, textwidth)
+        val = textVal(valAt, 0, textsize, textwidth)
         edittime = Integer.to_string(:os.system_time(:seconds), 16)
 
         "(module #{name} (layer F.Cu) (tedit #{edittime})\n" <>

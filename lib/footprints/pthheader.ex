@@ -45,8 +45,8 @@ defmodule Footprints.PTHHeader do
       # Put all the module pieces together, create, and write the module
       features = List.flatten(pads) ++ courtyard ++ frontSilkBorder ++ backSilkBorder ++ [cFront]
 
-      refloc      = {-crtydlength/2 - 0.75*silktextheight, 0}
-      valloc      = { crtydlength/2 + 0.75*silktextheight, 0}
+      refloc      = {0,0}   #{-crtydlength/2 - 0.75*silktextheight, 0}
+      valloc      = {0,0}   #{ crtydlength/2 + 0.75*silktextheight, 0}
       m = Comps.module("Header_#{pincount}x#{rowcount}",
                        "#{pincount}x#{rowcount} 0.10in (2.54 mm) spacing unshrouded header",
                        features,
