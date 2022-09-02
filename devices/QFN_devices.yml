@@ -20,6 +20,17 @@ defaults:
 qfn:
    - pinwidth:        0.20
      bodylen:          3.0
+     pincount:          16
+     bodywid:          3.0
+     legland:          0.21
+     heelfillet:      -0.02
+     pinpitch:         0.5
+     silkoutlinewidth: 0.05
+     epadwid:          1.45
+     epadlen:          1.45
+
+   - pinwidth:        0.20
+     bodylen:          3.0
      pincount:          24
      bodywid:          3.0
      legland:          0.21

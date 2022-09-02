@@ -1,4 +1,4 @@
-(module QFN50P400x400-24-T215x215 (layer F.Cu) (tedit 622899A5)
+(module QFN50P400x400-24-T215x215 (layer F.Cu) (tedit 6311EAB6)
   (at 0 0)
   (descr "24 pin 0.5in pitch 4.0x4.0 QFN device")
   (tags "SMD QFN")

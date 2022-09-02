@@ -1,4 +1,4 @@
-(module 4520_chip_diode (layer F.Cu) (tedit 622899A4)
+(module 4520_chip_diode (layer F.Cu) (tedit 6311EAB5)
   (at 0 0)
   (descr "4520 (metric) chip diode")
   (tags "SMD chip 4520")

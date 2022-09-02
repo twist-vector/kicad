@@ -1,4 +1,4 @@
-(module SOT25-95P290x280-5 (layer F.Cu) (tedit 622899A5)
+(module SOT25-95P290x280-5 (layer F.Cu) (tedit 6311EAB6)
   (at 0 0)
   (descr "5 pin 0.95in pitch 2.9x2.8 SOT25 device")
   (tags "SMD SOT25")

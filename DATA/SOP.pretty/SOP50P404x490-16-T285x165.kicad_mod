@@ -1,4 +1,4 @@
-(module SOP50P404x490-16-T285x165 (layer F.Cu) (tedit 622899A4)
+(module SOP50P404x490-16-T285x165 (layer F.Cu) (tedit 6311EAB6)
   (at 0 0)
   (descr "16 pin 0.5in pitch 4.04x4.9 SOP device")
   (tags "SMD SOP")

@@ -1,4 +1,4 @@
-(module SOP80P1538x1030-36 (layer F.Cu) (tedit 622899A4)
+(module SOP80P1538x1030-36 (layer F.Cu) (tedit 6311EAB6)
   (at 0 0)
   (descr "36 pin 0.8in pitch 15.375x10.3 SOP device")
   (tags "SMD SOP")

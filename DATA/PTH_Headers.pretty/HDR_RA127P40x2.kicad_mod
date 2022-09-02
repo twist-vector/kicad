@@ -1,4 +1,4 @@
-(module Header_40x2_RA (layer F.Cu) (tedit 622899A3)
+(module Header_40x2_RA (layer F.Cu) (tedit 6311EAB5)
   (at 0 0)
   (descr "40x2 0.10in (2.54 mm) spacing right angle unshrouded header")
   (tags "")

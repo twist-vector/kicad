@@ -1,4 +1,4 @@
-(module SOIC254P712x1030-6 (layer F.Cu) (tedit 622899A4)
+(module SOIC254P712x1030-6 (layer F.Cu) (tedit 6311EAB6)
   (at 0 0)
   (descr "6 pin 2.54in pitch 7.12x10.3 SOIC device")
   (tags "SMD SOIC")

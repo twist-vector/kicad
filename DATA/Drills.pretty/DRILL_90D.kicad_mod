@@ -1,4 +1,4 @@
-(module DRILL_90D (layer F.Cu) (tedit 622899A3)
+(module DRILL_90D (layer F.Cu) (tedit 6311EAB5)
   (at 0 0)
   (descr "Standard clearance drill for an M9 size screw")
   (tags "PTH drill")
